@@ -47,7 +47,7 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold  text-uppercase mb-1">จำนวนสัญญา </div>
+                                            <div class="font-weight-bold  text-uppercase mb-1">จำนวนสัญญา</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $NumAgreement[1]['numAgreement'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
