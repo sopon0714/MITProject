@@ -24,13 +24,13 @@
         </a>
     </li>
     <li class='nav-item'>
-        <a class='nav-link collapsed' href="../config/config.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+        <a class='nav-link collapsed' href="../../views/config/config.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
             <i class="fas fa-wrench"></i>
             <span>การจัดการหอพัก</span>
         </a>
     </li>
     <li class='nav-item'>
-        <a class='nav-link collapsed' href="../config/config.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+        <a class='nav-link collapsed' href="../../views/room/room.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
             <i class="fas fa-key"></i>
             <span>การจัดการห้อง</span>
         </a>
