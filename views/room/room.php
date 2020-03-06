@@ -3,7 +3,16 @@
 
 <head>
     <title>Profile</title>
-    <?php require_once('../../views/layout/MainCSS.php') ?>
+    <?php require_once('../../views/layout/MainCSS.php');
+    include("../../dbConnect.php");
+    $sql_tableRoom = "SELECT room.status,rnumber,rent,COALESCE(title,'-') as title,firstname,lastname ,detail FROM room 
+    LEFT JOIN agreement  ON room.rid = agreement.rid 
+    LEFT JOIN user ON user.uid = agreement.uid";
+
+    $tableRoom = selectData($sql_tableRoom);
+
+    // echo $tableRoom
+    ?>
 </head>
 
 <body>
@@ -192,77 +201,24 @@
 															<th rowspan="1" colspan="1">ค่าไฟ</th>
 															<th rowspan="1" colspan="1">ค่านํ้า</th>
 															<th rowspan="1" colspan="1">จัดการ</th>
-														</tr> -->
-                                                </tfoot>
+														</tr> 
+                                                </tfoot>-->
                                                 <tbody>
-                                                    <tr role="row" class="odd">
-                                                        <td style="text-align:center;">
-                                                            <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน" style="width:15px;height:20px">R</a>
-                                                        </td>
-                                                        <td class="sorting_1">001A</td>
-                                                        <td>4900</td>
-                                                        <td>นายซี ทรีวัน</td>
-                                                        <td>ทีวี ตู้เย็น
-                                                            <!-- <a href="inforoom.php"><button type="button" id="btn_info" class="btn btn-success btn-sm" data-toggle="tooltip" title="" data-original-title="ข้อมูลห้อง" style="width:15px;height:20px"><i class="fas fa-info"></i></button></a>
-																<button type="button" onclick="picture()" class="btn btn-info btn-sm " data-toggle="tooltip" title="" data-original-title="กดเพื่อดูรูป" style="width:15px;height:20px"><i class="fas fa-photo-video"></i></button>
-																<a href="Usage_history.php?page=Usage_1"><button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="" data-original-title="ประวัติ" style="width:15px;height:20px"><i class="fas fa-file-alt"></i></button></a> -->
-                                                        </td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" style="width:15px;height:20px" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
-                                                            <button type="button" onclick="delfunction('ห้อง','001A')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบห้อง" style="width:15px;height:20px"><i class="far fa-trash-alt"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr role="row" class="odd">
-                                                        <td style="text-align:center;">
-                                                            <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน" style="width:15px;height:20px">R</a>
-                                                        </td>
-                                                        <td class="sorting_1">002A</td>
-                                                        <td>4900</td>
-                                                        <td>นายบี ทูวัน</td>
-                                                        <td>ทีวี ตู้เย็น
-                                                            <!-- <a href="inforoom.php"><button type="button" id="btn_info" class="btn btn-success btn-sm" data-toggle="tooltip" title="" data-original-title="ข้อมูลห้อง" style="width:15px;height:20px"><i class="fas fa-info"></i></button></a>
-																<button type="button" onclick="picture()" class="btn btn-info btn-sm " data-toggle="tooltip" title="" data-original-title="กดเพื่อดูรูป" style="width:15px;height:20px"><i class="fas fa-photo-video"></i></button>
-																<a href="Usage_history.php?page=Usage_1"><button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="" data-original-title="ประวัติ" style="width:15px;height:20px"><i class="fas fa-file-alt"></i></button></a> -->
-                                                        </td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" style="width:15px;height:20px" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
-                                                            <button type="button" onclick="delfunction('ห้อง','002A')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบห้อง" style="width:15px;height:20px"><i class="far fa-trash-alt"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr role="row" class="odd">
-                                                        <td style="text-align:center;">
-                                                            <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน" style="width:15px;height:20px">R</a>
-                                                        </td>
-                                                        <td class="sorting_1">201B</td>
-                                                        <td>5200</td>
-                                                        <td>นายเอ วัน</td>
-                                                        <td> ทีวี ตู้เย็น
-                                                            <!-- <a href="inforoom.php"><button type="button" id="btn_info" class="btn btn-success btn-sm" data-toggle="tooltip" title="" data-original-title="ข้อมูลห้อง" style="width:15px;height:20px"><i class="fas fa-info"></i></button></a>
-																<button type="button" onclick="picture()" class="btn btn-info btn-sm " data-toggle="tooltip" title="" data-original-title="กดเพื่อดูรูป" style="width:15px;height:20px"><i class="fas fa-photo-video"></i></button>
-																<a href="Usage_history.php?page=Usage_1"><button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="" data-original-title="ประวัติ" style="width:15px;height:20px"><i class="fas fa-file-alt"></i></button></a> -->
-                                                        </td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" style="width:15px;height:20px" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
-                                                            <button type="button" onclick="delfunction('ห้อง','201B')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบห้อง" style="width:15px;height:20px"><i class="far fa-trash-alt"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr role="row" class="odd">
-                                                        <td style="text-align:center;">
-                                                            <a class="btn btn-success btn-dark btn-sm active" data-toggle="tooltip" title="" data-original-title="ไม่พร้อมใช้งาน" style="width:15px;height:20px">R</a>
-                                                        </td>
-                                                        <td class="sorting_1">202B</td>
-                                                        <td>5200</td>
-                                                        <td>-</td>
-                                                        <td>ทีวี ตู้เย็น
-                                                            <!-- <a href="inforoom.php"><button type="button" id="btn_info" class="btn btn-success btn-sm" data-toggle="tooltip" title="" data-original-title="ข้อมูลห้อง" style="width:15px;height:20px"><i class="fas fa-info"></i></button></a>
-																<button type="button" onclick="picture()" class="btn btn-info btn-sm " data-toggle="tooltip" title="" data-original-title="กดเพื่อดูรูป" style="width:15px;height:20px"><i class="fas fa-photo-video"></i></button>
-																<a href="Usage_history.php?page=Usage_1"><button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title="" data-original-title="ประวัติ" style="width:15px;height:20px"><i class="fas fa-file-alt"></i></button></a> -->
-                                                        </td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" style="width:15px;height:20px" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
-                                                            <button type="button" onclick="delfunction('ห้อง','202B')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบห้อง" style="width:15px;height:20px"><i class="far fa-trash-alt"></i></button>
-                                                        </td>
-                                                    </tr>
+                                                    <?php for ($i = 0; $i <  $tableRoom[0]['numrow']; $i++) { ?>
+                                                        <tr role="row" class="odd">
+                                                            <td style="text-align:center;">
+                                                                <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน" style="width:15px;height:20px">R</a>
+                                                            </td>
+                                                            <td><?php echo $tableRoom[$i + 1]['rnumber'] ?></td>
+                                                            <td><?php echo $tableRoom[$i + 1]['rent'] ?></td>
+                                                            <td><?php echo $tableRoom[$i + 1]['title'] ?> <?php echo $tableRoom[$i + 1]['firstname'] ?> <?php echo $tableRoom[$i + 1]['lastname'] ?> </td>
+                                                            <td><?php echo $tableRoom[$i + 1]['detail'] ?></td>
+                                                            <td style="text-align:center;">
+                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" style="width:15px;height:20px" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
+                                                                <button type="button" onclick="delfunction('ห้อง','001A')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบห้อง" style="width:15px;height:20px"><i class="far fa-trash-alt"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -317,6 +273,17 @@
                         <div class="col-xl-8 col-12">
                             <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
                         </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>คำนำหน้า :</span>
+                        </div>
+                        <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
+                            <select class="custom-select  mb-3" id="course_e" name="course_e">
+                                <option>นาย</option>
+                                <option>นาง</option>
+                                <option>นางสาว</option>
+                            </select> </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
@@ -383,10 +350,21 @@
                 </div>
                 <div class="row mb-4">
                     <div class="col-xl-3 col-12 text-right">
+                        <span>คำนำหน้า :</span>
+                    </div>
+                    <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
+                        <select class="custom-select  mb-3" id="course_e" name="course_e">
+                            <option>นาย</option>
+                            <option>นาง</option>
+                            <option>นางสาว</option>
+                        </select> </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-12 text-right">
                         <span>ชื่อผู้เช่า:</span>
                     </div>
                     <div class="col-xl-8 col-12">
-                        <input type="text" class="form-control" id="username" value="นายคณา วันดี" placeholder="กรุณากรอกชื่อผู้เช่า" maxlength="100">
+                        <input type="text" class="form-control" id="username" value="คณา วันดี" placeholder="กรุณากรอกชื่อผู้เช่า" maxlength="100">
                         <!-- <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
 												<select class="custom-select  mb-3" id="course_e" name="course_e">
 													<option>1 ปี</option>
