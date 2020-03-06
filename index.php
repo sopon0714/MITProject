@@ -20,7 +20,7 @@
 
 </head>
 
-<body style="background-color: #white">
+<body>
 
     <div>
         <form id="sign_in" method="POST" action="sign-in-verify.php">
