@@ -34,7 +34,7 @@
                     <img src="./img/Untitled-2.png" style="width:50%;margin-top:10px">
                     <div class="col-sm-9 col-md-7 col-lg-5 " style="margin-left: 5%;margin-top: 5%">
                         <div>
-                            <h5 class="text-center">KU Apartment</h5>
+                            <h5 class="text-center" style="font-size: 30px">YuDeeMeeSuk Dormitory</h5>
                         </div>
 
                         <div class="card  my-1">
