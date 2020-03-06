@@ -1,5 +1,5 @@
 <?php
-include("../dbConnect.php");
+include("../../dbConnect.php");
 
 $query = "SELECT * FROM config";
 $result = selectData($query);
