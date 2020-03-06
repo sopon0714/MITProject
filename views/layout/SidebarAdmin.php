@@ -13,8 +13,20 @@
     </li>
     <li class='nav-item'>
         <a class='nav-link collapsed' href="../dormitory/indexadmin.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
-            <i class="fas fa-question-circle"></i>
-            <span>ข้อมูลหอพัก</span>
+            <i class="fas fa-user-alt"></i>
+            <span>บัญชีผู้ใช้</span>
+        </a>
+    </li>
+    <li class='nav-item'>
+        <a class='nav-link collapsed' href="../dormitory/indexadmin.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+            <i class="fas fa-users"></i>
+            <span>การจัดการผู้ใช้</span>
+        </a>
+    </li>
+    <li class='nav-item'>
+        <a class='nav-link collapsed' href="../dormitory/indexadmin.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+            <i class="fas fa-wrench"></i>
+            <span>การจัดการหอพัก</span>
         </a>
     </li>
     <li class='nav-item'>
@@ -30,18 +42,7 @@
             <span>ประวัติการชำระค่าเช่ารายเดือน</span>
         </a>
     </li>
-    <li class='nav-item'>
-        <a class='nav-link collapsed' href="../dormitory/indexadmin.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
-            <i class="fas fa-users"></i>
-            <span>การจัดการผู้ใช้</span>
-        </a>
-    </li>
-    <li class='nav-item'>
-        <a class='nav-link collapsed' href="../dormitory/indexadmin.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
-            <i class="fas fa-wrench"></i>
-            <span>การจัดการหอพัก</span>
-        </a>
-    </li>
+
 
     <li class='nav-item'>
         <a class='nav-link' href='../main/logout.php'>
