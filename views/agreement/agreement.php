@@ -274,7 +274,7 @@
                     </div>
                     <div class="row mb-4" style="margin:10px;">
                         <div class="col-xl-3 col-12 text-right">
-                            <span>วันที่เข้า : </span>
+                            <span>วันที่เข้า: </span>
                         </div>
                         <div class="col-xl-5 col-12">
                             <input type="date" class="form-control" id="date" value="2020-03-07" maxlength="100">
@@ -282,7 +282,7 @@
                     </div>
                     <div class="row mb-4" style="margin:10px;">
                         <div class="col-xl-3 col-12 text-right">
-                            <span>วันที่ออก : </span>
+                            <span>วันที่ออก: </span>
                         </div>
                         <div class="col-xl-5 col-12">
                             <input type="date" class="form-control" id="date" value="2020-03-07" maxlength="100">
