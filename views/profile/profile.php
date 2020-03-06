@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
-                                <div class="card-header card-bg">
+                                <div class="card-header card-bg" style="background-color: white">
                                     <div class="row">
                                         <div class="col-12">
                                             <span class="link-active font-weight-bold" style="color:#006664;">บัญชีผู้ใช้</span>
@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
-                                <div class="card-header card-bg font-weight-bold" style="color:#006664;">
+                                <div class="card-header card-bg font-weight-bold" style="color:#006664;background-color: white;">
                                     รายละเอียดบัญชี
                                     <span style="float:right;">
 
