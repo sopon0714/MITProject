@@ -19,6 +19,20 @@ $address = $result[10]['config_value'];
 <!DOCTYPE html>
 <html>
 
+<form method="post" action="manage.php">
+    <input type="text" name="waterbill " />
+    <input type="text" name="electricitybill" />
+    <input type="text" name="account" />
+    <input type="text" name="bank" />
+    <input type="text" name="commonfee" />
+    <input type="text" name="dormitoryname" />
+    <input type="text" name="dormitorytel" />
+    <input type="text" name="router" />
+    <input type="text" name="email" />
+    <input type="text" name="address" />
+    <input type="submit" />
+</form>
+
 <head>
     <!-- ########### header ########### -->
     <?php include("../layout/MainCSS.php");
@@ -268,6 +282,7 @@ $address = $result[10]['config_value'];
     <!-- ########### footer ########### -->
     <?php include("../layout/MainJS.php"); ?>
 </body>
+
 
 </html>
 <script type="text/javascript">
