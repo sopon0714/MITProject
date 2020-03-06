@@ -51,7 +51,7 @@
 
 
     <li class='nav-item'>
-        <a class='nav-link' href='../main/logout.php'>
+        <a class='nav-link' href='../../logout.php'>
             <i class='material-icons'>meeting_room</i>
             <span>ออกจากระบบ</span>
         </a>
