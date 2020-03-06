@@ -20,7 +20,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #e6fff5">
 
     <div>
         <form id="sign_in" method="POST" action="sign-in-verify.php">
@@ -30,7 +30,7 @@
             <br>
             <div class="container">
                 <div class=" row">
-                    <img src="./img/logo1.png" style="width:50%;margin-top:20px">
+                    <img src="./img/Untitled-2.png" style="width:50%;margin-top:10px">
                     <div class="col-sm-9 col-md-7 col-lg-5 " style="margin-left: 5%;margin-top: 5%">
                         <div>
                             <h5 class="text-center">KU Apartment</h5>
