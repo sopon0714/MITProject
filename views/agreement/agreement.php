@@ -135,7 +135,7 @@
                                                         </td>
                                                         <td style="text-align:center;">
                                                             <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="แก้ไขข้อมูล" style="width:15px;height:20px"><i class="fas fa-edit" onclick="EditAgreement()"></i></button>
-                                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบสัญญา" style="width:15px;height:20px"><i class="far fa-trash-alt"></i></button>
+                                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบสัญญา" style="width:15px;height:20px"><i class="far fa-trash-alt" onclick="delfunction('ห้อง511','555')"></i></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -157,6 +157,7 @@
 <?php require_once('../../views/layout/MainJS.php') ?>
 <!-- Start Modal -->
 <div>
+    <!-- เพิ่มสัญญาเช่า -->
     <div id="modalAddAgreement" class="modal fade">
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
@@ -176,9 +177,25 @@
                                 <option>ห้อง 514</option>
                             </select> </div>
                     </div>
+                    <div class="row mb-4" style="margin:10px;">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>วันที่เข้า : </span>
+                        </div>
+                        <div class="col-xl-5 col-12">
+                            <input type="date" class="form-control" id="date" value="2020-03-07" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="row mb-4" style="margin:10px;">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>วันที่ออก : </span>
+                        </div>
+                        <div class="col-xl-5 col-12">
+                            <input type="date" class="form-control" id="date" value="2020-03-07" maxlength="100">
+                        </div>
+                    </div>
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
-                            <span>ระยะสัญญา :</span>
+                            <span>คำนำหน้า :</span>
                         </div>
                         <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
                             <select class="custom-select  mb-3" id="course_e" name="course_e">
@@ -202,16 +219,6 @@
                         <div class="col-xl-8 col-12">
                             <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100">
                         </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>ระยะสัญญา :</span>
-                        </div>
-                        <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                            <select class="custom-select  mb-3" id="course_e" name="course_e">
-                                <option>1 ปี</option>
-                                <option>2 ปี</option>
-                            </select> </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
@@ -245,7 +252,8 @@
             </div>
         </form>
     </div>
-    <div id="modalEditAgreement" class="modal fade">
+    <!-- แก้ไขสัญญาเช่า -->
+    <div id="modalEdit" class="modal fade">
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#3E49BB">
@@ -258,10 +266,37 @@
                         </div>
                         <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
                             <select class="custom-select  mb-3" id="course_e" name="course_e">
-                                <option>ห้อง 511</option>
+                                <option value="" selected="">ห้อง 514</option>
                                 <option>ห้อง 512</option>
                                 <option>ห้อง 513</option>
                                 <option>ห้อง 514</option>
+                            </select> </div>
+                    </div>
+                    <div class="row mb-4" style="margin:10px;">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>วันที่เข้า: </span>
+                        </div>
+                        <div class="col-xl-5 col-12">
+                            <input type="date" class="form-control" id="date" value="2020-03-07" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="row mb-4" style="margin:10px;">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>วันที่ออก: </span>
+                        </div>
+                        <div class="col-xl-5 col-12">
+                            <input type="date" class="form-control" id="date" value="2020-03-07" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>คำนำหน้า :</span>
+                        </div>
+                        <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
+                            <select class="custom-select  mb-3" id="course_e" name="course_e">
+                                <option>นาย</option>
+                                <option>นาง</option>
+                                <option>นางสาว</option>
                             </select> </div>
                     </div>
                     <div class="row mb-4">
@@ -269,7 +304,7 @@
                             <span>ชื่อผู้เข้าพักอาศัย :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกชื่อ" maxlength="100">
+                            <input type="text" class="form-control" id="username" value="ภาณุภัสส์" placeholder="กรุณากรอกชื่อ" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -277,25 +312,24 @@
                             <span>นามสกุล:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100">
+                            <input type="text" class="form-control" id="username" value="ธนัชญ์สุธาโชติ" placeholder="กรุณากรอกนามสกุล" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
-                            <span>ระยะสัญญา :</span>
+                            <span>รหัสประจำตัวประชาชน:</span>
                         </div>
-                        <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                            <select class="custom-select  mb-3" id="course_e" name="course_e">
-                                <option>1 ปี</option>
-                                <option>2 ปี</option>
-                            </select> </div>
+                        <div class="col-xl-8 col-12">
+                            <input type="text" class="form-control" id="mail" value="1100801270623" placeholder="กรุณากรอกเบอร์โทร">
+                        </div>
+
                     </div>
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
                             <span>เบอร์โทรติดต่อ:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="mail" value="" placeholder="กรุณากรอกเบอร์โทร">
+                            <input type="text" class="form-control" id="mail" value="0894118587" placeholder="กรุณากรอกเบอร์โทร">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -303,7 +337,7 @@
                             <span>อีเมล์ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="mail" value="" placeholder="กรุณากรอกอีเมล์">
+                            <input type="text" class="form-control" id="mail" value="ingcho007@gmail.com" placeholder="กรุณากรอกอีเมล์">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -314,6 +348,7 @@
             </div>
         </form>
     </div>
+    <!-- รายละเอียดสัญญา -->
     <div id="modalDetailAgreement" class="modal fade">
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
@@ -402,6 +437,6 @@
     }
 
     function EditAgreement() {
-        $("#modalEditAgreement").modal('show');
+        $("#modalEdit").modal('show');
     }
 </script>
