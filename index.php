@@ -1,3 +1,7 @@
+<?php $msg = $_GET['msg'] ?? "";
+$username = $_COOKIE['username'] ?? "";
+$password = $_COOKIE['password'] ?? "";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,9 +21,10 @@
 
     <!-- sweetalert  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
+
 </head>
 
-<body>
+<body style="background-color: #e6fff5">
 
     <div>
         <form id="sign_in" method="POST" action="sign-in-verify.php">
@@ -29,10 +34,10 @@
             <br>
             <div class="container">
                 <div class=" row">
-                    <img src="./img/KU_Logo.png" style="width:30%;margin-top:45px">
-                    <div class="col-sm-9 col-md-7 col-lg-5 " style="margin-left: 20%;margin-top: 5%">
+                    <img src="./img/Untitled-2.png" style="width:50%;margin-top:10px">
+                    <div class="col-sm-9 col-md-7 col-lg-5 " style="margin-left: 5%;margin-top: 5%">
                         <div>
-                            <h5 class="text-center">KU Apartment</h5>
+                            <h5 class="text-center" style="font-size: 30px">YuDeeMeeSuk Dormitory</h5>
                         </div>
 
                         <div class="card  my-1">
@@ -44,19 +49,22 @@
                                     <div class="form-label-group">
                                         <label for="inputEmail">ชื่อผู้ใช้</label>
                                         <div class="col-11">
-                                            <input type="text" name="username" id="username" class="form-control" placeholder="username" value="" required autofocus>
+                                            <input type="text" name="username" id="username" class="form-control" placeholder="username" value="<?php echo $username ?>" autofocus>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="form-label-group">
                                         <label for="inputPassword">รหัสผ่าน</label>
                                         <div class="col-11">
-                                            <input class="form-control" type="password" name="password1" id="password1" placeholder="Password" value="" required>
+                                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" value="<?php echo $password ?>">
                                         </div>
                                     </div>
-                                    <br>
+                                    </br>
+                                    <div class="form-label-group">
+                                        <label style="color: red"><?= $msg ?></label>
+                                    </div>
                                     <div class="custom-control custom-checkbox mb-1">
-                                        <input type="checkbox" class="custom-control-input" id="remember" name="remember" />
+                                        <input type="checkbox" class="custom-control-input" id="remember" name="remember" <?php if (isset($_COOKIE['username'])) echo " checked "; ?> />
                                         <label class="custom-control-label" for="remember">บันทึกบัญชีผู้ใช้</label>
                                         <label style="margin-left: 20px;cursor:pointer;color: blue" id="pass_edit"> ลืมรหัสผ่าน?</label>
                                         <button class="btn btn-success btn-md" style="float:right;" type="submit">ล็อกอิน</button>
