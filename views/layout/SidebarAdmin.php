@@ -12,21 +12,27 @@
 
     </li>
     <li class='nav-item'>
-        <a class='nav-link collapsed' href="../dormitory/indexadmin.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+        <a class='nav-link collapsed' href="../../views/profile/profile.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
             <i class="fas fa-user-alt"></i>
             <span>บัญชีผู้ใช้</span>
         </a>
     </li>
     <li class='nav-item'>
-        <a class='nav-link collapsed' href="../dormitory/indexadmin.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+        <a class='nav-link collapsed' href="../../views/agreement/agreement.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
             <i class="fas fa-users"></i>
             <span>การจัดการผู้ใช้</span>
         </a>
     </li>
     <li class='nav-item'>
-        <a class='nav-link collapsed' href="../config/config.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+        <a class='nav-link collapsed' href="../../views/config/config.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
             <i class="fas fa-wrench"></i>
             <span>การจัดการหอพัก</span>
+        </a>
+    </li>
+    <li class='nav-item'>
+        <a class='nav-link collapsed' href="../../views/room/room.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+            <i class="fas fa-key"></i>
+            <span>การจัดการห้อง</span>
         </a>
     </li>
     <li class='nav-item'>
@@ -45,7 +51,7 @@
 
 
     <li class='nav-item'>
-        <a class='nav-link' href='../main/logout.php'>
+        <a class='nav-link' href='../../logout.php'>
             <i class='material-icons'>meeting_room</i>
             <span>ออกจากระบบ</span>
         </a>

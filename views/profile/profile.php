@@ -141,8 +141,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
             <div class="modal-content">
                 <form method="post" id="Changeinfo" name="Changeinfo" action="manage.php">
                     <div class="Changeinfo">
-                        <div class="modal-header header-modal">
-                            <h4 class="modal-title">แก้ไขข้อมูลผู้ใช้</h4>
+                        <div class="modal-header header-modal" style="background-color: #eecc0b;">
+                            <h4 class="modal-title" style="color: white">แก้ไขข้อมูลผู้ใช้ </h4>
                         </div>
                         <div class="modal-body" id="ChangeModalBody">
                             <div class="container">
@@ -218,8 +218,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
             <div class="modal-content">
                 <form method="post" id="ChangeEmail" name="ChangeEmail" action="manage.php">
                     <div class="Changeinfo">
-                        <div class="modal-header header-modal ">
-                            <h4 class="modal-title">เปลี่ยนอีเมล</h4>
+                        <div class="modal-header header-modal " style="background-color: #66b3ff;">
+                            <h4 class="modal-title" style="color: white">เปลี่ยนอีเมล</h4>
                         </div>
                         <div class="modal-body" id="ChangeModalBody">
                             <div class="container">
@@ -250,8 +250,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
             <div class="modal-content">
                 <form method="post" id="ChangePassword" name="ChangePassword" action="manage.php">
                     <div class="Changeinfo">
-                        <div class="modal-header header-modal">
-                            <h4 class="modal-title">เปลี่ยนรหัสผ่าน</h4>
+                        <div class="modal-header header-modal" style="background-color:#00cc66;">
+                            <h4 class="modal-title" style="color: white">เปลี่ยนรหัสผ่าน</h4>
                         </div>
                         <div class="modal-body" id="ChangeModalBody">
                             <div class="container">
