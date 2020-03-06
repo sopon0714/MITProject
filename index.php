@@ -18,6 +18,7 @@
 
     <!-- sweetalert  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
+
 </head>
 
 <body>
@@ -30,8 +31,8 @@
             <br>
             <div class="container">
                 <div class=" row">
-                    <img src="./img/KU_Logo.png" style="width:30%;margin-top:45px">
-                    <div class="col-sm-9 col-md-7 col-lg-5 " style="margin-left: 20%;margin-top: 5%">
+                    <img src="./img/logo1.png" style="width:50%;margin-top:20px">
+                    <div class="col-sm-9 col-md-7 col-lg-5 " style="margin-left: 5%;margin-top: 5%">
                         <div>
                             <h5 class="text-center">KU Apartment</h5>
                         </div>
