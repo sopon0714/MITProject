@@ -1,4 +1,7 @@
-<?php $msg = $_GET['msg'] ?? "" ?>
+<?php $msg = $_GET['msg'] ?? "";
+$username = $_COOKIE['username'] ?? "";
+$password = $_COOKIE['password'] ?? "";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,14 +49,14 @@
                                     <div class="form-label-group">
                                         <label for="inputEmail">ชื่อผู้ใช้</label>
                                         <div class="col-11">
-                                            <input type="text" name="username" id="username" class="form-control" placeholder="username" value="" autofocus>
+                                            <input type="text" name="username" id="username" class="form-control" placeholder="username" value="<?php echo $username ?>" autofocus>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="form-label-group">
                                         <label for="inputPassword">รหัสผ่าน</label>
                                         <div class="col-11">
-                                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" value="">
+                                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" value="<?php echo $password ?>">
                                         </div>
                                     </div>
                                     </br>
@@ -61,7 +64,7 @@
                                         <label style="color: red"><?= $msg ?></label>
                                     </div>
                                     <div class="custom-control custom-checkbox mb-1">
-                                        <input type="checkbox" class="custom-control-input" id="remember" name="remember" />
+                                        <input type="checkbox" class="custom-control-input" id="remember" name="remember" <?php if (isset($_COOKIE['username'])) echo " checked "; ?> />
                                         <label class="custom-control-label" for="remember">บันทึกบัญชีผู้ใช้</label>
                                         <label style="margin-left: 20px;cursor:pointer;color: blue" id="pass_edit"> ลืมรหัสผ่าน?</label>
                                         <button class="btn btn-success btn-md" style="float:right;" type="submit">ล็อกอิน</button>
