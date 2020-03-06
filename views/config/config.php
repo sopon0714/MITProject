@@ -19,19 +19,6 @@ $address = $result[10]['config_value'];
 <!DOCTYPE html>
 <html>
 
-<form method="post" action="manage.php">
-    <input type="text" name="waterbill " />
-    <input type="text" name="electricitybill" />
-    <input type="text" name="account" />
-    <input type="text" name="bank" />
-    <input type="text" name="commonfee" />
-    <input type="text" name="dormitoryname" />
-    <input type="text" name="dormitorytel" />
-    <input type="text" name="router" />
-    <input type="text" name="email" />
-    <input type="text" name="address" />
-    <input type="submit" />
-</form>
 
 <head>
     <!-- ########### header ########### -->
@@ -65,7 +52,7 @@ $address = $result[10]['config_value'];
                                         <div class="font-weight-bold header-text-color">
                                             <h5>ข้อมูลการจัดการหอพัก</h5>
                                         </div>
-                                        <div class="col text-right"><button type="button" class="btn btn-info " onclick="editInfo()">แก้ไขข้อมูล</button></div>
+                                        <div class="col text-right"><button type="button" class="btn btn-info " id="btn_edit">แก้ไขข้อมูล</button></div>
                                     </div>
                                 </div>
                                 <div class="row mb-4" style="margin:20px;">
@@ -169,9 +156,10 @@ $address = $result[10]['config_value'];
 
                     </div>
                     <!-- Start Model EditInfo -->
-                    <div id="editInfo" class="modal fade">
-                        <form class="modal-dialog modal-lg " method="post" action="manage.php">
+                    <!-- <div id="editInfo" name="editInfo" class="modal fade">
+                        <form method="post" id="editInfo" name="editInfo" action="manage.php">
                             <div class="modal-content">
+
                                 <div class="modal-header " style="background-color: #eecc0b;">
                                     <h4 class="modal-title" style="color:white">แก้ไขข้อมูลการจัดการหอพัก</h4>
                                 </div>
@@ -182,7 +170,7 @@ $address = $result[10]['config_value'];
                                                 <span>ชื่อหอพัก <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="username__r" name="username__r" placeholder="<?php echo $dormitoryname ?>">
+                                                <input type="text" class="form-control" id="dormitoryname" name="dormitoryname" placeholder="<?php echo $dormitoryname ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -190,7 +178,7 @@ $address = $result[10]['config_value'];
                                                 <span>ที่อยู่ <span style="color:red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="<?php echo $address ?>">
+                                                <input type="text" class="form-control" id="address" name="address" placeholder="<?php echo $address ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -198,7 +186,7 @@ $address = $result[10]['config_value'];
                                                 <span>เบอร์โทร <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="<?php echo $dormitorytel ?>">
+                                                <input type="text" class="form-control" id="dormitorytel" name="dormitorytel" placeholder="<?php echo $dormitorytel ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -206,7 +194,7 @@ $address = $result[10]['config_value'];
                                                 <span>Email <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="<?php echo $email ?>">
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo $email ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -214,7 +202,7 @@ $address = $result[10]['config_value'];
                                                 <span>ค่าน้ำหน่วยละ <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="<?php echo $waterbill ?>">
+                                                <input type="text" class="form-control" id="waterbill" name="waterbill" placeholder="<?php echo $waterbill ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -222,7 +210,7 @@ $address = $result[10]['config_value'];
                                                 <span>ค่าไฟหน่วยละ<span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="<?php echo $electricitybill ?>">
+                                                <input type="text" class="form-control" id="electricitybill" name="electricitybill" placeholder="<?php echo $electricitybill ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -230,7 +218,7 @@ $address = $result[10]['config_value'];
                                                 <span>ค่าเช่าเราท์เตอร์ <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="<?php echo $router ?>">
+                                                <input type="text" class="form-control" id="router" name="router" placeholder="<?php echo $router ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -238,7 +226,7 @@ $address = $result[10]['config_value'];
                                                 <span>ค่าส่วนกลางและอื่นๆ <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="<?php echo $commonfee ?>">
+                                                <input type="text" class="form-control" id="commonfee" name="commonfee" placeholder="<?php echo $commonfee ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -246,7 +234,7 @@ $address = $result[10]['config_value'];
                                                 <span>เลขบัญชีธนาคาร<span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="<?php echo $account ?>">
+                                                <input type="text" class="form-control" id="account" name="account" placeholder="<?php echo $account ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -254,29 +242,130 @@ $address = $result[10]['config_value'];
                                                 <span>ธนาคาร <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="<?php echo $bank ?>">
+                                                <input type="text" class="form-control" id="bank" name="bank" placeholder="<?php echo $bank ?>">
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success" name="submitedit">ยืนยัน</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                                    </div>
+                                </div>
+                        </form>
+
+                    </div> -->
+                    <!-- End Model EditInfo -->
+
+                    <div id="editInfo" class="modal fade">
+                        <form class="modal-dialog modal-lg " method="post" action="manage.php">
+                            <div class="modal-content">
+                                <div class="modal-header " style="background-color: #eecc0b;">
+                                    <h4 class="modal-title" style="color:white">แก้ไขข้อมูลส่วนตัวหอพัก</h4>
+                                </div>
+                                <div class="modal-body" id="addModalBody">
+                                    <div class="container">
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>ชื่อหอพัก <span style="color: red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="waterbill" name="waterbill" placeholder="<?php echo $waterbill ?>">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>ที่อยู่ <span style="color:red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกที่อยู่หอพัก">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>เบอร์โทร <span style="color: red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกเบอร์โทร">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>Email <span style="color: red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกตึกอีเมล">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>ค่าน้ำหน่วยละ <span style="color: red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกค่าน้ำ(บาท/ยูนิต)">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>ค่าไฟหน่วยละ<span style="color: red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกค่าไฟ(บาท/ยูนิต)">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>ค่าเช่าเราท์เตอร์ <span style="color: red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกค่าเช่าเราท์เตอร์(บาท/ปี)">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>ค่าส่วนกลางและอื่นๆ <span style="color: red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกค่าส่วนกลางและอื่นๆ (บาท)">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>เลขบัญชีธนาคาร<span style="color: red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกเลขบัญชีธนาคาร">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>ธนาคาร <span style="color: red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกธนาคาร">
                                             </div>
                                         </div>
 
-
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success" name="submitedit">ยืนยัน</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                                </div>
-                            </div>
                         </form>
-                    </div>
-                    <!-- End Model EditInfo -->
 
-                    <!-- End of Content Wrapper -->
+                    </div>
                 </div>
-                <!-- #################### end Content #################### -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" name="submitedit">ยืนยัน</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                </div>
             </div>
-            <!-- End of Main Content -->
+            </form>
         </div>
+
         <!-- End of Content Wrapper -->
+    </div>
+    <!-- #################### end Content #################### -->
+    </div>
+    <!-- End of Main Content -->
+    </div>
+    <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
     <!-- ########### footer ########### -->
@@ -285,37 +374,11 @@ $address = $result[10]['config_value'];
 
 
 </html>
-<script type="text/javascript">
-    function yesnoCheck() {
-        if (document.getElementById('yesCheck').checked) {
-            document.getElementById('ifYes').style.visibility = 'visible';
-        } else document.getElementById('ifYes').style.visibility = 'hidden';
 
-    }
-</script>
 <script>
     $(document).ready(function() {
-        console.log("ready!");
-        $('[data-toggle="tooltip"]').tooltip();
+        $('#btn_edit').click(function() {
+            $("#editInfo").modal();
+        });
     });
-
-    function editInfo() {
-        $("#editInfo").modal();
-    }
-
-    function editManage() {
-        $("#editManage").modal();
-    }
-
-    function picture() {
-        $("#picture").modal();
-    }
-
-    function lock() {
-        $("#lock_all").modal();
-    }
-
-    function open_lock() {
-        $("#open_all").modal();
-    }
 </script>
