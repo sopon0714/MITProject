@@ -1,3 +1,7 @@
+<?php
+session_start();
+$DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,8 +34,8 @@
                                             <span class="link-active font-weight-bold" style="color:#006664;">บัญชีผู้ใช้</span>
                                             <span style="float:right;">
                                                 <i class="fas fa-bookmark"></i>
-                                                <a class="link-path" href="#">หน้าแรก</a>
-                                                <span> > </span>
+                                                <!-- <a class="link-path" href="#">หน้าแรก</a>
+                                                <span> > </span> -->
                                                 <a class="link-path link-active" href="#" style="color:#006664;">บัญชีผู้ใช้</a>
                                             </span>
                                         </div>
@@ -65,7 +69,7 @@
                                             <span>username:</span>
                                         </div>
                                         <div class="col-xl-4 col-6 text-right">
-                                            <input type="text" class="form-control" id="username" value="UR0101" disabled>
+                                            <input type="text" class="form-control" id="username" value="<?= $DATAUSER['username'] ?>" disabled>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -73,7 +77,7 @@
                                             <span>คำนำหน้า:</span>
                                         </div>
                                         <div class="col-xl-4 col-6 text-right">
-                                            <input type="text" class="form-control" id="title" value="นาย" disabled>
+                                            <input type="text" class="form-control" id="title" value="<?= $DATAUSER['title'] ?>" disabled>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -81,7 +85,7 @@
                                             <span>ชื่อ:</span>
                                         </div>
                                         <div class="col-xl-4 col-6 text-right">
-                                            <input type="text" class="form-control" id="fname" value="โสภณ" disabled>
+                                            <input type="text" class="form-control" id="fname" value="<?= $DATAUSER['firstname'] ?>" disabled>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -89,7 +93,7 @@
                                             <span>นามสกุล:</span>
                                         </div>
                                         <div class="col-xl-4 col-6 text-right">
-                                            <input type="text" class="form-control" id="lname" value="โตใหญ่" disabled>
+                                            <input type="text" class="form-control" id="lname" value="<?= $DATAUSER['lastname'] ?>" disabled>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -97,7 +101,7 @@
                                             <span>เลขบัตรประชาชน:</span>
                                         </div>
                                         <div class="col-xl-4 col-6 text-right">
-                                            <input type="text" class="form-control" id="formalId" value="1129900000000" disabled>
+                                            <input type="text" class="form-control" id="formalId" value="<?= $DATAUSER['formalId'] ?>" disabled>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -105,7 +109,7 @@
                                             <span>อีเมล:</span>
                                         </div>
                                         <div class="col-xl-4 col-6 text-right">
-                                            <input type="text" class="form-control" id="email" value="sopon0712@gmail.com" disabled>
+                                            <input type="text" class="form-control" id="email" value="<?= $DATAUSER['email'] ?>" disabled>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -113,7 +117,7 @@
                                             <span>เบอร์โทร:</span>
                                         </div>
                                         <div class="col-xl-4 col-6 text-right">
-                                            <input type="text" class="form-control" id="phoneNumber" value="0625424005" disabled>
+                                            <input type="text" class="form-control" id="phoneNumber" value="<?= $DATAUSER['phoneNumber'] ?>" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -148,17 +152,17 @@
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="title" checked>นาย
+                                            <input type="radio" class="form-check-input" name="title" value="นาย" <?php if ($DATAUSER['title'] == 'นาย') echo "checked" ?>>นาย
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="title">นาง
+                                            <input type="radio" class="form-check-input" name="title" value="นาง" <?php if ($DATAUSER['title'] == 'นาง') echo "checked" ?>>นาง
                                         </label>
                                     </div>
                                     <div class="form-check-inline disabled">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="title">นางสาว
+                                            <input type="radio" class="form-check-input" name="title" value="นางสาว" <?php if ($DATAUSER['title'] == 'นางสาว') echo "checked" ?>>นางสาว
                                         </label>
                                     </div>
                                 </div>
@@ -167,7 +171,7 @@
                                         <span>ชื่อ:</span>
                                     </div>
                                     <div class="col-xl-6 col-6 text-right">
-                                        <input type="text" class="form-control" id="fnameEdit" name="fnameEdit" value="โสภณ" placeholder="กรุณากรอกชื่อ">
+                                        <input type="text" class="form-control" id="fnameEdit" name="fnameEdit" value="<?= $DATAUSER['firstname'] ?>" placeholder="กรุณากรอกชื่อ">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -175,7 +179,7 @@
                                         <span>นามสกุล:</span>
                                     </div>
                                     <div class="col-xl-6 col-6 text-right">
-                                        <input type="text" class="form-control" id="lnameEdit" name="lnameEdit" value="โตใหญ่" placeholder="กรุณากรอกนามสกุล">
+                                        <input type="text" class="form-control" id="lnameEdit" name="lnameEdit" value="<?= $DATAUSER['lastname'] ?>" placeholder="กรุณากรอกนามสกุล">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -183,7 +187,7 @@
                                         <span>เลขบัตรประชาชน:</span>
                                     </div>
                                     <div class="col-xl-6 col-6 text-right">
-                                        <input type="text" class="form-control" id="formalIdEdit" name="formalIdEdit" value="1129900000000" placeholder="กรุณากรอกเลขบัตรประชาชน">
+                                        <input type="text" class="form-control" id="formalIdEdit" name="formalIdEdit" value="<?= $DATAUSER['formalId'] ?>" placeholder="กรุณากรอกเลขบัตรประชาชน">
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -191,14 +195,16 @@
                                         <span>เบอร์โทร:</span>
                                     </div>
                                     <div class="col-xl-6 col-6 text-right">
-                                        <input type="text" class="form-control" id="phoneNumberEdit" name="phoneNumberEdit" value="0625424005" placeholder="กรุณากรอกเบอร์โทร">
+                                        <input type="text" class="form-control" id="phoneNumberEdit" name="phoneNumberEdit" value="<?= $DATAUSER['phoneNumber'] ?>" placeholder="กรุณากรอกเบอร์โทร">
                                     </div>
                                 </div>
+                                <!-- hidden -->
+                                <input type="hidden" class="form-control" id="IDEdit" name="IDEdit" value="<?= $DATAUSER['uid'] ?>" placeholder="กรุณากรอกเบอร์โทร">
                             </div>
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" name="saveInfo" id="saveInfo" value="insert" class="btn btn-success save">ยืนยัน</button>
+                            <button type="submit" name="saveInfo" id="saveInfo" value="insert" class="btn btn-success save">ยืนยัน</button>
                             <button type="button" class="btn btn-danger cancel" id="a_cancelInfo" data-dismiss="modal">ยกเลิก</button>
                         </div>
                     </div>
