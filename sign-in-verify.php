@@ -15,6 +15,13 @@ if ($username == "" || $password == "") {
     } else if ($DATAUSER['status'] == "รอยืนยัน") {
         header("location:./index.php?msg=กรุณายืนยันemail:{$DATAUSER['email']}ก่อน");
     } else {
+        if (isset($_POST['remember'])) {
+            setcookie("username", $username, time() + (10 * 365 * 24 * 60 * 60));
+            setcookie("password", $password, time() + (10 * 365 * 24 * 60 * 60));
+        } else {
+            setcookie("username");
+            setcookie("password");
+        }
         unset($DATAUSER['password']);
         $_SESSION['DATAUSER'] = $DATAUSER;
         header("location:./views/profile/profile.php");
