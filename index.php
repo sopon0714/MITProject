@@ -1,3 +1,4 @@
+<?php $msg = $_GET['msg'] ?? "" ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,17 +45,20 @@
                                     <div class="form-label-group">
                                         <label for="inputEmail">ชื่อผู้ใช้</label>
                                         <div class="col-11">
-                                            <input type="text" name="username" id="username" class="form-control" placeholder="username" value="" required autofocus>
+                                            <input type="text" name="username" id="username" class="form-control" placeholder="username" value="" autofocus>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="form-label-group">
                                         <label for="inputPassword">รหัสผ่าน</label>
                                         <div class="col-11">
-                                            <input class="form-control" type="password" name="password1" id="password1" placeholder="Password" value="" required>
+                                            <input class="form-control" type="password" name="password" id="password" placeholder="Password" value="">
                                         </div>
                                     </div>
-                                    <br>
+                                    </br>
+                                    <div class="form-label-group">
+                                        <label style="color: red"><?= $msg ?></label>
+                                    </div>
                                     <div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" id="remember" name="remember" />
                                         <label class="custom-control-label" for="remember">บันทึกบัญชีผู้ใช้</label>
