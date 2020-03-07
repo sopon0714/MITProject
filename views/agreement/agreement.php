@@ -18,7 +18,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     $TableAgreement = selectData($sql_TableAgreement);
     $NumAgreement = selectData($sql_NumAgreement);
     //echo ($TableAgreement[2]['firstname']);
+
     ?>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -99,7 +102,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <div class="table-responsive">
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row center">
-                                        <div class="col-sm-11">
+                                        <div class="col-sm-11" id="Agreement_table">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr role="row">
@@ -132,7 +135,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                                 <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดสัญญา" style="width:15px;height:20px" onclick="detailAgreement()"><i class="fas fa-file-alt"></i></button>
                                                             </td>
                                                             <td style="text-align:center;">
-                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="แก้ไขข้อมูล" style="width:15px;height:20px"><i class="fas fa-edit" onclick="EditAgreement(<?php $i ?>)"></i></button>
+                                                                <button id="EditAgreement" type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="แก้ไขข้อมูล" style="width:15px;height:20px"><i class="fas fa-edit" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>"></i></button>
                                                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบสัญญา" style="width:15px;height:20px"><i class="far fa-trash-alt" onclick="delfunction('ห้อง511','555')"></i></button>
                                                             </td>
                                                         </tr>
@@ -265,8 +268,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>เลขห้อง :</span>
                         </div>
                         <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                            <select class="custom-select  mb-3" id="course_e" name="course_e">
-                                <option value="" selected="">ห้อง 514</option>
+                            <select class="custom-select  mb-3" id="e_rnumber" name="e_rnumber">
+                                <option value="" selected=""></option>
                                 <option>ห้อง 512</option>
                                 <option>ห้อง 513</option>
                                 <option>ห้อง 514</option>
@@ -277,7 +280,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่เข้า: </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="date" value="2020-03-07" maxlength="100">
+                            <input type="date" class="form-control" id="e_startDate" name="e_startDate" value="2020-03-07" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4" style="margin:10px;">
@@ -285,61 +288,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่ออก: </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="date" value="2020-03-07" maxlength="100">
+                            <input type="date" class="form-control" id="e_endDate" name="e_endDate" value="2020-03-07" maxlength="100">
                         </div>
                     </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>คำนำหน้า :</span>
-                        </div>
-                        <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                            <select class="custom-select  mb-3" id="course_e" name="course_e">
-                                <option>นาย</option>
-                                <option>นาง</option>
-                                <option>นางสาว</option>
-                            </select> </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>ชื่อผู้เข้าพักอาศัย :</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="ภาณุภัสส์" placeholder="กรุณากรอกชื่อ" maxlength="100">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>นามสกุล:</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="ธนัชญ์สุธาโชติ" placeholder="กรุณากรอกนามสกุล" maxlength="100">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>รหัสประจำตัวประชาชน:</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="mail" value="1100801270623" placeholder="กรุณากรอกเบอร์โทร">
-                        </div>
 
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>เบอร์โทรติดต่อ:</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="mail" value="0894118587" placeholder="กรุณากรอกเบอร์โทร">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>อีเมล์ :</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="mail" value="ingcho007@gmail.com" placeholder="กรุณากรอกอีเมล์">
-                        </div>
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -435,8 +387,32 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     function detailAgreement() {
         $("#modalDetailAgreement").modal('show');
     }
+    $("#EditAgreement").click(function() {
+        $("#modalEdit").modal();
+        var rnumber = $(this).attr('rnumber');
+        var startDate = $(this).attr('startDate');
+        var endDate = $(this).attr('endDate');
+
+        $('#e_rnumber').val(rnumber);
+        $('#e_startDate').val(startDate);
+        $('#e_endDate').val(endDate);
+    });
 
     function EditAgreement() {
         $("#modalEdit").modal('show');
     }
+    var dataTable = $('#Agreement_table').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "order": [],
+        "ajax": {
+            url: "fetch.php",
+            type: "POST"
+        },
+        "columnDefs": [{
+            "targets": [0, 3, 4],
+            "orderable": false,
+        }, ],
+
+    });
 </script>
