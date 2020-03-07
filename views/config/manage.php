@@ -37,7 +37,7 @@ if (isset($_POST['save'])) {
         WHERE `config`.`config_key` = 'waterbill'";
     echo $sql . "</br>";
     updateData($sql);
-    // elecbill
+    // electricitybill
     $sql = "UPDATE `config` SET `config_value` = '$elecbill'
     WHERE `config`.`config_key` = 'electricitybill'";
     echo $sql . "</br>";
