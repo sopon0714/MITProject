@@ -61,6 +61,14 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
                             </div>
                         </div>
+
+                        <div class="row mb-2" style="margin:20px;">
+                            <div class="col-xl-5  text-left" style="font-size:130%">
+                                <span>ข้อมูลของปี 2563 เดือนที่ 1</span>
+                            </div>
+
+                        </div>
+
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -69,40 +77,75 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr role="row">
-                                                        <th rowspan="1" colspan="1">ปี</th>
-                                                        <th rowspan="1" colspan="1">เดือน</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ต้องชำระ(ห้อง)</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ชำระแล้ว(ห้อง)</th>
+                                                        <th rowspan="1" colspan="1">ห้อง</th>
+                                                        <th rowspan="1" colspan="1">ยอดที่ต้องชำระ</th>
+                                                        <th rowspan="1" colspan="1">สถานะ</th>
                                                         <th rowspan="1" colspan="1">รายละเอียด</th>
+
 
                                                     </tr>
                                                 </thead>
                                                 <tfoot>
                                                     <tr>
-                                                        <th rowspan="1" colspan="1">ปี</th>
-                                                        <th rowspan="1" colspan="1">เดือน</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ต้องชำระ(ห้อง)</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ชำระแล้ว(ห้อง)</th>
+                                                        <th rowspan="1" colspan="1">ห้อง</th>
+                                                        <th rowspan="1" colspan="1">ยอดที่ต้องชำระ</th>
+                                                        <th rowspan="1" colspan="1">สถานะ</th>
                                                         <th rowspan="1" colspan="1">รายละเอียด</th>
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
 
                                                     <tr>
-                                                        <td>2563</td>
-                                                        <td>1</td>
-                                                        <td>3</td>
-                                                        <td>10</td>
+                                                        <td>101</td>
+                                                        <td>3500</td>
+                                                        <td>จ่ายแล้ว</td>
                                                         <td style="text-align:center;">
-                                                            <a href="../../views/payment/detailPayment.php">
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailPayment()">
-                                                                    <i class="fas fa-file-alt"></i>
-                                                                </button>
-                                                            </a>
-
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailSlip()">
+                                                                <i class="fas fa-file-alt"></i>
+                                                            </button>
                                                         </td>
-
                                                     </tr>
+                                                    <tr>
+                                                        <td>102</td>
+                                                        <td>3500</td>
+                                                        <td>จ่ายแล้ว</td>
+                                                        <td style="text-align:center;">
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailSlip()">
+                                                                <i class="fas fa-file-alt"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>103</td>
+                                                        <td>3500</td>
+                                                        <td>จ่ายแล้ว</td>
+                                                        <td style="text-align:center;">
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailSlip()">
+                                                                <i class="fas fa-file-alt"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>104</td>
+                                                        <td>3500</td>
+                                                        <td>ยังไม่จ่าย</td>
+                                                        <td style="text-align:center;">
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailSlip()">
+                                                                <i class="fas fa-file-alt"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>105</td>
+                                                        <td>3500</td>
+                                                        <td>ยังไม่จ่าย</td>
+                                                        <td style="text-align:center;">
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailSlip()">
+                                                                <i class="fas fa-file-alt"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+
 
 
                                                 </tbody>
@@ -123,10 +166,39 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <!-- footer -->
 <?php require_once('../../views/layout/MainJS.php') ?>
 <!-- Start Modal -->
-<div>
+<!-- รายละเอียดสัญญา -->
+<div id="modalDetailSlip" class="modal fade">
+    <form class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#00ace6">
+
+                <h4 class="modal-title" style="color:white">รายละเอียดสัญญาการเช่า</h4>
+            </div>
+            <div class="modal-body" id="addModalBody">
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-12 text-left">
+                        <span>ห้อง : 101</span>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-12 text-left">
+                        <span>ปี 2563 เดือนที่ 1</span>
+                    </div>
 
 
-
+                    <img src="../../img/slip.jpg" style="width:50%; margin-top:30px">
+                    <div class="row mb-12">
+                        <div class="col-xl-5 col-12 " style="font-size:130%">
+                            <span>เวลา 22:59:00 น. วันที่ 07-03-63</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                </div>
+            </div>
+    </form>
 </div>
 <!-- End Modal -->
 <script>
@@ -141,11 +213,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         });
     });
 
-    function detailAgreement() {
-        $("#modalDetailAgreement").modal('show');
-    }
-
-    function EditAgreement() {
-        $("#modalEdit").modal('show');
+    function detailSlip() {
+        $("#modalDetailSlip").modal('show');
     }
 </script>
