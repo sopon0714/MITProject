@@ -41,15 +41,6 @@
             <span>การจัดการชำระค่าเช่ารายเดือน</span>
         </a>
     </li>
-
-    <li class='nav-item'>
-        <a class='nav-link collapsed' href="../dormitory/indexadmin.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
-            <i class="fas fa-wallet"></i>
-            <span>ประวัติการชำระค่าเช่ารายเดือน</span>
-        </a>
-    </li>
-
-
     <li class='nav-item'>
         <a class='nav-link' href='../../logout.php'>
             <i class='material-icons'>meeting_room</i>

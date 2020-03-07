@@ -1,6 +1,8 @@
 <?php
 session_start();
-$DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
+require_once('../../dbConnect.php');
+$sql = "SELECT * FROM user WHERE `user`.`uid` = {$_SESSION['DATAUSER']['uid']}";
+$DATAUSER = selectDataOne($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
