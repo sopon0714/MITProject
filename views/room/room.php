@@ -255,7 +255,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <!-- Start Modal -->
 <div>
     <div id="modalAddRoom" class="modal fade">
-        <form class="modal-dialog modal-lg ">
+        <form class="modal-dialog modal-lg " method="POST" action='manage.php'>
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#3E49BB">
                     <h4 class="modal-title" style="color:white">เพิ่มห้องพัก</h4>
@@ -267,7 +267,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>หมายเลขห้อง :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
+                            <input type="text" class="form-control" id="rnumber" name="rnumber" value="" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -275,7 +275,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ค่าเช่าห้อง:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
+                            <input type="text" class="form-control" id="rent" name="rent" value="" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
                         </div>
                     </div>
 
@@ -285,13 +285,15 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                         <div class="col-xl-8 col-12">
                             <!-- <input type="text" class="form-control" id="mail" value="" placeholder="กรุณากรอกรายละเอียด"> -->
-                            <textarea name="comment" rows="5" cols="60" placeholder="กรุณากรอกรายละเอียด"></textarea>
+                            <textarea id="detail" name="detail" rows="5" cols="60" placeholder="กรุณากรอกรายละเอียด"></textarea>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    </div>
+                    <input type="hidden" name="add">
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">บันทึก</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                 </div>
             </div>
         </form>
