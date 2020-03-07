@@ -271,7 +271,7 @@ $address = $result[10]['config_value'];
                                                 <span>ชื่อหอพัก <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="dormitoryname" name="dormitoryname" placeholder="<?php echo $dormitoryname ?>">
+                                                <input type="text" class="form-control" id="dormitoryname" name="dormitoryname" value="<?php echo $dormitoryname ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -279,7 +279,7 @@ $address = $result[10]['config_value'];
                                                 <span>ที่อยู่ <span style="color:red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="address" name="address" placeholder="<?php echo $address ?>">
+                                                <input type="text" class="form-control" id="address" name="address" value="<?php echo $address ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -287,7 +287,7 @@ $address = $result[10]['config_value'];
                                                 <span>เบอร์โทร <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="dormitorytel" name="dormitorytel" placeholder="<?php echo $dormitorytel ?>">
+                                                <input type="text" class="form-control" id="dormitorytel" name="dormitorytel" value="<?php echo $dormitorytel ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -295,7 +295,7 @@ $address = $result[10]['config_value'];
                                                 <span>Email <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo $email ?>">
+                                                <input type="text" class="form-control" id="email" name="email" value="<?php echo $email ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -303,7 +303,7 @@ $address = $result[10]['config_value'];
                                                 <span>ค่าน้ำหน่วยละ <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="waterbill" name="waterbill" placeholder="<?php echo $waterbill ?>">
+                                                <input type="text" class="form-control" id="waterbill" name="waterbill" value="<?php echo $waterbill ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -311,7 +311,7 @@ $address = $result[10]['config_value'];
                                                 <span>ค่าไฟหน่วยละ<span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="electricitybill" name="electricitybill" placeholder="<?php echo $electricitybill ?>">
+                                                <input type="text" class="form-control" id="electricitybill" name="electricitybill" value="<?php echo $electricitybill ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -319,7 +319,7 @@ $address = $result[10]['config_value'];
                                                 <span>ค่าเช่าเราท์เตอร์ <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="router" name="router" placeholder="<?php echo $router ?>">
+                                                <input type="text" class="form-control" id="router" name="router" value="<?php echo $router ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -327,7 +327,7 @@ $address = $result[10]['config_value'];
                                                 <span>ค่าส่วนกลางและอื่นๆ <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="commonfee" name="commonfee" placeholder="<?php echo $commonfee ?>">
+                                                <input type="text" class="form-control" id="commonfee" name="commonfee" value="<?php echo $commonfee ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -335,7 +335,7 @@ $address = $result[10]['config_value'];
                                                 <span>เลขบัญชีธนาคาร<span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="account" name="account" placeholder="<?php echo $account ?>">
+                                                <input type="text" class="form-control" id="account" name="account" value="<?php echo $account ?>">
                                             </div>
                                         </div>
                                         <div class="row mb-4">
@@ -343,7 +343,7 @@ $address = $result[10]['config_value'];
                                                 <span>ธนาคาร <span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="bank" name="bank" placeholder="<?php echo $bank ?>">
+                                                <input type="text" class="form-control" id="bank" name="bank" value="<?php echo $bank ?>">
                                             </div>
                                         </div>
 

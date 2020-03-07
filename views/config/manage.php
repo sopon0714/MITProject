@@ -12,14 +12,15 @@ if (isset($_POST['save'])) {
     $common = $_POST['commonfee'];
     $account = $_POST['account'];
     $bank = $_POST['bank'];
-
-    $sql = "UPDATE `config` SET `dormitoryname` = '$dormitname'
-    -- , `address` = '$address', `dormitorytel` = '$dormittel', 
-    -- `email` = '$email', `waterbill` = '$waterbill', `router` = '$router', `commonfee` = '$common', `account` = '$account', `bank` = '$bank' 
-    WHERE `config`.`dormitoryname` = $dormitname";
+    // dormitname
+    $sql = "UPDATE `config` SET `config_value` = '$dormitname'
+    WHERE `config`.`config_key` = 'DormitoryName'";
     echo $sql . "</br>";
     updateData($sql);
-    $sql = "SELECT config_value FROM config WHERE dormitoryname =$dormitname";
+    // address
+    $sql = "UPDATE `config` SET `config_value` = '$address'
+    WHERE `config`.`config_key` = 'Address'";
     echo $sql . "</br>";
+    updateData($sql);
     header("location:../../views/config/config.php");
 }
