@@ -112,12 +112,8 @@ $accountname = $result[11]['config_value'];
                                             <input type="text" class="form-control" id="semester" value="<?php echo $email ?>" maxlength="100" disabled>
                                         </div>
                                     </div>
-                                    บาท / เดือน
-                                </div>
-                                <div class="row mb-4" style="margin:20px;">
-                                    <div class="col-xl-3 col-12 text-right">
-                                        <span>ค่าส่วนกลางและอื่นๆ: </span>
-                                    </div>
+
+
                                     <div class="row mb-4" style="margin:20px;">
                                         <div class="col-xl-3 col-12 text-right">
                                             <span>ค่าไฟหน่วยละ : </span>
@@ -128,23 +124,24 @@ $accountname = $result[11]['config_value'];
                                         </div>
                                         บาท/ยูนิต
                                     </div>
-                                    บาท / เดือน
-                                </div>
-                                <div class="row mb-4" style="margin:20px;">
-                                    <div class="col-xl-3 col-12 text-right">
-                                        <span>ชื่อบัญชีธนาคาร: </span>
+                                    <div class="row mb-4" style="margin:20px;">
+                                        <div class="col-xl-3 col-12 text-right">
+                                            <span>ค่าส่วนกลางและอื่นๆ: </span>
+                                        </div>
+                                        <div class="col-xl-2 col-12">
+                                            <input type="text" class="form-control" id="semester" value="<?php echo $commonfee ?>" maxlength="100" disabled>
+                                        </div>
+                                        บาท / เดือน
                                     </div>
-                                    <div class="col-xl-2 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $accountname ?>" maxlength="100" disabled>
+                                    <div class="row mb-4" style="margin:20px;">
+                                        <div class="col-xl-3 col-12 text-right">
+                                            <span>ชื่อบัญชีธนาคาร: </span>
+                                        </div>
+                                        <div class="col-xl-2 col-12">
+                                            <input type="text" class="form-control" id="semester" value="<?php echo $accountname ?>" maxlength="100" disabled>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mb-4" style="margin:20px;">
-                                    <div class="col-xl-3 col-12 text-right">
-                                        <span>เลขบัญชีธนาคาร: </span>
-                                    </div>
-                                    <div class="col-xl-2 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $accountname ?>" maxlength="100" disabled>
-                                    </div>
+
                                     <div class="row mb-4" style="margin:20px;">
                                         <div class="col-xl-3 col-12 text-right">
                                             <span>เลขบัญชีธนาคาร: </span>
@@ -288,9 +285,9 @@ $accountname = $result[11]['config_value'];
                                                     <option value="ออมสิน" <?php if ($bank == "ออมสิน") {
                                                                                 echo "selected";
                                                                             } ?>>ออมสิน</option>
-                                                    <option value="กสิกร" <?php if ($bank == "กสิกร") {
-                                                                                echo "selected";
-                                                                            } ?>>กสิกร</option>
+                                                    <option value="กสิกรไทย" <?php if ($bank == "กสิกรไทย") {
+                                                                                    echo "selected";
+                                                                                } ?>>กสิกรไทย</option>
                                                 </select>
 
                                             </div>
