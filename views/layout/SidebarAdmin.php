@@ -1,7 +1,7 @@
 <!--############################### start Sidebar ############################### -->
 <ul class="navbar-nav  sidebar sidebar-dark accordion  " style="background-color: #bf4040" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../dormitory/indexadmin.php">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon ">
             <i class="fas fa-hotel"></i>
         </div>

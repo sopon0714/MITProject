@@ -299,43 +299,44 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <div id="modalEdit" class="modal fade">
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#3E49BB">
+                <div class="modal-header" style="background-color:#eecc0b">
                     <h4 class="modal-title" style="color:white">แก้ไขห้อง</h4>
                 </div>
 
+                <div class="modal-body" id="addModalBody">
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>หมายเลขห้อง :</span>
+                        </div>
+                        <div class="col-xl-8 col-12">
+                            <input type="text" class="form-control" id="username" value="001A" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>ค่าเช่าห้อง:</span>
+                        </div>
+                        <div class="col-xl-8 col-12">
+                            <input type="text" class="form-control" id="username" value="4900" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
+                        </div>
+                    </div>
 
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>หมายเลขห้อง :</span>
-                    </div>
-                    <div class="col-xl-8 col-12">
-                        <input type="text" class="form-control" id="username" value="001A" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>ค่าเช่าห้อง:</span>
-                    </div>
-                    <div class="col-xl-8 col-12">
-                        <input type="text" class="form-control" id="username" value="4900" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
-                    </div>
-                </div>
 
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>รายละเอียด:</span>
+                        </div>
+                        <div class="col-xl-8 col-12">
+                            <!-- <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด"> -->
+                            <textarea name="comment" rows="5" cols="60" class="form-control" value="ทีวี ตู้เย็น" placeholder="ทีวี ตู้เย็น"></textarea>
+                        </div>
+                    </div>
 
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>รายละเอียด:</span>
-                    </div>
-                    <div class="col-xl-8 col-12">
-                        <!-- <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด"> -->
-                        <textarea name="comment" rows="5" cols="60" class="form-control" value="ทีวี ตู้เย็น" placeholder="ทีวี ตู้เย็น"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                     </div>
+
                 </div>
             </div>
         </form>
