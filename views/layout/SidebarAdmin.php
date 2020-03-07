@@ -17,12 +17,22 @@
             <span>บัญชีผู้ใช้</span>
         </a>
     </li>
+
     <li class='nav-item'>
-        <a class='nav-link collapsed' href="../../views/agreement/agreement.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+        <a class='nav-link collapsed' href="../../views/agreement/agreement.php" data-toggle='collapse' data-target='#link' aria-expanded='true' aria-controls='link-2'>
             <i class="fas fa-users"></i>
             <span>การจัดการผู้ใช้</span>
         </a>
+        <div id='link' class='collapse' aria-labelledby='headingTwo' data-parent='#accordionSidebar'>
+            <div class=' py-2 collapse-inner rounded' style='border-left: 2px solid white; border-radius: 0% !important;'>
+                <div class="background-color-sideber" style="background-color: #bf4040" id="accordionSidebar">
+                    <a class='nav-link' href="../../views/agreement/agreement.php">การจัดการผู้เช่า</a>
+                    <a class='nav-link' href='../Booking/reserved_detail_reserver.php'>การจัดการผู้ดูแล</a>
+                </div>
+            </div>
+        </div>
     </li>
+
     <li class='nav-item'>
         <a class='nav-link collapsed' href="../../views/config/config.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
             <i class="fas fa-wrench"></i>
