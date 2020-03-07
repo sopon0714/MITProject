@@ -12,6 +12,7 @@ if (isset($_POST['save'])) {
     $common = $_POST['commonfee'];
     $account = $_POST['account'];
     $bank = $_POST['bank'];
+    $accountname = $_POST['accountname'];
     // dormitname
     $sql = "UPDATE `config` SET `config_value` = '$dormitname'
     WHERE `config`.`config_key` = 'DormitoryName'";
@@ -62,6 +63,9 @@ if (isset($_POST['save'])) {
     WHERE `config`.`config_key` = 'bank'";
     echo $sql . "</br>";
     updateData($sql);
-
+    $sql = "UPDATE `config` SET `config_value` = '$accountname'
+    WHERE `config`.`config_key` = 'accountname'";
+    echo $sql . "</br>";
+    updateData($sql);
     header("location:../../views/config/config.php");
 }
