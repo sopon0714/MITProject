@@ -3,7 +3,18 @@
 
 <head>
     <title>Profile</title>
-    <?php require_once('../../views/layout/MainCSS.php') ?>
+    <?php require_once('../../views/layout/MainCSS.php');
+    include("../../dbConnect.php");
+
+    $sql_TableAgreement = "SELECT * FROM `user` INNER JOIN agreement ON agreement.uid = user.uid
+        INNER JOIN room ON room.rid = agreement.rid";
+    $sql_NumAgreement = "SELECT COUNT(agreement.agreeId) AS numAgreement FROM agreement 
+    INNER JOIN user ON user.uid = agreement.uid WHERE user.isDelete=0";
+
+    $TableAgreement = selectData($sql_TableAgreement);
+    $NumAgreement = selectData($sql_NumAgreement);
+    //echo ($TableAgreement[2]['firstname']);
+    ?>
 </head>
 
 <body>
@@ -36,8 +47,8 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold  text-uppercase mb-1">จำนวนห้อง</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">4 ห้อง</div>
+                                            <div class="font-weight-bold  text-uppercase mb-1">จำนวนสัญญา</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $NumAgreement[1]['numAgreement'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="material-icons icon-big">home</i>
@@ -45,24 +56,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-12 mb-4">
-                            <a href='addroom.php' style="text-decoration: none">
-                                <div class="card border-left-primary card-color-add shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="font-weight-bold  text-uppercase mb-1">จำนวนห้องที่ว่าง
-                                                </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">20/100</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="material-icons icon-big">home</i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
                         </div>
                         <div class="col-xl-3 col-12 mb-4">
                             <div class="card border-left-primary card-color-add shadow h-100 py-2" id="addAgreement" style="cursor:pointer;">
@@ -125,19 +118,22 @@
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
-                                                    <tr role="row" class="odd">
-                                                        <td class="sorting_1">514</td>
-                                                        <td>นาย ภาณุภัสส์ ธนัชญ์สุธาโชติ</td>
-                                                        <td>01/01/2563</td>
-                                                        <td>01/01/2565</td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดสัญญา" style="width:15px;height:20px" onclick="detailAgreement()"><i class="fas fa-file-alt"></i></button>
-                                                        </td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="แก้ไขข้อมูล" style="width:15px;height:20px"><i class="fas fa-edit" onclick="EditAgreement()"></i></button>
-                                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบสัญญา" style="width:15px;height:20px"><i class="far fa-trash-alt" onclick="delfunction('ห้อง511','555')"></i></button>
-                                                        </td>
-                                                    </tr>
+                                                    <?php for ($i = 0; $i < $TableAgreement[0]['numrow']; $i++) { ?>
+                                                        <tr role="row" class="odd">
+                                                            <td class="sorting_1"><?php echo $TableAgreement[$i + 1]['rnumber'] ?></td>
+                                                            <td><?php echo $TableAgreement[$i + 1]['title'] ?> <?php echo $TableAgreement[$i + 1]['firstname'] ?> <?php echo $TableAgreement[$i + 1]['lastname'] ?></td>
+                                                            <td><?php echo $TableAgreement[$i + 1]['startDate'] ?></td>
+                                                            <td><?php echo $TableAgreement[$i + 1]['endDate'] ?></td>
+                                                            <td style="text-align:center;">
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดสัญญา" style="width:15px;height:20px" onclick="detailAgreement()"><i class="fas fa-file-alt"></i></button>
+                                                            </td>
+                                                            <td style="text-align:center;">
+                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="แก้ไขข้อมูล" style="width:15px;height:20px"><i class="fas fa-edit" onclick="EditAgreement(<?php $i ?>)"></i></button>
+                                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบสัญญา" style="width:15px;height:20px"><i class="far fa-trash-alt" onclick="delfunction('ห้อง511','555')"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -257,7 +253,7 @@
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#3E49BB">
-                    <h4 class="modal-title" style="color:white">เพิ่มสัญญาการเช่า</h4>
+                    <h4 class="modal-title" style="color:white">แก้ไขสัญญาสัญญาการเช่า</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4">
@@ -353,7 +349,7 @@
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#3E49BB">
-                    <h4 class="modal-title" style="color:white">เพิ่มสัญญาการเช่า</h4>
+                    <h4 class="modal-title" style="color:white">รายละเอียดสัญญาการเช่า</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4">

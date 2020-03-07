@@ -9,3 +9,4 @@
 
 <script src="../../lib/datatables/jquery.dataTables.min.js"></script>
 <script src="../../lib/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
