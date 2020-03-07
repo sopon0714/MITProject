@@ -1,6 +1,7 @@
 <?php
 include("../../dbConnect.php");
-
+session_start();
+$DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 $query = "SELECT * FROM config";
 $result = selectData($query);
 //print_r($result);
@@ -14,6 +15,7 @@ $dormitorytel = $result[7]['config_value'];
 $router = $result[8]['config_value'];
 $email = $result[9]['config_value'];
 $address = $result[10]['config_value'];
+$accountname = $result[11]['config_value'];
 
 ?>
 <!DOCTYPE html>
@@ -110,15 +112,11 @@ $address = $result[10]['config_value'];
                                             <input type="text" class="form-control" id="semester" value="<?php echo $email ?>" maxlength="100" disabled>
                                         </div>
                                     </div>
-                                    <div class="row mb-4" style="margin:20px;">
-                                        <div class="col-xl-3 col-12 text-right">
-                                            <span>ค่าน้ำหน่วยละ : </span>
-
-                                        </div>
-                                        <div class="col-xl-2 col-12">
-                                            <input type="text" class="form-control" id="semester" value="<?php echo $waterbill ?>" maxlength="100" disabled>
-                                        </div>
-                                        บาท/ยูนิต
+                                    บาท / เดือน
+                                </div>
+                                <div class="row mb-4" style="margin:20px;">
+                                    <div class="col-xl-3 col-12 text-right">
+                                        <span>ค่าส่วนกลางและอื่นๆ: </span>
                                     </div>
                                     <div class="row mb-4" style="margin:20px;">
                                         <div class="col-xl-3 col-12 text-right">
@@ -130,23 +128,22 @@ $address = $result[10]['config_value'];
                                         </div>
                                         บาท/ยูนิต
                                     </div>
-                                    <div class="row mb-4" style="margin:20px;">
-                                        <div class="col-xl-3 col-12 text-right">
-                                            <span>ค่าเช่าเราท์เตอร์ : </span>
-                                        </div>
-                                        <div class="col-xl-2 col-12">
-                                            <input type="text" class="form-control" id="semester" value="<?php echo $router ?>" maxlength="100" disabled>
-                                        </div>
-                                        บาท / ปี
+                                    บาท / เดือน
+                                </div>
+                                <div class="row mb-4" style="margin:20px;">
+                                    <div class="col-xl-3 col-12 text-right">
+                                        <span>ชื่อบัญชีธนาคาร: </span>
                                     </div>
-                                    <div class="row mb-4" style="margin:20px;">
-                                        <div class="col-xl-3 col-12 text-right">
-                                            <span>ค่าส่วนกลางและอื่นๆ: </span>
-                                        </div>
-                                        <div class="col-xl-2 col-12">
-                                            <input type="text" class="form-control" id="semester" value="<?php echo $commonfee ?>" maxlength="100" disabled>
-                                        </div>
-                                        บาท / ปี
+                                    <div class="col-xl-2 col-12">
+                                        <input type="text" class="form-control" id="semester" value="<?php echo $accountname ?>" maxlength="100" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-4" style="margin:20px;">
+                                    <div class="col-xl-3 col-12 text-right">
+                                        <span>เลขบัญชีธนาคาร: </span>
+                                    </div>
+                                    <div class="col-xl-2 col-12">
+                                        <input type="text" class="form-control" id="semester" value="<?php echo $accountname ?>" maxlength="100" disabled>
                                     </div>
                                     <div class="row mb-4" style="margin:20px;">
                                         <div class="col-xl-3 col-12 text-right">
@@ -175,108 +172,7 @@ $address = $result[10]['config_value'];
                         <!-- End of Main Content -->
 
                     </div>
-                    <!-- Start Model EditInfo -->
-                    <!-- <div id="editInfo" name="editInfo" class="modal fade">
-                        <form method="post" id="editInfo" name="editInfo" action="manage.php">
-                            <div class="modal-content">
 
-                                <div class="modal-header " style="background-color: #eecc0b;">
-                                    <h4 class="modal-title" style="color:white">แก้ไขข้อมูลการจัดการหอพัก</h4>
-                                </div>
-                                <div class="modal-body" id="addModalBody">
-                                    <div class="container">
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>ชื่อหอพัก <span style="color: red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="dormitoryname" name="dormitoryname" placeholder="<?php echo $dormitoryname ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>ที่อยู่ <span style="color:red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="address" name="address" placeholder="<?php echo $address ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>เบอร์โทร <span style="color: red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="dormitorytel" name="dormitorytel" placeholder="<?php echo $dormitorytel ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>Email <span style="color: red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="email" name="email" placeholder="<?php echo $email ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>ค่าน้ำหน่วยละ <span style="color: red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="waterbill" name="waterbill" placeholder="<?php echo $waterbill ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>ค่าไฟหน่วยละ<span style="color: red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="electricitybill" name="electricitybill" placeholder="<?php echo $electricitybill ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>ค่าเช่าเราท์เตอร์ <span style="color: red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="router" name="router" placeholder="<?php echo $router ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>ค่าส่วนกลางและอื่นๆ <span style="color: red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="commonfee" name="commonfee" placeholder="<?php echo $commonfee ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>เลขบัญชีธนาคาร<span style="color: red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="account" name="account" placeholder="<?php echo $account ?>">
-                                            </div>
-                                        </div>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>ธนาคาร <span style="color: red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="bank" name="bank" placeholder="<?php echo $bank ?>">
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-success" name="submitedit">ยืนยัน</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                                    </div>
-                                </div>
-                        </form>
-
-                    </div> -->
-                    <!-- End Model EditInfo -->
 
                     <div id="editInfo" class="modal fade">
                         <form class="modal-dialog modal-lg " method="post" action="manage.php">
@@ -352,6 +248,14 @@ $address = $result[10]['config_value'];
                                         </div>
                                         <div class="row mb-4">
                                             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
+                                                <span>ชื่อบัญชีธนาคาร<span style="color: red">*</span> :</span>
+                                            </div>
+                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
+                                                <input type="text" class="form-control" id="accountname" name="accountname" value="<?php echo $accountname ?>">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-4">
+                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
                                                 <span>เลขบัญชีธนาคาร<span style="color: red">*</span> :</span>
                                             </div>
                                             <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
@@ -359,13 +263,39 @@ $address = $result[10]['config_value'];
                                             </div>
                                         </div>
                                         <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>ธนาคาร <span style="color: red">*</span> :</span>
+                                            <div class="col-xl-3 col-12 text-right">
+                                                <span>ธนาคาร<span style="color: red">*</span> :</span>
                                             </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="bank" name="bank" value="<?php echo $bank ?>">
+                                            <div class="col-xl-9 col-12">
+                                                <select class="form-control" id="bank" name=bank>
+
+
+                                                    <option value="กรุงเทพ" <?php if ($bank == "กรุงเทพ") {
+                                                                                echo "selected";
+                                                                            } ?>>กรุงเทพ</option>
+                                                    <option value="กรุงไทย" <?php if ($bank == "กรุงไทย") {
+                                                                                echo "selected";
+                                                                            } ?>>กรุงไทย</option>
+                                                    <option value="ทหารไทย" <?php if ($bank == "ทหารไทย") {
+                                                                                echo "selected";
+                                                                            } ?>>ทหารไทย</option>
+                                                    <option value="ไทยพาณิชย์" <?php if ($bank == "ไทยพาณิชย์") {
+                                                                                    echo "selected";
+                                                                                } ?>>ไทยพาณิชย์</option>
+                                                    <option value="กรุงศรี" <?php if ($bank == "กรุงศรี") {
+                                                                                echo "selected";
+                                                                            } ?>>กรุงศรี</option>
+                                                    <option value="ออมสิน" <?php if ($bank == "ออมสิน") {
+                                                                                echo "selected";
+                                                                            } ?>>ออมสิน</option>
+                                                    <option value="กสิกร" <?php if ($bank == "กสิกร") {
+                                                                                echo "selected";
+                                                                            } ?>>กสิกร</option>
+                                                </select>
+
                                             </div>
                                         </div>
+
 
                         </form>
 

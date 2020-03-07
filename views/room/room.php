@@ -1,3 +1,7 @@
+<?php
+session_start();
+$DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -257,17 +261,7 @@
                     <h4 class="modal-title" style="color:white">เพิ่มห้องพัก</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>สถานะ :</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <span>ว่าง<span>
-                                    <input type="radio" name="status" value="ว่าง" />
-                                    <span>ไม่ว่าง<span>
-                                            <input type="radio" name="status" value="ไม่ว่าง" />
-                        </div>
-                    </div>
+
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
                             <span>หมายเลขห้อง :</span>
@@ -284,36 +278,14 @@
                             <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
                         </div>
                     </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>คำนำหน้า :</span>
-                        </div>
-                        <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                            <select class="custom-select  mb-3" id="course_e" name="course_e">
-                                <option>นาย</option>
-                                <option>นาง</option>
-                                <option>นางสาว</option>
-                            </select> </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>ชื่อผู้เช่า:</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกชื่อผู้เช่า" maxlength="100">
-                            <!-- <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-												<select class="custom-select  mb-3" id="course_e" name="course_e">
-													<option>1 ปี</option>
-													<option>2 ปี</option>
-												</select> </div> -->
-                        </div>
-                    </div>
+
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
                             <span>รายละเอียด:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="mail" value="" placeholder="กรุณากรอกรายละเอียด">
+                            <!-- <input type="text" class="form-control" id="mail" value="" placeholder="กรุณากรอกรายละเอียด"> -->
+                            <textarea name="comment" rows="5" cols="60" placeholder="กรุณากรอกรายละเอียด"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -331,17 +303,7 @@
                     <h4 class="modal-title" style="color:white">แก้ไขห้อง</h4>
                 </div>
 
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>สถานะ :</span>
-                    </div>
-                    <div class="col-xl-8 col-12">
-                        <span>ว่าง<span>
-                                <input type="radio" name="status" value="ว่าง" />
-                                <span>ไม่ว่าง<span>
-                                        <input type="radio" name="status" value="ไม่ว่าง" />
-                    </div>
-                </div>
+
                 <div class="row mb-4">
                     <div class="col-xl-3 col-12 text-right">
                         <span>หมายเลขห้อง :</span>
@@ -358,36 +320,15 @@
                         <input type="text" class="form-control" id="username" value="4900" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
                     </div>
                 </div>
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>คำนำหน้า :</span>
-                    </div>
-                    <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                        <select class="custom-select  mb-3" id="course_e" name="course_e">
-                            <option>นาย</option>
-                            <option>นาง</option>
-                            <option>นางสาว</option>
-                        </select> </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>ชื่อผู้เช่า:</span>
-                    </div>
-                    <div class="col-xl-8 col-12">
-                        <input type="text" class="form-control" id="username" value="คณา วันดี" placeholder="กรุณากรอกชื่อผู้เช่า" maxlength="100">
-                        <!-- <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-												<select class="custom-select  mb-3" id="course_e" name="course_e">
-													<option>1 ปี</option>
-													<option>2 ปี</option>
-												</select> </div> -->
-                    </div>
-                </div>
+
+
                 <div class="row mb-4">
                     <div class="col-xl-3 col-12 text-right">
                         <span>รายละเอียด:</span>
                     </div>
                     <div class="col-xl-8 col-12">
-                        <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด">
+                        <!-- <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด"> -->
+                        <textarea name="comment" rows="5" cols="60" class="form-control" value="ทีวี ตู้เย็น" placeholder="ทีวี ตู้เย็น"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

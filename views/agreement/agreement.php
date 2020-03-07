@@ -1,3 +1,7 @@
+<?php
+session_start();
+$DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -264,7 +268,7 @@
     <div id="modalEdit" class="modal fade">
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#3E49BB">
+                <div class="modal-header" style="background-color:#eecc0b">
                     <h4 class="modal-title" style="color:white">แก้ไขสัญญาสัญญาการเช่า</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
@@ -360,7 +364,7 @@
     <div id="modalDetailAgreement" class="modal fade">
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#3E49BB">
+                <div class="modal-header" style="background-color:#00ace6">
 
                     <h4 class="modal-title" style="color:white">รายละเอียดสัญญาการเช่า</h4>
                 </div>
