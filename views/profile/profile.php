@@ -32,12 +32,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     <div class="row">
                                         <div class="col-12">
                                             <span class="link-active font-weight-bold" style="color:#006664;">บัญชีผู้ใช้</span>
-                                            <span style="float:right;">
-                                                <i class="fas fa-bookmark"></i>
-                                                <!-- <a class="link-path" href="#">หน้าแรก</a>
-                                                <span> > </span> -->
-                                                <a class="link-path link-active" href="#" style="color:#006664;">บัญชีผู้ใช้</a>
-                                            </span>
                                         </div>
                                     </div>
                                 </div>

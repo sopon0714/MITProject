@@ -1,6 +1,7 @@
 <?php
 include("../../dbConnect.php");
-
+session_start();
+$DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 $query = "SELECT * FROM config";
 $result = selectData($query);
 //print_r($result);

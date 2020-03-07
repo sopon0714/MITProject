@@ -1,3 +1,7 @@
+<?php
+session_start();
+$DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
