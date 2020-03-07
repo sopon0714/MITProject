@@ -305,7 +305,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#eecc0b">
-                    <h4 class="modal-title" style="color:white">แก้ไขสัญญาสัญญาการเช่า</h4>
+                    <h4 class="modal-title" style="color:white">แก้ไขสัญญาสัญญาการเช่า </h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4">
