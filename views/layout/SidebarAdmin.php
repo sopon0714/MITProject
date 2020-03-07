@@ -36,7 +36,7 @@
         </a>
     </li>
     <li class='nav-item'>
-        <a class='nav-link collapsed' href="../dormitory/indexadmin.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+        <a class='nav-link collapsed' href="../../views/payment/payment.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
             <i class="fas fa-hand-holding-usd"></i>
             <span>การจัดการชำระค่าเช่ารายเดือน</span>
         </a>
