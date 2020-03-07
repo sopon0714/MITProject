@@ -1,6 +1,8 @@
 <?php
 session_start();
-$DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
+require_once('../../dbConnect.php');
+$sql = "SELECT * FROM user WHERE `user`.`uid` = {$_SESSION['DATAUSER']['uid']}";
+$DATAUSER = selectDataOne($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -227,6 +229,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     </div>
                                 </div>
                             </div>
+                            <!-- hidden -->
+                            <input type="hidden" class="form-control" id="IDEdit2" name="IDEdit2" value="<?= $DATAUSER['uid'] ?>">
 
                         </div>
                         <div class="modal-footer">
@@ -330,6 +334,34 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
             var pass2 = document.getElementById("newpass").value;
             var pass3 = document.getElementById("newpass2").value;
             changepassword(iduser, pass1, pass2, pass3);
+        });
+        $(document).on('click', '#saveMail', function() {
+            var iduser = document.getElementById("IDEdit2").value;
+            var emailEdit = document.getElementById("emailEdit").value;
+            $('#ChangeEmailModal').modal('toggle');
+            swal({
+                title: 'เปลี่ยน Email',
+                text: 'ได้ทำการส่งEmailไปที่:' + emailEdit + ' กรุณาเข้าไปยืนยัน',
+                icon: 'success',
+            });
+            $.ajax({
+                type: "POST",
+
+                data: {
+                    userid: iduser,
+                    action: "changeemail",
+                    emailEdit: emailEdit
+
+                },
+                url: "../../views/profile/manage.php",
+                async: false,
+                success: function(result) {
+                    console.log("5555");
+                    console.table(result);
+
+                }
+            });
+
         });
 
         function changepassword(iduser, pass1, pass2, pass3) {
