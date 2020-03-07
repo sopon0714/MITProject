@@ -37,8 +37,15 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
-                                <div class="card-header card-bg  header-text-color">
-                                    รายซื่อห้อง
+                                <div class="card-header card-bg" style="background-color: white">
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <span class="link-active font-weight-bold" style="color:#006664;">การจัดการห้อง</span>
+
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -177,8 +184,11 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <!-- ######################## end filter ######################## -->
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header card-header-table py-3">
-                            <h6 class="m-0 font-weight-bold header-text-color">รายซื่อห้องในระบบ </h6>
+                        <div class="card">
+                            <div class="card-header card-bg font-weight-bold" style="color:#006664;background-color: white;">
+                                รายชื่อห้องในระบบ
+
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -211,15 +221,15 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                     <?php for ($i = 0; $i <  $tableRoom[0]['numrow']; $i++) { ?>
                                                         <tr role="row" class="odd">
                                                             <td style="text-align:center;">
-                                                                <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน" style="width:15px;height:20px">R</a>
+                                                                <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน">R</a>
                                                             </td>
                                                             <td><?php echo $tableRoom[$i + 1]['rnumber'] ?></td>
                                                             <td><?php echo $tableRoom[$i + 1]['rent'] ?></td>
                                                             <td><?php echo $tableRoom[$i + 1]['title'] ?> <?php echo $tableRoom[$i + 1]['firstname'] ?> <?php echo $tableRoom[$i + 1]['lastname'] ?> </td>
                                                             <td><?php echo $tableRoom[$i + 1]['detail'] ?></td>
                                                             <td style="text-align:center;">
-                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" style="width:15px;height:20px" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
-                                                                <button type="button" onclick="delfunction('ห้อง','001A')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบห้อง" style="width:15px;height:20px"><i class="far fa-trash-alt"></i></button>
+                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
+                                                                <button type="button" onclick="delfunction('ห้อง','001A')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบห้อง"><i class="far fa-trash-alt"></i></button>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
@@ -251,17 +261,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <h4 class="modal-title" style="color:white">เพิ่มห้องพัก</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>สถานะ :</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <span>ว่าง<span>
-                                    <input type="radio" name="status" value="ว่าง" />
-                                    <span>ไม่ว่าง<span>
-                                            <input type="radio" name="status" value="ไม่ว่าง" />
-                        </div>
-                    </div>
+
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
                             <span>หมายเลขห้อง :</span>
@@ -278,36 +278,14 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
                         </div>
                     </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>คำนำหน้า :</span>
-                        </div>
-                        <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                            <select class="custom-select  mb-3" id="course_e" name="course_e">
-                                <option>นาย</option>
-                                <option>นาง</option>
-                                <option>นางสาว</option>
-                            </select> </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>ชื่อผู้เช่า:</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกชื่อผู้เช่า" maxlength="100">
-                            <!-- <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-												<select class="custom-select  mb-3" id="course_e" name="course_e">
-													<option>1 ปี</option>
-													<option>2 ปี</option>
-												</select> </div> -->
-                        </div>
-                    </div>
+
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
                             <span>รายละเอียด:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="mail" value="" placeholder="กรุณากรอกรายละเอียด">
+                            <!-- <input type="text" class="form-control" id="mail" value="" placeholder="กรุณากรอกรายละเอียด"> -->
+                            <textarea name="comment" rows="5" cols="60" placeholder="กรุณากรอกรายละเอียด"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -321,74 +299,44 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <div id="modalEdit" class="modal fade">
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#3E49BB">
+                <div class="modal-header" style="background-color:#eecc0b">
                     <h4 class="modal-title" style="color:white">แก้ไขห้อง</h4>
                 </div>
 
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>สถานะ :</span>
+                <div class="modal-body" id="addModalBody">
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>หมายเลขห้อง :</span>
+                        </div>
+                        <div class="col-xl-8 col-12">
+                            <input type="text" class="form-control" id="username" value="001A" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
+                        </div>
                     </div>
-                    <div class="col-xl-8 col-12">
-                        <span>ว่าง<span>
-                                <input type="radio" name="status" value="ว่าง" />
-                                <span>ไม่ว่าง<span>
-                                        <input type="radio" name="status" value="ไม่ว่าง" />
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>ค่าเช่าห้อง:</span>
+                        </div>
+                        <div class="col-xl-8 col-12">
+                            <input type="text" class="form-control" id="username" value="4900" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>หมายเลขห้อง :</span>
+
+
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>รายละเอียด:</span>
+                        </div>
+                        <div class="col-xl-8 col-12">
+                            <!-- <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด"> -->
+                            <textarea name="comment" rows="5" cols="60" class="form-control" value="ทีวี ตู้เย็น" placeholder="ทีวี ตู้เย็น"></textarea>
+                        </div>
                     </div>
-                    <div class="col-xl-8 col-12">
-                        <input type="text" class="form-control" id="username" value="001A" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>ค่าเช่าห้อง:</span>
-                    </div>
-                    <div class="col-xl-8 col-12">
-                        <input type="text" class="form-control" id="username" value="4900" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>คำนำหน้า :</span>
-                    </div>
-                    <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                        <select class="custom-select  mb-3" id="course_e" name="course_e">
-                            <option>นาย</option>
-                            <option>นาง</option>
-                            <option>นางสาว</option>
-                        </select> </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>ชื่อผู้เช่า:</span>
-                    </div>
-                    <div class="col-xl-8 col-12">
-                        <input type="text" class="form-control" id="username" value="คณา วันดี" placeholder="กรุณากรอกชื่อผู้เช่า" maxlength="100">
-                        <!-- <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-												<select class="custom-select  mb-3" id="course_e" name="course_e">
-													<option>1 ปี</option>
-													<option>2 ปี</option>
-												</select> </div> -->
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-right">
-                        <span>รายละเอียด:</span>
-                    </div>
-                    <div class="col-xl-8 col-12">
-                        <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด">
-                    </div>
-                </div>
-                <div class="modal-footer">
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                     </div>
+
                 </div>
             </div>
         </form>

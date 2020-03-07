@@ -66,6 +66,7 @@ $password = $_COOKIE['password'] ?? "";
                                     <div class="custom-control custom-checkbox mb-1">
                                         <input type="checkbox" class="custom-control-input" id="remember" name="remember" <?php if (isset($_COOKIE['username'])) echo " checked "; ?> />
                                         <label class="custom-control-label" for="remember">บันทึกบัญชีผู้ใช้</label>
+
                                         <label style="margin-left: 20px;cursor:pointer;color: blue" id="pass_edit"> ลืมรหัสผ่าน?</label>
                                         <button class="btn btn-success btn-md" style="float:right;" type="submit">ล็อกอิน</button>
                                     </div>
@@ -91,8 +92,8 @@ $password = $_COOKIE['password'] ?? "";
         <div class="modal-content">
             <form method="post" id="formAdd" name="formAdd" action="manage.php">
                 <div class="changepass">
-                    <div class="modal-header header-modal">
-                        <h4 class="modal-title">ลืม Password</h4>
+                    <div class="modal-header header-modal" style="background-color: #ffcc00;">
+                        <h4 class="modal-title" style="color: white">ลืม Password</h4>
                     </div>
                     <div class="modal-body" id="ChangeModalBody">
                         <div class="container">

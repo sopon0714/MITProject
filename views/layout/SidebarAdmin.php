@@ -1,7 +1,7 @@
 <!--############################### start Sidebar ############################### -->
 <ul class="navbar-nav  sidebar sidebar-dark accordion  " style="background-color: #bf4040" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../dormitory/indexadmin.php">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon ">
             <i class="fas fa-hotel"></i>
         </div>
@@ -41,15 +41,6 @@
             <span>การจัดการชำระค่าเช่ารายเดือน</span>
         </a>
     </li>
-
-    <li class='nav-item'>
-        <a class='nav-link collapsed' href="../dormitory/indexadmin.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
-            <i class="fas fa-wallet"></i>
-            <span>ประวัติการชำระค่าเช่ารายเดือน</span>
-        </a>
-    </li>
-
-
     <li class='nav-item'>
         <a class='nav-link' href='../../logout.php'>
             <i class='material-icons'>meeting_room</i>
