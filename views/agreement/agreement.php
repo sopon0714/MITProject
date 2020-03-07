@@ -39,8 +39,15 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
-                                <div class="card-header card-bg  header-text-color">
-                                    รายละเอียดสัญญา
+                                <div class="card-header card-bg" style="background-color: white">
+                                    <div class="row">
+                                        <div class="col-12">
+
+                                            <span class="link-active font-weight-bold" style="color:#006664;">การจัดการผู้ใช้</span>
+
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -92,8 +99,11 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <!-- ######################## end filter ######################## -->
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header card-header-table py-3">
-                            <h6 class="m-0 font-weight-bold header-text-color">สัญญาการเช่าทั้งหมด</h6>
+                        <div class="card">
+                            <div class="card-header card-bg font-weight-bold" style="color:#006664;background-color: white;">
+                                สัญญาการเช่าทั้งหมด
+
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -129,11 +139,13 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                             <td><?php echo $TableAgreement[$i + 1]['startDate'] ?></td>
                                                             <td><?php echo $TableAgreement[$i + 1]['endDate'] ?></td>
                                                             <td style="text-align:center;">
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title="" data-original-title="รายละเอียดสัญญา" style="width:15px;height:20px" onclick="detailAgreement()"><i class="fas fa-file-alt"></i></button>
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดสัญญา' onclick="detailAgreement()">
+                                                                    <i class="fas fa-file-alt"></i>
+                                                                </button>
                                                             </td>
                                                             <td style="text-align:center;">
-                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="แก้ไขข้อมูล" style="width:15px;height:20px"><i class="fas fa-edit" onclick="EditAgreement(<?php $i ?>)"></i></button>
-                                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบสัญญา" style="width:15px;height:20px"><i class="far fa-trash-alt" onclick="delfunction('ห้อง511','555')"></i></button>
+                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditAgreement(<?php $i ?>)"></i></button>
+                                                                <button type="button" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบสัญญา"><i class="far fa-trash-alt" onclick="delfunction('ห้อง511','555')"></i></button>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
@@ -256,7 +268,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <div id="modalEdit" class="modal fade">
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#3E49BB">
+                <div class="modal-header" style="background-color:#eecc0b">
                     <h4 class="modal-title" style="color:white">แก้ไขสัญญาสัญญาการเช่า</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
@@ -352,7 +364,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <div id="modalDetailAgreement" class="modal fade">
         <form class="modal-dialog modal-lg ">
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#3E49BB">
+                <div class="modal-header" style="background-color:#00ace6">
+
                     <h4 class="modal-title" style="color:white">รายละเอียดสัญญาการเช่า</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
