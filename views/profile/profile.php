@@ -199,7 +199,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     </div>
                                 </div>
                                 <!-- hidden -->
-                                <input type="hidden" class="form-control" id="IDEdit" name="IDEdit" value="<?= $DATAUSER['uid'] ?>" placeholder="กรุณากรอกเบอร์โทร">
+                                <input type="hidden" class="form-control" id="IDEdit" name="IDEdit" value="<?= $DATAUSER['uid'] ?>">
                             </div>
 
                         </div>
@@ -263,6 +263,13 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     <div class="col-xl-7 col-6 text-right">
                                         <input type="password" class="form-control" id="oldpass" name="oldpass" placeholder="กรุณากรอกรหัสผ่านเก่า">
                                     </div>
+
+                                </div>
+                                <div class="row mb-3">
+                                    <div class=" col-xl-3 col-2 ">
+                                    </div>
+                                    <div id="errorpassold" class=" col-xl-3 col-2 form-label-group">
+                                    </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-xl-3 col-2 text-right textreq">
@@ -273,6 +280,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                </div>
+                                <div class="row mb-3">
                                     <div class="col-xl-3 col-2 text-right textreq">
                                         <span>รหัสผ่านใหม่อีกครั้ง:</span>
                                     </div>
@@ -280,6 +289,15 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                         <input type="password" class="form-control" id="newpass2" name="newpass2" placeholder="กรุณากรอกรหัสผ่านใหม่อีกครั้ง">
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    <div class=" col-xl-3 col-2 ">
+                                    </div>
+                                    <div id="errorpassnew" class="form-label-group col-xl-3 col-2 ">
+
+                                    </div>
+                                </div>
+                                <!-- hidden -->
+                                <input type="hidden" class="form-control" id="IDEdit3" name="IDEdit3" value="<?= $DATAUSER['uid'] ?>">
                             </div>
 
                         </div>
@@ -312,5 +330,57 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         $('#btn_email').click(function() {
             $("#ChangeEmailModal").modal();
         });
+        $(document).on('click', '#savepass', function() {
+            var iduser = document.getElementById("IDEdit3").value;
+            var pass1 = document.getElementById("oldpass").value;
+            var pass2 = document.getElementById("newpass").value;
+            var pass3 = document.getElementById("newpass2").value;
+            changepassword(iduser, pass1, pass2, pass3);
+        });
+
+        function changepassword(iduser, pass1, pass2, pass3) {
+
+            $.ajax({
+                type: "POST",
+
+                data: {
+                    userid: iduser,
+                    action: "changepassword",
+                    passold: pass1,
+                    passnew: pass2,
+                    passnew2: pass3
+                },
+                url: "../../views/profile/manage.php",
+                async: false,
+
+                success: function(result) {
+                    console.table(result);
+                    if (result.output == 1) {
+                        $("#errorpassold").empty();
+                        $("#errorpassnew").empty();
+                        $("#errorpassold").append("<label style=\"color: red\">รหัสผ่านไม่ถูกต้อง</label>");
+                    } else if (result.output == 2) {
+                        $("#errorpassold").empty();
+                        $("#errorpassnew").empty();
+                        $("#errorpassnew").append("<label style=\"color: red\">รหัสผ่านใหม่ไม่ตรงกัน</label>");
+                    } else {
+                        $("#errorpassold").empty();
+                        $("#errorpassnew").empty();
+                        $('#ChangePasswordModal').modal('toggle');
+                        swal({
+                            title: 'ตั้ง password ใหม่',
+                            text: 'สำเร็จ....',
+                            icon: 'success',
+                            timer: 2000,
+                            buttons: false
+                        });
+
+                    }
+
+
+
+                }
+            });
+        }
     });
 </script>
