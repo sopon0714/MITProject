@@ -176,28 +176,30 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
             </div>
             <div class="modal-body" id="addModalBody">
                 <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-left">
-                        <span>ห้อง : 101</span>
+                    <div class="col-xl-12 col-12 " style="font-size:25px">
+                        <span>ห้อง : 101 ปี 2563 เดือนที่ 1</span>
                     </div>
                 </div>
+
                 <div class="row mb-4">
-                    <div class="col-xl-3 col-12 text-left">
-                        <span>ปี 2563 เดือนที่ 1</span>
-                    </div>
-
-
-                    <img src="../../img/slip.jpg" style="width:50%; margin-top:30px">
-                    <div class="row mb-12">
-                        <div class="col-xl-5 col-12 " style="font-size:130%">
-                            <span>เวลา 22:59:00 น. วันที่ 07-03-63</span>
-                        </div>
+                    <div class="col-xl-12 col-12 " style="font-size:25px">
+                        <span>หลักฐานการโอน เวลา 22:59:00 น. วันที่ 07-03-63</span>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+
+                <div class="row mb-4">
+
+                    <div ALIGN="center">
+                        <img src="../../img/slip.jpg" style="width:50%">
+                    </div>
                 </div>
+
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+            </div>
+        </div>
     </form>
 </div>
 <!-- End Modal -->
