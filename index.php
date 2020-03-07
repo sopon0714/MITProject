@@ -103,11 +103,13 @@ $password = $_COOKIE['password'] ?? "";
                                     <input type="text" name="username2" id="username2" class="form-control" placeholder="username" required autofocus>
                                 </div>
                             </div>
+                            <div class="row mb-3">
 
+                                <div id="erroruser" class="form-label-group col-xl-6 col-2 ">
 
-
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" name="save" id="save" value="insert" class="btn btn-success save">ยืนยัน</button>
@@ -138,55 +140,41 @@ $password = $_COOKIE['password'] ?? "";
             $("#ChangeModal").modal();
         });
         $(document).on('click', '.save', function() {
-            var user = document.getElementById("username2").value;
-            changepassword(user);
+            var username = document.getElementById("username2").value;
+            $.ajax({
+                type: "POST",
+
+                data: {
+                    username: username
+                },
+                url: "./manage.php",
+                async: false,
+
+                success: function(result) {
+                    console.table(result)
+                    if (result.output == 1) {
+                        erroruser
+                        $("#erroruser").empty();
+                        document.getElementById("username2").value = "";
+                        $("#erroruser").append("<label style=\"color: red\">ไม่พบบัญชีนี้ในระบบ</label>");
+                    } else if (result.output == 2) {
+                        $("#erroruser").empty();
+                        $('#ChangeModal').modal('toggle');
+                        swal({
+                            title: 'ลืมรหัสผ่าน',
+                            text: "อีเมลลืได้ถูกส่งไปที่Email:xxx" + result.Email.substring(4, result.Email.length),
+                            icon: 'success',
+                            timer: 10000,
+                            buttons: false
+                        });
+                    }
+
+                }
+            });
+
         });
         $('#ChangeModal').on('hidden.bs.modal', function() {
             $(this).find('form').trigger('reset');
         })
-        // $(document).on('click', '.cancel', function() {
-        //     // cancel();
-        //     $("#username2").value = "";
-
-        // });
-
-
-        function changepassword(username2) {
-
-            $.ajax({
-                type: "POST",
-
-                data: {
-                    username: username2
-                },
-                url: "view/ChangePassword/manage.php",
-                async: false,
-
-                success: function(result) {
-
-                    $(".changepass").empty();
-                    $(".changepass").append(result);
-                }
-            });
-        }
-
-        function cancel() {
-            $.ajax({
-                type: "POST",
-
-                data: {
-                    cancel: "ccc"
-                },
-                url: "view/ChangePassword/manage.php",
-                async: false,
-
-                success: function(result) {
-
-                    $(".changepass").empty();
-                    $(".changepass").append(result);
-                }
-            });
-        }
-
     });
 </script>
