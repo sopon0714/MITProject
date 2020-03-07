@@ -9,9 +9,9 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <title>Profile</title>
     <?php require_once('../../views/layout/MainCSS.php');
     include("../../dbConnect.php");
-    $sql_tableRoom = "SELECT room.status,rnumber,rent,COALESCE(title,'-') as title,firstname,lastname ,detail FROM room 
-    LEFT JOIN agreement  ON room.rid = agreement.rid 
-    LEFT JOIN user ON user.uid = agreement.uid";
+    $sql_tableRoom = "SELECT room.rid,room.status,rnumber,rent,COALESCE(title,'-') as title,firstname,lastname ,detail 
+    FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete LIKE 0";
+
 
     $tableRoom = selectData($sql_tableRoom);
 
@@ -228,8 +228,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                             <td><?php echo $tableRoom[$i + 1]['title'] ?> <?php echo $tableRoom[$i + 1]['firstname'] ?> <?php echo $tableRoom[$i + 1]['lastname'] ?> </td>
                                                             <td><?php echo $tableRoom[$i + 1]['detail'] ?></td>
                                                             <td style="text-align:center;">
-                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
-                                                                <button type="button" onclick="delfunction('ห้อง','001A')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบห้อง"><i class="far fa-trash-alt"></i></button>
+                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" style="width:15px;height:20px" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
+                                                                <button type="button" onclick="delfunction(<?= $tableRoom[$i + 1]['rid'] ?>,<?= $tableRoom[$i + 1]['rnumber'] ?>)" class="btn btn-danger btn-sm btndel" data-toggle="tooltip" title="" data-original-title="ลบห้อง" style="width:15px;height:20px"><i class="far fa-trash-alt"></i></button>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
@@ -341,6 +341,9 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
             </div>
         </form>
     </div>
+
+
+
 </div>
 <!-- End Modal -->
 <script>
@@ -349,6 +352,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         $('.tt').tooltip({
             trigger: "hover"
         });
+        $(".btndel").on('click', function() {
+
+        });
+
 
     });
     $(document).ready(function() {
@@ -361,5 +368,48 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
     function EditRoom() {
         $("#modalEdit").modal('show');
+    }
+
+    function delfunction(id, rname) {
+        swal({
+                title: "คุณต้องการลบหรือไม่?",
+                text: "ต้องการยืนยันลบห้อง " + rname + " ใช่ไหม ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    $.ajax({
+                        type: "POST",
+
+                        data: {
+                            rid: id,
+                            action: "delete"
+
+                        },
+                        url: "../../views/room/manage.php",
+                        async: false,
+
+                        success: function(result) {
+                            console.table(result);
+
+                        }
+                    });
+
+                    swal("ลบรายการของคุณเรียบร้อยแล้ว", {
+                        icon: "success",
+                        buttons: false
+                    });
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+
     }
 </script>

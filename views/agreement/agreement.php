@@ -51,7 +51,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     <div class="row">
                                         <div class="col-12">
 
-                                            <span class="link-active font-weight-bold" style="color:#006664;">การจัดการผู้ใช้</span>
+                                            <span class="link-active font-weight-bold" style="color:#006664;">การจัดการผู้เช่า</span>
 
                                             </span>
                                         </div>
