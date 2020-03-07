@@ -112,7 +112,16 @@ $accountname = $result[11]['config_value'];
                                             <input type="text" class="form-control" id="semester" value="<?php echo $email ?>" maxlength="100" disabled>
                                         </div>
                                     </div>
+                                    <div class="row mb-4" style="margin:20px;">
+                                        <div class="col-xl-3 col-12 text-right">
+                                            <span>ค่าน้ำหน่วยละ : </span>
 
+                                        </div>
+                                        <div class="col-xl-2 col-12">
+                                            <input type="text" class="form-control" id="semester" value="<?php echo $waterbill ?>" maxlength="100" disabled>
+                                        </div>
+                                        บาท/ยูนิต
+                                    </div>
 
                                     <div class="row mb-4" style="margin:20px;">
                                         <div class="col-xl-3 col-12 text-right">
@@ -227,14 +236,7 @@ $accountname = $result[11]['config_value'];
                                                 <input type="text" class="form-control" id="electricitybill" name="electricitybill" value="<?php echo $electricitybill ?>">
                                             </div>
                                         </div>
-                                        <div class="row mb-4">
-                                            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                <span>ค่าเช่าเราท์เตอร์ <span style="color: red">*</span> :</span>
-                                            </div>
-                                            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                <input type="text" class="form-control" id="router" name="router" value="<?php echo $router ?>">
-                                            </div>
-                                        </div>
+
                                         <div class="row mb-4">
                                             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
                                                 <span>ค่าส่วนกลางและอื่นๆ <span style="color: red">*</span> :</span>
