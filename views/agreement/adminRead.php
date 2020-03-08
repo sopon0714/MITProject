@@ -10,7 +10,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <?php require_once('../../views/layout/MainCSS.php');
     include("../../dbConnect.php");
 
-    $sql_TableAdmin = "SELECT * FROM `user` WHERE user.type = 'ผู้ดูแลระบบ'";
+    $sql_TableAdmin = "SELECT * FROM `user` WHERE user.type = 'ผู้ดูแลระบบ' &&  user.isDelete LIKE 0";
     $sql_NumAdmin = "SELECT COUNT(user.uid) as admin FROM `user` WHERE user.type = 'ผู้ดูแลระบบ'";
 
     $TableAdmin = selectData($sql_TableAdmin);
@@ -67,7 +67,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">จำนวนผู้ดูแล</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php echo $NumAdmin[1]['Admin'] ?> คน</div>
+                                                <?php echo $NumAdmin[1]['admin'] ?> คน</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="material-icons icon-big">home</i>
@@ -138,7 +138,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                 <tbody>
                                                     <?php for ($i = 0; $i < $TableAdmin[0]['numrow']; $i++) { ?>
                                                     <tr role="row" class="odd">
-                                                        <td class="sorting_1">
                                                         <td><?php echo $TableAdmin[$i + 1]['title'] ?>
                                                             <?php echo $TableAdmin[$i + 1]['firstname'] ?>
                                                             <?php echo $TableAdmin[$i + 1]['lastname'] ?></td>
@@ -146,26 +145,25 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                         <td><?php echo $TableAdmin[$i + 1]['email'] ?></td>
                                                         <td style="text-align:center;">
                                                             <a href="#" class="detailAdmin"
-                                                                rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>"
-                                                                firstname="<?php echo $TableAgreement[$i + 1]['firstname']; ?>"
-                                                                lastname="<?php echo $TableAgreement[$i + 1]['lastname']; ?>"
-                                                                startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>"
-                                                                endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>"
-                                                                phoneNumber="<?php echo $TableAgreement[$i + 1]['phoneNumber']; ?>"
-                                                                email="<?php echo $TableAgreement[$i + 1]['email']; ?>">
+                                                                firstname="<?php echo $TableAdmin[$i + 1]['firstname']; ?>"
+                                                                lastname="<?php echo $TableAdmin[$i + 1]['lastname']; ?>"
+                                                                formalId="<?php echo $TableAdmin[$i + 1]['formalId']; ?>"
+                                                                phoneNumber="<?php echo $TableAdmin[$i + 1]['phoneNumber']; ?>"
+                                                                email="<?php echo $TableAdmin[$i + 1]['email']; ?>"
+                                                                username="<?php echo $TableAdmin[$i + 1]['username']; ?>"
+                                                                password="<?php echo $TableAdmin[$i + 1]['password']; ?>">
                                                                 <button type="button" class="btn btn-info btn-sm"
                                                                     data-toggle="tooltip" title='รายละเอียดแอดมิน'>
                                                                     <i class="fas fa-file-alt"></i>
                                                                 </button>
                                                             </a>
-                                                        </td>
-                                                        <td style="text-align:center;">
                                                             <button
                                                                 onclick="delfunctionAdmin('<?php echo $TableAdmin[$i + 1]['firstname'] ?>','<?php echo $TableAdmin[$i + 1]['uid'] ?>')"
                                                                 type='button' id='btn_delete'
                                                                 class="btn btn-danger btn-sm" data-toggle="tooltip"
                                                                 title="" data-original-title="ลบผู้ดูแลระบบ"><i
-                                                                    class="far fa-trash-alt"></i></button>
+                                                                    class="far fa-trash-alt"></i>
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                     <?php } ?>
@@ -233,7 +231,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                         <div class="col-xl-8 col-12">
                             <input type="text" class="form-control" id="formalId" name="formalId" value=""
-                                placeholder="กรุณากรอกเบอร์โทร">
+                                placeholder="กรุณากรอกรหัสประจำตัวประชาชน">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -268,7 +266,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>password :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="password" name="password" value=""
+                            <input type="password" class="form-control" id="password" name="password" value=""
                                 placeholder="กรุณากรอกpassword">
                         </div>
                     </div>
@@ -277,7 +275,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ยืนยัน password :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="password2" name="password2" value=""
+                            <input type="password" class="form-control" id="password2" name="password2" value=""
                                 placeholder="กรุณากรอกpassword">
                         </div>
                     </div>
@@ -374,73 +372,4 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     </div>
 </div>
 <!-- End Modal -->
-<script>
-$(document).ready(function() {
-    console.log("ready!");
-    $('[data-toggle="tooltip"]').tooltip();
-});
-$(document).ready(function() {
-    console.log("ready!");
-    $("#addAdmin").click(function() {
-        $("#modalAddAdmin").modal();
-    });
-});
-$(".detailAdmin").click(function() {
-    var firstname = $(this).attr('firstname');
-    var lastname = $(this).attr('lastname');
-    var formalId = $(this).attr('formalId');
-    var phoneNumber = $(this).attr('phoneNumber');
-    var email = $(this).attr('email');
-    var username = $(this).attr('username');
-    var password = $(this).attr('password');
-
-    $('#e_firstname').val(firstname);
-    $('#e_lastname').val(lastname);
-    $('#e_formalId').val(formalId);
-    $('#e_phoneNumber').val(phoneNumber);
-    $('#e_email').val(email);
-    $('#e_username').val(username);
-    $('#e_password').val(password);
-
-    $("#modalDetailAdmin").modal();
-});
-
-function delfunctionAdmin(title, uid) {
-    //alert(uid + " dddd")
-    swal({
-            title: "คุณต้องการลบ",
-            text: title + "หรือไม่ ?",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-        .then((willDelete) => {
-            if (willDelete) {
-                swal("Poof! Your imaginary file has been deleted!", {
-                    icon: "success",
-                    buttons: false
-                });
-                delete_2(uid);
-                setTimeout(function() {
-                    location.reload();
-                }, 1500);
-            } else {
-                swal("Your imaginary file is safe!");
-            }
-        });
-}
-
-function delete_2(uid1) {
-    $.ajax({
-        type: "POST",
-        data: {
-            uid: uid1,
-            delete: "deleteAdmin"
-        },
-        url: "./manage.php",
-        async: false,
-        success: function(result) {}
-    });
-}
-</script>
-<!-- <script src="function.js"></script> -->
+<script src="function.js"></script>
