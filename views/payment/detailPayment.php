@@ -57,7 +57,12 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                     <div class="row">
                                         <div class="col-12">
                                             <span class="link-active " style="font-size: 15px; color:white;">การจัดการการชำระค่าเช่ารายเดือน</span>
+                                            <span style="float:right;">
 
+                                                <button type="button" id="btn_info" class="btn btn-warning btn-sm tt" title='ย้อนกลับ'>
+                                                    <i class="fas fa-undo-alt"></i>
+                                                </button>
+                                            </span>
                                             </span>
                                         </div>
                                     </div>
@@ -112,7 +117,6 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                         <div class="card">
                             <div class="card-header card-bg " style="background-color: #bf4040">
                                 <span class="link-active " style="font-size: 15px; color:white;">รายละเอียดการชำระค่าเช่ารายเดือน</span>
-
                             </div>
                         </div>
 
