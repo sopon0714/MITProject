@@ -19,21 +19,36 @@ if (isset($_POST['add'])) {
     VALUES ( NULL, '$username', '$password' ,'ผู้เช่า','$title','$firstname','$lastname','$formalId','$email','$phoneNumber','รอยืนยัน', 0 )";
     echo $sqluser;
     addinsertData($sqluser);
-
+    // $rid = "SELECT rid FROM `room` WHERE room.rnumber = $rnumber";
+    // echo $rnumber;
+    //$r_rid = selectData($rid);
     $uid = "SELECT user.uid as uid FROM user where user.firstname = '$firstname' && user.lastname = '$lastname'";
     $u_uid = selectData($uid);
     echo ($u_uid[1]['uid']);
     $ss = ($u_uid[1]['uid']);
+    // $update = ($r_rid[1]['rid']);
 
     $sqlagree = "INSERT INTO agreement ( agreeId,`rid`, `uid`, `startDate`, `endDate`) VALUES ( NULL,'$rnumber', '$ss', '$startDate', '$endDate' )";
     echo $sqlagree;
     addinsertData($sqlagree);
+
+    $sqlUpdateStatus = "UPDATE `room` SET `status` = 'ไม่ว่าง' WHERE `room`.`rid` =  '$rnumber'";
+    updateData($sqlUpdateStatus);
     header("location:./agreement.php");
 }
 if (isset($_POST['delete'])) {
     $uid = $_POST['uid'];
     $sql = "UPDATE user SET isDelete = 1  WHERE user.uid =  $uid";
     updateData($sql);
+
+    $sqlrid = "SELECT room.rid as rid FROM `room` INNER JOIN agreement ON agreement.rid = room.rid
+    INNER JOIN user ON user.uid=agreement.uid
+    WHERE user.uid = $uid";
+    $ridselect = selectData($sqlrid);
+    $rid = $ridselect[1]['rid'];
+
+    $sqlUpdateRoom = "UPDATE `room` SET `status` = 'ว่าง' WHERE `room`.`rid` = $rid";
+    updateData($sqlUpdateRoom);
 }
 if (isset($_POST['edit'])) {
     $e_idAgree = $_POST['e_idAgree'];
