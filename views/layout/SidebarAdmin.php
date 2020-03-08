@@ -52,6 +52,12 @@
         </a>
     </li>
     <li class='nav-item'>
+        <a class='nav-link collapsed' href="../../views/inform/showinform.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+            <i class="fas fa-comment-dots"></i>
+            <span>แสดงคำร้อง</span>
+        </a>
+    </li>
+    <li class='nav-item'>
         <a class='nav-link' href='../../logout.php'>
             <i class='material-icons'>meeting_room</i>
             <span>ออกจากระบบ</span>
