@@ -109,17 +109,14 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                     <td>15.33</td>
                                                     <td>8/3/2563</td>
                                                     <td>101</td>
-                                                    <td>ก็อกน้ำรั่ว</td>
                                                     <td style="text-align:center;">
-                                                        <button type="button" onclick="delfunction('ห้อง','001A')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบรายการ"><i class="far fa-trash-alt"></i></button>
-                                                    </td>
-                                                </tr>
+                                                        <a href="../../views/payment/detailPayment.php">
+                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailPayment()">
+                                                                <i class="fas fa-file-alt"></i>
+                                                            </button>
+                                                        </a>
 
-                                                <tr>
-                                                    <td>12.08</td>
-                                                    <td>3/3/2563</td>
-                                                    <td>101</td>
-                                                    <td>เครื่องซักผ้าใช้ไม่ได้</td>
+                                                    </td>
                                                     <td style="text-align:center;">
                                                         <button type="button" onclick="delfunction('ห้อง','001A')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบรายการ"><i class="far fa-trash-alt"></i></button>
                                                     </td>
