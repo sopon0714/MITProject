@@ -52,7 +52,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class=" row">
                                         <div class="col-12">
-                                            <span class="link-active font-weight-bold" style="font-size: 15px; color:white;">การจัดการผู้เช่า</span>
+                                            <span class="link-active " style="font-size: 15px; color:white;">การจัดการผู้เช่า</span>
                                             </span>
                                         </div>
                                     </div>
@@ -106,40 +106,38 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card">
-                            <div class="card-header card-bg font-weight-bold" style="color:#006664;background-color: white;">
-                                สัญญาการเช่าทั้งหมด
+                            <div class="card-header card-bg " style="background-color: #bf4040">
+                                <span class="link-active " style="font-size: 15px; color:white;">สัญญาการเช่าทั้งหมด</span>
+
 
                             </div>
                         </div>
                         <div class="card-body">
+
                             <div class="table-responsive">
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row center">
+
                                         <div class="col-sm-11" id="Agreement_table">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
-                                                    <tr role="row">
+
+                                                    <tr role="row" style="text-align:center;">
+
                                                         <th rowspan="1" colspan="1">หมายเลขห้อง</th>
                                                         <th rowspan="1" colspan="1">ชื่อผู้เช่า</th>
                                                         <th rowspan="1" colspan="1">วันที่เริ่มสัญญา</th>
                                                         <th rowspan="1" colspan="1">วันที่สิ้นสุดสัญญา</th>
                                                         <th rowspan="1" colspan="1">รายละเอียด</th>
                                                         <th rowspan="1" colspan="1">จัดการ</th>
+
                                                     </tr>
+
                                                 </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th rowspan="1" colspan="1">หมายเลขห้อง</th>
-                                                        <th rowspan="1" colspan="1">ชื่อผู้เช่า</th>
-                                                        <th rowspan="1" colspan="1">วันที่เริ่มสัญญา</th>
-                                                        <th rowspan="1" colspan="1">วันที่สิ้นสุดสัญญา</th>
-                                                        <th rowspan="1" colspan="1">รายละเอียด</th>
-                                                        <th rowspan="1" colspan="1">จัดการ</th>
-                                                    </tr>
-                                                </tfoot>
+
                                                 <tbody>
                                                     <?php for ($i = 0; $i < $TableAgreement[0]['numrow']; $i++) { ?>
-                                                        <tr role="row" class="odd">
+                                                        <tr role="row" class="odd" style="text-align:center;">
                                                             <td class="sorting_1">
                                                                 <?php echo $TableAgreement[$i + 1]['rnumber'] ?></td>
                                                             <td><?php echo $TableAgreement[$i + 1]['title'] ?>
@@ -168,6 +166,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                 </tbody>
                                             </table>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
