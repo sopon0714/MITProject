@@ -409,7 +409,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     }, 1500);
 
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
                 }
             });
 
