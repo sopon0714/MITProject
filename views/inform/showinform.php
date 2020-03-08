@@ -121,7 +121,7 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
                                                 <?php for ($i = 0; $i < $TableRequest[0]['numrow']; $i++) { ?>
                                                     <tr role="row" class="odd">
                                                         <td class="sorting_1">
-                                                            <?php echo $TableRequest[$i + 1]['TimeRequest'] ?></td>
+                                                            <?php echo $TableRequest[$i + 1]['TimeRequest'] ?>น.</td>
                                                         <td>
                                                             <?php echo $TableRequest[$i + 1]['DateRequest'] ?></td>
                                                         <td>
