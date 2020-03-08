@@ -47,7 +47,8 @@
     </li>
     <li class='nav-item'>
         <a class='nav-link collapsed' href="../../views/payment/payment.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
-            <i class="fas fa-hand-holding-usd"></i>
+            <i class="fas fa-coins"></i>
+
             <span>การจัดการชำระค่าเช่ารายเดือน</span>
         </a>
     </li>

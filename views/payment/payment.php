@@ -71,7 +71,8 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numberNotCommit ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">home</i>
+
+                                            <i class="fas fa-file-invoice-dollar"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -86,28 +87,29 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numberWait ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">home</i>
+                                            <i class="fas fa-vote-yea"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xl-3 col-12 mb-4">
-                            <div class="card border-left-primary card-color-add shadow h-100 py-2" id="addAgreement" style="cursor:pointer;">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold  text-uppercase mb-1">เพิ่มการชำระ
+                            <a href="../../views/payment/addPayment.php">
+                                <div class="card border-left-primary card-color-add shadow h-100 py-2" id="addPayment" style="cursor:pointer;">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="font-weight-bold  text-uppercase mb-1">เพิ่มการชำระ
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">+1 การชำระ</div>
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">+1 การชำระ</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="material-icons icon-big">add_circle</i>
+                                            <div class="col-auto">
+                                                <i class="material-icons icon-big">add_circle</i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            </a>
                         </div>
 
 
@@ -160,7 +162,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                         <td>{$INFOPAYMENT[$i]['Confirm']}</td>
                                                         <td style=\"text-align:center;\">
                                                             <a href=\"../../views/payment/detailPayment.php?dateID={$INFOPAYMENT[$i]['dateId']}\">
-                                                                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"tooltip\" title='รายละเอียด' onclick=\"detailPayment()\">
+                                                                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"tooltip\" title='รายละเอียด' >
                                                                     <i class=\"fas fa-file-alt\"></i>
                                                                 </button>
                                                             </a>
@@ -169,6 +171,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                     </tr>";
                                                     }
                                                     ?>
+
 
 
                                                 </tbody>
@@ -206,12 +209,4 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
             $("#modalAddAgreement").modal();
         });
     });
-
-    function detailAgreement() {
-        $("#modalDetailAgreement").modal('show');
-    }
-
-    function EditAgreement() {
-        $("#modalEdit").modal('show');
-    }
 </script>
