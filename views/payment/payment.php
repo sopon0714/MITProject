@@ -5,7 +5,7 @@ if (!isset($_SESSION['DATAUSER'])) {
     header("location:../../index.php?msg=กระบวนการเข้าเว็บไซต์ไม่ถูกต้อง");
 }
 $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
-$sqlInfoPayment = "SELECT `date`.`dateId`,`date`.`year`,`date`.`month` ,COUNT(*) as roomAll ,COUNT(`payment`.`timeSlip`)-COUNT(`payment`.`timeConfirm`) as roomCommit ,COUNT(`payment`.`timeConfirm`) as Confirm
+$sqlInfoPayment = "SELECT `date`.`dateId`,`date`.`year`,`date`.`month` ,COUNT(*) as roomAll ,COUNT(*) -COUNT(`payment`.`timeSlip`) as roomNotpay,COUNT(`payment`.`timeSlip`)-COUNT(`payment`.`timeConfirm`) as roomCommit ,COUNT(`payment`.`timeConfirm`) as Confirm
 FROM `payment` 
 INNER JOIN `date` ON `date`.`dateId` = `payment`.`dateId`
 GROUP BY  `date`.`year`,`date`.`month`
@@ -14,7 +14,7 @@ $INFOPAYMENT = selectData($sqlInfoPayment);
 $numberNotCommit  = 0;
 $numberWait = 0;
 for ($i = 1; $i <= $INFOPAYMENT[0]['numrow']; $i++) {
-    $numberNotCommit  += $INFOPAYMENT[$i]['roomAll'] - $INFOPAYMENT[$i]['roomCommit'] - $INFOPAYMENT[$i]['Confirm'];
+    $numberNotCommit  += $INFOPAYMENT[$i]['roomNotpay'];
     $numberWait  += $INFOPAYMENT[$i]['roomCommit'];
 }
 $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
@@ -139,9 +139,10 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                     <tr role="row">
                                                         <th rowspan="1" colspan="1">ปีพ.ศ</th>
                                                         <th rowspan="1" colspan="1">เดือน</th>
-                                                        <th rowspan="1" colspan="1">จำนวนห้องที่ยังไม่ได้ชำระ</th>
-                                                        <th rowspan="1" colspan="1">จำนวนห้องที่รอยืนยัน</th>
-                                                        <th rowspan="1" colspan="1">จำนวนห้องที่ชำระเสร็จสมบูรณ์</th>
+                                                        <th rowspan="1" colspan="1">ห้องที่ต้องชำระ</th>
+                                                        <th rowspan="1" colspan="1">ห้องที่ยังไม่ชำระ</th>
+                                                        <th rowspan="1" colspan="1">ห้องที่รอยืนยัน</th>
+                                                        <th rowspan="1" colspan="1">ห้องที่ชำระเสร็จสมบูรณ์</th>
                                                         <th rowspan="1" colspan="1">รายละเอียด</th>
 
                                                     </tr>
@@ -154,6 +155,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                         <td>{$INFOPAYMENT[$i]['year']}</td>
                                                         <td>{$arrMonth[$INFOPAYMENT[$i]['month']]}</td>
                                                         <td>{$INFOPAYMENT[$i]['roomAll']}</td>
+                                                        <td>{$INFOPAYMENT[$i]['roomNotpay']}</td>
                                                         <td>{$INFOPAYMENT[$i]['roomCommit']}</td>
                                                         <td>{$INFOPAYMENT[$i]['Confirm']}</td>
                                                         <td style=\"text-align:center;\">
