@@ -57,7 +57,7 @@ $accountname = $result[11]['config_value'];
                                     <div class="row">
                                         <div class="col-12">
 
-                                            <span class="link-active font-weight-bold" style="font-size: 15px; color:white;">การจัดการหอพัก</span>
+                                            <span class="link-active " style="font-size: 15px; color:white;">การจัดการหอพัก</span>
                                         </div>
                                     </div>
                                 </div>
@@ -69,8 +69,9 @@ $accountname = $result[11]['config_value'];
                         <div class="col-xl-center col-12 mb-4">
                             <div class="card ">
 
-                                <div class="card-header card-bg font-weight-bold" style="color:#006664;background-color: white;">
-                                    ข้อมูลการจัดการหอพัก
+                                <div class="card-header card-bg " style="background-color: #bf4040">
+                                    <span class="link-active " style="font-size: 15px; color:white;">ข้อมูลการจัดการหอพัก</span>
+
                                     <span style="float:right;">
 
                                         <button type="button" id="btn_edit" class="btn btn-warning btn-sm tt " title='แก้ไขข้อมูลหอพัก'>
