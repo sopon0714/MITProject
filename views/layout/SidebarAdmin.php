@@ -27,7 +27,7 @@
             <div class=' py-2 collapse-inner rounded' style='border-left: 2px solid white; border-radius: 0% !important;'>
                 <div class="background-color-sideber" style="background-color: #bf4040" id="accordionSidebar">
                     <a class='nav-link' href="../../views/agreement/agreement.php">การจัดการผู้เช่า</a>
-                    <a class='nav-link' href='../Booking/reserved_detail_reserver.php'>การจัดการผู้ดูแล</a>
+                    <a class='nav-link' href='../../views/agreement/adminRead.php'>การจัดการผู้ดูแล</a>
                 </div>
             </div>
         </div>
