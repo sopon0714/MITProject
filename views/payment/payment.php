@@ -162,7 +162,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                         <td>{$INFOPAYMENT[$i]['Confirm']}</td>
                                                         <td style=\"text-align:center;\">
                                                             <a href=\"../../views/payment/detailPayment.php?dateID={$INFOPAYMENT[$i]['dateId']}\">
-                                                                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"tooltip\" title='รายละเอียด' onclick=\"detailPayment()\">
+                                                                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"tooltip\" title='รายละเอียด' >
                                                                     <i class=\"fas fa-file-alt\"></i>
                                                                 </button>
                                                             </a>
@@ -171,6 +171,8 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                     </tr>";
                                                     }
                                                     ?>
+
+
 
                                                 </tbody>
                                             </table>
@@ -207,12 +209,4 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
             $("#modalAddAgreement").modal();
         });
     });
-
-    function detailAgreement() {
-        $("#modalDetailAgreement").modal('show');
-    }
-
-    function EditAgreement() {
-        $("#modalEdit").modal('show');
-    }
 </script>

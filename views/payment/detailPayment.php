@@ -1,9 +1,22 @@
 <?php
 session_start();
-if (!isset($_SESSION['DATAUSER'])) {
+include("../../dbConnect.php");
+if (!isset($_SESSION['DATAUSER']) || !isset($_GET['dateID'])) {
     header("location:../../index.php?msg=กระบวนการเข้าเว็บไซต์ไม่ถูกต้อง");
 }
 $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
+$dateID = $_GET['dateID'];
+$sqlDate = "SELECT * FROM `date` WHERE dateId= $dateID";
+$sqlDetail = "SELECT `payment`.`pId`,`room`.`rnumber`,`payment`.`waterb`*`payment`.`waterUnit` as costWater,
+`payment`.`elecb`*`payment`.`elecUnit` as costElect,`payment`.`commonf`,`payment`.`paymentAll`,`payment`.`status`
+FROM `payment` 
+INNER JOIN `date` ON `date`.`dateId` = `payment`.`dateId`
+INNER JOIN `agreement` ON `agreement`.`agreeId` = `payment`.`agreeId`
+INNER JOIN `room` ON `room`.`rid` = `agreement`.`rid`
+WHERE `date`.`dateId`= $dateID";
+$DATAINFO = selectDataOne($sqlDate);
+$DATADETAIL = selectData($sqlDetail);
+$arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +24,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <head>
     <title>Profile</title>
     <?php require_once('../../views/layout/MainCSS.php');
-    include("../../dbConnect.php");
+
     ?>
 </head>
 
@@ -100,7 +113,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
                         <div class="row mb-2" style="margin:20px;">
                             <div class="col-xl-5  text-left" style="font-size:130%">
-                                <span>ข้อมูลของปี 2563 เดือนที่ 1</span>
+                                <span>ข้อมูลของเดือน <?= $arrMonth[$DATAINFO['month']] ?> ปีพุทธศักราช <?= $DATAINFO['year'] ?> </span>
                             </div>
 
                         </div>
@@ -114,6 +127,9 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                 <thead>
                                                     <tr role="row">
                                                         <th rowspan="1" colspan="1">ห้อง</th>
+                                                        <th rowspan="1" colspan="1">ค่าน้ำ</th>
+                                                        <th rowspan="1" colspan="1">ค่าไฟ</th>
+                                                        <th rowspan="1" colspan="1">ค่าเช่าห้อง+ค่าอื่นๆ</th>
                                                         <th rowspan="1" colspan="1">ยอดที่ต้องชำระ</th>
                                                         <th rowspan="1" colspan="1">สถานะ</th>
                                                         <th rowspan="1" colspan="1">รายละเอียด</th>
@@ -121,69 +137,25 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
                                                     </tr>
                                                 </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th rowspan="1" colspan="1">ห้อง</th>
-                                                        <th rowspan="1" colspan="1">ยอดที่ต้องชำระ</th>
-                                                        <th rowspan="1" colspan="1">สถานะ</th>
-                                                        <th rowspan="1" colspan="1">รายละเอียด</th>
-                                                    </tr>
-                                                </tfoot>
                                                 <tbody>
+                                                    <?php
+                                                    for ($i = 1; $i <= $DATADETAIL[0]['numrow']; $i++) {
+                                                        echo "<tr>
+                                                        <td>{$DATADETAIL[$i]['rnumber']}</td>
+                                                        <td>{$DATADETAIL[$i]['costWater']}</td>
+                                                        <td>{$DATADETAIL[$i]['costElect']}</td>
+                                                        <td>{$DATADETAIL[$i]['commonf']}</td>
+                                                        <td>{$DATADETAIL[$i]['paymentAll']}</td>
+                                                        <td>{$DATADETAIL[$i]['status']}</td>
+                                                        <td style=\"text-align:center;\">
+                                                            <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"tooltip\" title='รายละเอียด' onclick=\"detailSlip()\">
+                                                                <i class=\"fas fa-file-alt\"></i>
+                                                            </button>
+                                                        </td>
 
-                                                    <tr>
-                                                        <td>101</td>
-                                                        <td>3500</td>
-                                                        <td>จ่ายแล้ว</td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailSlip()">
-                                                                <i class="fas fa-file-alt"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>102</td>
-                                                        <td>3500</td>
-                                                        <td>จ่ายแล้ว</td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailSlip()">
-                                                                <i class="fas fa-file-alt"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>103</td>
-                                                        <td>3500</td>
-                                                        <td>จ่ายแล้ว</td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailSlip()">
-                                                                <i class="fas fa-file-alt"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>104</td>
-                                                        <td>3500</td>
-                                                        <td>ยังไม่จ่าย</td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailSlip()">
-                                                                <i class="fas fa-file-alt"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>105</td>
-                                                        <td>3500</td>
-                                                        <td>ยังไม่จ่าย</td>
-                                                        <td style="text-align:center;">
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailSlip()">
-                                                                <i class="fas fa-file-alt"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-
-
-
+                                                    </tr>";
+                                                    }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
