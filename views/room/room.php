@@ -9,11 +9,14 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <title>Profile</title>
     <?php require_once('../../views/layout/MainCSS.php');
     include("../../dbConnect.php");
-    $sql_tableRoom = "SELECT room.rid,room.status,rnumber,rent,COALESCE(title,'-') as title,firstname,lastname ,detail 
+    $sql_tableRoom = "SELECT room.rid,room.status as status,rnumber,rent,COALESCE(title,'-') as title,firstname,lastname ,detail ,user.uid
     FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete LIKE 0";
-
+    $sqlnumroom = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0";
+    $sqlRoomEmpty = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0 AND status LIKE 'ว่าง' ";
 
     $tableRoom = selectData($sql_tableRoom);
+    $numroom = selectData($sqlnumroom);
+    $RoomEmpty = selectData($sqlRoomEmpty);
 
     // echo $tableRoom
     ?>
@@ -56,7 +59,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">จำนวนห้องทั้งหมด</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">4 ห้อง</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numroom[1]['Numroom'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="material-icons icon-big">home</i>
@@ -74,7 +77,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">จำนวนห้องที่ว่าง
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">1 ห้อง</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $RoomEmpty[1]['Numroom'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="material-icons icon-big">home</i>
@@ -105,81 +108,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
                     </div>
                     <!-- ######################## start filter ######################## -->
-                    <div class="row center">
-                        <div class="col-xl-12 col-12 mb-4 ">
-                            <div id="accordion">
-                                <div class="card ">
-                                    <!-- <div class="card-header header-background-color-filter" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style=" color:white;">
-											การค้นหาขั้นสูง
-										</div> -->
 
-                                    <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
-                                        <div class="card-body">
-                                            <div class="container">
-                                                <div class="row mb-4">
-                                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                        <span>หมายเลขห้อง :</span>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                        <input type="text" class="form-control" id="username__r" name="username__r" placeholder="กรุณากรอกเลขห้อง">
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-4">
-                                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                        <span>ชื่อห้อง/span>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                        <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกชื่อห้อง">
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-4">
-                                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-right">
-                                                        <span>ชื่อย่อห้อง :</span>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12">
-                                                        <input type="text" class="form-control" id="username__n_r" name="username__n_r" placeholder="กรุณากรอกชื่อย่อ">
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-4 mt-4">
-                                                    <div class="col-xl-3 col-12 text-right">
-                                                        <span>สถานะห้อง :</span>
-                                                    </div>
-                                                    <div class="col-xl-9 col-12">
-                                                        <div class="form-check form-check-inline">
-                                                            <input type="radio" class="form-check-input" id="status1" name="status">
-                                                            <label class="form-check-label" for="materialInline1">พร้อมใช้งาน</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input type="radio" class="form-check-input" id="status2" name="status">
-                                                            <label class="form-check-label" for="materialInline2">ไม่พร้อมใช้งาน</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-4 mt-4">
-                                                    <div class="col-xl-3 col-12 text-right">
-                                                        <span>สถานะล็อคห้อง :</span>
-                                                    </div>
-                                                    <div class="col-xl-9 col-12">
-                                                        <div class="form-check form-check-inline">
-                                                            <input type="radio" class="form-check-input" id="status3" name="status2">
-                                                            <label class="form-check-label" for="materialInline1">ล็อค</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input type="radio" class="form-check-input" id="status4" name="status2">
-                                                            <label class="form-check-label" for="materialInline2">ไม่ล็อค</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-info"><i class="fa fa-search"></i> ค้นหา</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <!-- ######################## end filter ######################## -->
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -218,17 +147,41 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                 </tfoot>-->
                                                 <tbody>
                                                     <?php for ($i = 0; $i <  $tableRoom[0]['numrow']; $i++) { ?>
+<<<<<<< HEAD
                                                         <tr role="row" class="odd" style="text-align:center;">
                                                             <td>
                                                                 <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน">R</a>
+=======
+                                                        <tr role="row" class="odd">
+                                                            <td style="text-align:center;">
+                                                                <?php if ($tableRoom[$i + 1]['status'] == 'ว่าง') { ?>
+                                                                    <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน">R</a>
+                                                                <?php } else { ?>
+                                                                    <a class="btn btn-danger btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="ไม่พร้อมใช้งาน">R</a>
+                                                                <?php } ?>
+>>>>>>> 9d38c93ee3d831f313a58f200bb51671501f37a4
                                                             </td>
                                                             <td><?php echo $tableRoom[$i + 1]['rnumber'] ?></td>
                                                             <td><?php echo $tableRoom[$i + 1]['rent'] ?></td>
                                                             <td><?php echo $tableRoom[$i + 1]['title'] ?> <?php echo $tableRoom[$i + 1]['firstname'] ?> <?php echo $tableRoom[$i + 1]['lastname'] ?> </td>
-                                                            <td><?php echo $tableRoom[$i + 1]['detail'] ?></td>
                                                             <td style="text-align:center;">
-                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
-                                                                <button type="button" onclick="delfunction(<?= $tableRoom[$i + 1]['rid'] ?>,<?= $tableRoom[$i + 1]['rnumber'] ?>)" class="btn btn-danger btn-sm btndel" data-toggle="tooltip" title="" data-original-title="ลบห้อง"><i class="far fa-trash-alt"></i></button>
+                                                                <a href="#" class="detailRoom" detail="<?php echo $tableRoom[$i + 1]['detail']; ?>">
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดห้อง'>
+                                                                        <i class="fas fa-file-alt"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </td>
+                                                            <td style="text-align:center;">
+                                                                <a href="#" class="EditRoom" rid=<?php echo  $tableRoom[$i + 1]['rid'] ?> rnumber=<?php echo $tableRoom[$i + 1]['rnumber'] ?> rent=<?php echo $tableRoom[$i + 1]['rent'] ?> detail=' <?php echo $tableRoom[$i + 1]['detail'] ?>'>
+                                                                    <button type="button" class="btn btn-warning  btn-sm" 4 data-toggle="tooltip" title="แก้ไขข้อมูล">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                </a>
+                                                                <?php if ($tableRoom[$i + 1]['status'] == "ว่าง") { ?>
+                                                                    <button type="button" onclick="delfunction(<?= $tableRoom[$i + 1]['rid'] ?>,<?= $tableRoom[$i + 1]['rnumber'] ?>)" class="btn btn-danger btn-sm btndel" data-toggle="tooltip" title="" data-original-title="ลบห้อง"><i class="far fa-trash-alt"></i></button>
+                                                                <?php } else { ?>
+                                                                    <button type="button" onclick="delfunction2(<?= $tableRoom[$i + 1]['rid'] ?>,<?= $tableRoom[$i + 1]['rnumber'] ?>)" class="btn btn-danger btn-sm btndel" data-toggle="tooltip" title="" data-original-title="ลบห้อง"><i class="far fa-trash-alt"></i></button>
+                                                                <?php } ?>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
@@ -298,7 +251,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         </form>
     </div>
     <div id="modalEdit" class="modal fade">
-        <form class="modal-dialog modal-lg ">
+        <form class="modal-dialog modal-lg" method="POST" action='manage.php'>
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#eecc0b">
                     <h4 class="modal-title" style="color:white">แก้ไขห้อง</h4>
@@ -310,7 +263,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>หมายเลขห้อง :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="001A" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
+                            <input type="text" class="form-control" id="e_rnumber" name="e_rnumber" value="" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -318,7 +271,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ค่าเช่าห้อง:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="4900" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
+                            <input type="text" class="form-control" id="e_rent" name="e_rent" value="" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
                         </div>
                     </div>
 
@@ -329,19 +282,50 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                         <div class="col-xl-8 col-12">
                             <!-- <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด"> -->
-                            <textarea name="comment" rows="5" cols="60" class="form-control" value="ทีวี ตู้เย็น" placeholder="ทีวี ตู้เย็น"></textarea>
+                            <textarea id="e_detail" name="e_detail" rows="5" cols="60" class="form-control" value="" placeholder=""></textarea>
                         </div>
                     </div>
+                    <input type="hidden" id="e_rid" name="e_rid">
+                    <input type="hidden" name="edit">
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    </div>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">บันทึก</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                 </div>
             </div>
         </form>
     </div>
+
+    <div id="modalDetailRoom" class="modal fade">
+        <form class="modal-dialog modal-lg" method="POST" action='manage.php'>
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#eecc0b">
+                    <h4 class="modal-title" style="color:white">แก้ไขห้อง</h4>
+                </div>
+
+                <div class="modal-body" id="addModalBody">
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>รายละเอียด:</span>
+                        </div>
+                        <div class="col-xl-8 col-12">
+                            <!-- <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด"> -->
+                            <textarea id="d_detail" name="d_detail" rows="5" cols="60" class="form-control" value="" placeholder=""></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">บันทึก</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 
 
@@ -367,11 +351,39 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         $('[data-toggle="tooltip"]').tooltip();
     });
 
-    function EditRoom() {
-        $("#modalEdit").modal('show');
-    }
+    // function EditRoom() {
+    //     $("#modalEdit").modal('show');
+    // }
+    $(".EditRoom").click(function() {
+        var rid = $(this).attr('rid');
+        var rnumber = $(this).attr('rnumber');
+        var rent = $(this).attr('rent');
+        var detail = $(this).attr('detail');
+
+        //alert(detail);
+        // alert(rnumber);
+        // alert(startDate);
+        // alert(endDate);
+        $('#e_rid').val(rid);
+        $('#e_rnumber').val(rnumber);
+        $('#e_rent').val(rent);
+        $('#e_detail').val(detail);
+
+        $("#modalEdit").modal();
+    });
+
+    $(".detailRoom").click(function() {
+        var detail = $(this).attr('detail');
+
+        //alert(detail);
+        $('#d_detail').val(detail);
+
+
+        $("#modalDetailRoom").modal();
+    });
 
     function delfunction(id, rname) {
+
         swal({
                 title: "คุณต้องการลบหรือไม่?",
                 text: "ต้องการยืนยันลบห้อง " + rname + " ใช่ไหม ?",
@@ -408,9 +420,24 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     }, 1500);
 
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
                 }
             });
+
+
+    }
+
+    function delfunction2(id, rname) {
+
+        swal({
+            title: "คุณไม่สามารถทำรายการได้",
+            text: "คุณไม่สามารถลบได้เนื่องจากห้อง " + rname + " ติดสัญญาอยู่",
+            icon: "error",
+            confirmButtonClass: "btn-danger",
+            dangerMode: true,
+        })
+
+
 
     }
 </script>
