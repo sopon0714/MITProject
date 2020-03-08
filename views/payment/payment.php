@@ -71,7 +71,8 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numberNotCommit ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">home</i>
+
+                                            <i class="fas fa-file-invoice-dollar"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +87,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numberWait ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">home</i>
+                                            <i class="fas fa-vote-yea"></i>
                                         </div>
                                     </div>
                                 </div>

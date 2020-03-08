@@ -36,7 +36,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class="row">
                                         <div class="col-12">
-                                            <span class="link-active " style="font-size: 15px; color:white;">การจัดการการชำระค่าเช่ารายเดือนรายละเอียดการชำระค่าเช่ารายเดือน</span>
+                                            <span class="link-active " style="font-size: 15px; color:white;">การจัดการการชำระค่าเช่ารายเดือน</span>
 
                                             </span>
                                         </div>
@@ -53,10 +53,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">ห้องที่ยังไม่ได้ชำระค่าเช่า</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numberNotCommit ?> ห้อง</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">4 ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">home</i>
+                                            <i class="fas fa-file-invoice-dollar"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -68,10 +68,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">ห้องที่รอยืนยัน</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numberWait ?> ห้อง</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">1 ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">home</i>
+                                            <i class="fas fa-vote-yea"></i>
                                         </div>
                                     </div>
                                 </div>
