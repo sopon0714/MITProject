@@ -193,10 +193,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <div class="table-responsive">
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row center">
-                                        <div class="col-sm-11">
+                                        <div class="col-sm-12">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
-                                                    <tr role="row">
+                                                    <tr role="row" style="text-align:center;">
                                                         <th rowspan="1" colspan="1">สถานะห้อง</th>
                                                         <th rowspan="1" colspan="1">หมายเลขห้อง</th>
                                                         <th rowspan="1" colspan="1">ค่าเช่าห้อง</th>
@@ -218,8 +218,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                 </tfoot>-->
                                                 <tbody>
                                                     <?php for ($i = 0; $i <  $tableRoom[0]['numrow']; $i++) { ?>
-                                                        <tr role="row" class="odd">
-                                                            <td style="text-align:center;">
+                                                        <tr role="row" class="odd" style="text-align:center;">
+                                                            <td>
                                                                 <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน">R</a>
                                                             </td>
                                                             <td><?php echo $tableRoom[$i + 1]['rnumber'] ?></td>

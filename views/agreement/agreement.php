@@ -105,55 +105,49 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <!-- ######################## end filter ######################## -->
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card">
-                            <div class="card-header card-bg " style="background-color: #bf4040">
-                                <span class="link-active " style="font-size: 15px; color:white;">สัญญาการเช่าทั้งหมด</span>
 
-
-                            </div>
+                        <div class="card-header card-bg " style="background-color: #bf4040">
+                            <span class="link-active " style="font-size: 15px; color:white;">สัญญาการเช่าทั้งหมด</span>
                         </div>
-                        <div class="card-body">
 
+                        <div class="card-body">
                             <div class="table-responsive">
+
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row center">
 
-                                        <div class="col-sm-11" id="Agreement_table">
-                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                                <thead>
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="dataTable" width="50%" cellspacing="10">
 
-                                                    <tr role="row" style="text-align:center;">
 
-                                                        <th rowspan="1" colspan="1">หมายเลขห้อง</th>
-                                                        <th rowspan="1" colspan="1">ชื่อผู้เช่า</th>
-                                                        <th rowspan="1" colspan="1">วันที่เริ่มสัญญา</th>
-                                                        <th rowspan="1" colspan="1">วันที่สิ้นสุดสัญญา</th>
-                                                        <th rowspan="1" colspan="1">รายละเอียด</th>
-                                                        <th rowspan="1" colspan="1">จัดการ</th>
-
-                                                    </tr>
-
-                                                </thead>
+                                                <tr role="row" style="text-align:center;">
+                                                    <th rowspan="1" colspan="1" style="width:10%">หมายเลขห้อง</th>
+                                                    <th rowspan="1" colspan="1" style="width:25%">ชื่อผู้เช่า</th>
+                                                    <th rowspan="1" colspan="1" style="width:13%">วันที่เริ่มสัญญา</th>
+                                                    <th rowspan="1" colspan="1" style="width:13%">วันที่สิ้นสุดสัญญา</th>
+                                                    <th rowspan="1" colspan="1" style="width:11%">รายละเอียด</th>
+                                                    <th rowspan="1" colspan="1" style="width:11%">จัดการ</th>
+                                                </tr>
 
                                                 <tbody>
                                                     <?php for ($i = 0; $i < $TableAgreement[0]['numrow']; $i++) { ?>
                                                         <tr role="row" class="odd" style="text-align:center;">
-                                                            <td class="sorting_1">
+                                                            <td class="sorting_1" width="10%">
                                                                 <?php echo $TableAgreement[$i + 1]['rnumber'] ?></td>
-                                                            <td><?php echo $TableAgreement[$i + 1]['title'] ?>
+                                                            <td width="20%"><?php echo $TableAgreement[$i + 1]['title'] ?>
                                                                 <?php echo $TableAgreement[$i + 1]['firstname'] ?>
                                                                 <?php echo $TableAgreement[$i + 1]['lastname'] ?></td>
                                                             <td><?php echo $TableAgreement[$i + 1]['startDate'] ?></td>
                                                             <td><?php echo $TableAgreement[$i + 1]['endDate'] ?></td>
-                                                            <td style="text-align:center;">
+                                                            <td>
                                                                 <a href="#" class="detailAgreement" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" firstname="<?php echo $TableAgreement[$i + 1]['firstname']; ?>" lastname="<?php echo $TableAgreement[$i + 1]['lastname']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>" phoneNumber="<?php echo $TableAgreement[$i + 1]['phoneNumber']; ?>" email="<?php echo $TableAgreement[$i + 1]['email']; ?>">
                                                                     <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดสัญญา'>
                                                                         <i class="fas fa-file-alt"></i>
                                                                     </button>
                                                                 </a>
                                                             </td>
-                                                            <td style="text-align:center;">
-                                                                <a href="#" class="EditAgreement" idAgree="<?php echo $TableAgreement[$i + 1]['agreeId']; ?>" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>">
+                                                            <td>
+                                                                <a href=" #" class="EditAgreement" idAgree="<?php echo $TableAgreement[$i + 1]['agreeId']; ?>" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>">
                                                                     <button type="button" class="btn btn-warning  btn-sm" 4 data-toggle="tooltip" title="แก้ไขข้อมูล">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
