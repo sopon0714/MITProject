@@ -34,3 +34,17 @@ if (isset($_POST['delete'])) {
     $sql = "UPDATE user SET isDelete = 1  WHERE user.uid =  $uid";
     updateData($sql);
 }
+if (isset($_POST['edit'])) {
+    $e_idAgree = $_POST['e_idAgree'];
+    $e_rnumber = $_POST['e_rnumber'];
+    $e_startDate = $_POST['e_startDate'];
+    $e_endDate = $_POST['e_endDate'];
+    echo ("$e_idAgree    ");
+    echo ("$e_rnumber    ");
+    echo "$e_startDate    ";
+    echo "$e_endDate     ";
+
+    $sql_editAgree = "UPDATE agreement SET rid = '$e_rnumber', startDate ='$e_startDate', `endDate` = '$e_endDate' WHERE agreement.agreeId =  $e_idAgree";
+    updateData($sql_editAgree);
+    header("location:./agreement.php");
+}
