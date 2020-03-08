@@ -9,9 +9,9 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <title>Profile</title>
     <?php require_once('../../views/layout/MainCSS.php');
     include("../../dbConnect.php");
-    $sql_tableRoom = "SELECT room.status,rnumber,rent,COALESCE(title,'-') as title,firstname,lastname ,detail FROM room 
-    LEFT JOIN agreement  ON room.rid = agreement.rid 
-    LEFT JOIN user ON user.uid = agreement.uid";
+    $sql_tableRoom = "SELECT room.rid,room.status,rnumber,rent,COALESCE(title,'-') as title,firstname,lastname ,detail 
+    FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete LIKE 0";
+
 
     $tableRoom = selectData($sql_tableRoom);
 
@@ -37,11 +37,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
-                                <div class="card-header card-bg" style="background-color: white">
+                                <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class="row">
                                         <div class="col-12">
-
-                                            <span class="link-active font-weight-bold" style="color:#006664;">การจัดการห้อง</span>
+                                            <span class="link-active font-weight-bold" style="font-size: 15px; color:white;">การจัดการห้อง</span>
 
                                             </span>
                                         </div>
@@ -228,8 +227,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                             <td><?php echo $tableRoom[$i + 1]['title'] ?> <?php echo $tableRoom[$i + 1]['firstname'] ?> <?php echo $tableRoom[$i + 1]['lastname'] ?> </td>
                                                             <td><?php echo $tableRoom[$i + 1]['detail'] ?></td>
                                                             <td style="text-align:center;">
-                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
-                                                                <button type="button" onclick="delfunction('ห้อง','001A')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบห้อง"><i class="far fa-trash-alt"></i></button>
+                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" style="width:15px;height:20px" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
+                                                                <button type="button" onclick="delfunction(<?= $tableRoom[$i + 1]['rid'] ?>,<?= $tableRoom[$i + 1]['rnumber'] ?>)" class="btn btn-danger btn-sm btndel" data-toggle="tooltip" title="" data-original-title="ลบห้อง" style="width:15px;height:20px"><i class="far fa-trash-alt"></i></button>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
@@ -255,7 +254,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <!-- Start Modal -->
 <div>
     <div id="modalAddRoom" class="modal fade">
-        <form class="modal-dialog modal-lg ">
+        <form class="modal-dialog modal-lg " method="POST" action='manage.php'>
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#3E49BB">
                     <h4 class="modal-title" style="color:white">เพิ่มห้องพัก</h4>
@@ -267,7 +266,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>หมายเลขห้อง :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
+                            <input type="text" class="form-control" id="rnumber" name="rnumber" value="" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -275,7 +274,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ค่าเช่าห้อง:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
+                            <input type="text" class="form-control" id="rent" name="rent" value="" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
                         </div>
                     </div>
 
@@ -285,13 +284,15 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                         <div class="col-xl-8 col-12">
                             <!-- <input type="text" class="form-control" id="mail" value="" placeholder="กรุณากรอกรายละเอียด"> -->
-                            <textarea name="comment" rows="5" cols="60" placeholder="กรุณากรอกรายละเอียด"></textarea>
+                            <textarea id="detail" name="detail" rows="5" cols="60" placeholder="กรุณากรอกรายละเอียด"></textarea>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    </div>
+                    <input type="hidden" name="add">
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">บันทึก</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                 </div>
             </div>
         </form>
@@ -341,6 +342,9 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
             </div>
         </form>
     </div>
+
+
+
 </div>
 <!-- End Modal -->
 <script>
@@ -349,6 +353,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         $('.tt').tooltip({
             trigger: "hover"
         });
+        $(".btndel").on('click', function() {
+
+        });
+
 
     });
     $(document).ready(function() {
@@ -361,5 +369,48 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
     function EditRoom() {
         $("#modalEdit").modal('show');
+    }
+
+    function delfunction(id, rname) {
+        swal({
+                title: "คุณต้องการลบหรือไม่?",
+                text: "ต้องการยืนยันลบห้อง " + rname + " ใช่ไหม ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    $.ajax({
+                        type: "POST",
+
+                        data: {
+                            rid: id,
+                            action: "delete"
+
+                        },
+                        url: "../../views/room/manage.php",
+                        async: false,
+
+                        success: function(result) {
+                            console.table(result);
+
+                        }
+                    });
+
+                    swal("ลบรายการของคุณเรียบร้อยแล้ว", {
+                        icon: "success",
+                        buttons: false
+                    });
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
+
     }
 </script>
