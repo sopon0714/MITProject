@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once('../../dbConnect.php');
+if (!isset($_SESSION['DATAUSER'])) {
+    header("location:../../index.php?msg=กระบวนการเข้าเว็บไซต์ไม่ถูกต้อง");
+}
 $sql = "SELECT * FROM user WHERE `user`.`uid` = {$_SESSION['DATAUSER']['uid']}";
 $DATAUSER = selectDataOne($sql);
 ?>
