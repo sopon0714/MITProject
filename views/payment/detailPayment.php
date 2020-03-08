@@ -33,7 +33,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class="row">
                                         <div class="col-12">
-                                            <span class="link-active font-weight-bold" style="font-size: 15px; color:white;">รายละเอียดการชำระค่าเช่ารายเดือน</span>
+                                            <span class="link-active " style="font-size: 15px; color:white;">รายละเอียดการชำระค่าเช่ารายเดือน</span>
 
                                             </span>
                                         </div>
@@ -55,8 +55,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card">
-                            <div class="card-header card-bg font-weight-bold" style="color:#006664;background-color: white;">
-                                รายละเอียดสัญญาการเช่าทั้งหมด
+                            <div class="card-header card-bg " style="background-color: #bf4040">
+                                <span class="link-active " style="font-size: 15px; color:white;">รายละเอียดสัญญาการเช่าทั้งหมด</span>
 
                             </div>
                         </div>

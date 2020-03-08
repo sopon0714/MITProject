@@ -33,7 +33,7 @@ $DATAUSER = selectDataOne($sql);
                                 <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class="row">
                                         <div class="col-12">
-                                            <span class="link-active font-weight-bold" style="font-size: 15px; color:white;">บัญชีผู้ใช้</span>
+                                            <span class="link-active " style="font-size: 15px; color:white;">บัญชีผู้ใช้</span>
                                         </div>
                                     </div>
                                 </div>
@@ -43,8 +43,9 @@ $DATAUSER = selectDataOne($sql);
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
-                                <div class="card-header card-bg font-weight-bold" style="color:#006664;background-color: white;">
-                                    รายละเอียดบัญชี
+                                <div class="card-header card-bg " style="background-color: #bf4040">
+                                    <span class="link-active " style="font-size: 15px; color:white;">รายละเอียดบัญชี</span>
+
                                     <span style="float:right;">
 
                                         <button type="button" id="btn_info" class="btn btn-warning btn-sm tt" title='แก้ไขข้อมูลผู้ใช้'>
