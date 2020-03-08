@@ -187,7 +187,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <!-- Start Modal -->
 <div>
     <!-- เพิ่มแอดมิน -->
-    <?php $sql_room = "SELECT * FROM `room`";
+    <?php $sql_room = "SELECT * FROM `room` WHERE room.status = 'ว่าง'";
     $room = selectData($sql_room); ?>
     <div id="modalAddAdmin" class="modal fade">
         <form class="modal-dialog modal-lg " method="POST" action='manage.php'>
