@@ -11,9 +11,12 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     include("../../dbConnect.php");
     $sql_tableRoom = "SELECT room.rid,room.status,rnumber,rent,COALESCE(title,'-') as title,firstname,lastname ,detail 
     FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete LIKE 0";
-
+    $sqlnumroom = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0";
+    $sqlRoomEmpty = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0 AND status LIKE 'ว่าง' ";
 
     $tableRoom = selectData($sql_tableRoom);
+    $numroom = selectData($sqlnumroom);
+    $RoomEmpty = selectData($sqlRoomEmpty);
 
     // echo $tableRoom
     ?>
@@ -56,7 +59,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">จำนวนห้องทั้งหมด</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">4 ห้อง</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numroom[1]['Numroom'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="material-icons icon-big">home</i>
@@ -74,7 +77,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">จำนวนห้องที่ว่าง
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">1 ห้อง</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $RoomEmpty[1]['Numroom'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="material-icons icon-big">home</i>
@@ -227,7 +230,11 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                             <td><?php echo $tableRoom[$i + 1]['title'] ?> <?php echo $tableRoom[$i + 1]['firstname'] ?> <?php echo $tableRoom[$i + 1]['lastname'] ?> </td>
                                                             <td><?php echo $tableRoom[$i + 1]['detail'] ?></td>
                                                             <td style="text-align:center;">
-                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
+                                                                <a href="#" class="EditRoom" rid=<?php echo  $tableRoom[$i + 1]['rid'] ?> rnumber=<?php echo $tableRoom[$i + 1]['rnumber'] ?> rent=<?php echo $tableRoom[$i + 1]['rent'] ?> detail='<?php echo $tableRoom[$i + 1]['detail'] ?>'>
+                                                                    <button type="button" class="btn btn-warning  btn-sm" 4 data-toggle="tooltip" title="แก้ไขข้อมูล">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                </a>
                                                                 <button type="button" onclick="delfunction(<?= $tableRoom[$i + 1]['rid'] ?>,<?= $tableRoom[$i + 1]['rnumber'] ?>)" class="btn btn-danger btn-sm btndel" data-toggle="tooltip" title="" data-original-title="ลบห้อง"><i class="far fa-trash-alt"></i></button>
                                                             </td>
                                                         </tr>
@@ -298,7 +305,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         </form>
     </div>
     <div id="modalEdit" class="modal fade">
-        <form class="modal-dialog modal-lg ">
+        <form class="modal-dialog modal-lg" method="POST" action='manage.php'>
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#eecc0b">
                     <h4 class="modal-title" style="color:white">แก้ไขห้อง</h4>
@@ -310,7 +317,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>หมายเลขห้อง :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="001A" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
+                            <input type="text" class="form-control" id="e_rnumber" name="e_rnumber" value="" placeholder="กรุณากรอกหมายเลขห้อง" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -318,7 +325,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ค่าเช่าห้อง:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="4900" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
+                            <input type="text" class="form-control" id="e_rent" name="e_rent" value="" placeholder="กรุณากรอกค่าเช่าห้อง" maxlength="100">
                         </div>
                     </div>
 
@@ -329,15 +336,17 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                         <div class="col-xl-8 col-12">
                             <!-- <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด"> -->
-                            <textarea name="comment" rows="5" cols="60" class="form-control" value="ทีวี ตู้เย็น" placeholder="ทีวี ตู้เย็น"></textarea>
+                            <textarea id="e_detail" name="e_detail" rows="5" cols="60" class="form-control" value="" placeholder=""></textarea>
                         </div>
                     </div>
+                    <input type="hidden" id="e_rid" name="e_rid">
+                    <input type="hidden" name="edit">
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    </div>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">บันทึก</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                 </div>
             </div>
         </form>
@@ -367,9 +376,26 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         $('[data-toggle="tooltip"]').tooltip();
     });
 
-    function EditRoom() {
-        $("#modalEdit").modal('show');
-    }
+    // function EditRoom() {
+    //     $("#modalEdit").modal('show');
+    // }
+    $(".EditRoom").click(function() {
+        var rid = $(this).attr('rid');
+        var rnumber = $(this).attr('rnumber');
+        var rent = $(this).attr('rent');
+        var detail = $(this).attr('detail');
+
+        //alert(detail);
+        // alert(rnumber);
+        // alert(startDate);
+        // alert(endDate);
+        $('#e_rid').val(rid);
+        $('#e_rnumber').val(rnumber);
+        $('#e_rent').val(rent);
+        $('#e_detail').val(detail);
+
+        $("#modalEdit").modal();
+    });
 
     function delfunction(id, rname) {
         swal({
@@ -408,7 +434,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     }, 1500);
 
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
                 }
             });
 

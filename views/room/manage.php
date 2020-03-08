@@ -26,3 +26,18 @@ if (isset($_POST['add'])) {
 
     header("location:./room.php");
 }
+if (isset($_POST['edit'])) {
+    $rid = $_POST['e_rid'];
+    $rnumber = $_POST['e_rnumber'];
+    $rent = $_POST['e_rent'];
+    $detail = $_POST['e_detail'];
+
+
+    $sqlroom = "UPDATE `room` SET `rnumber` = '$rnumber', `rent`='$rent', `detail`= '$detail'  WHERE `room`.`rid` = $rid ";
+    echo $sqlroom;
+    updateData($sqlroom);
+
+
+
+    header("location:./room.php");
+}
