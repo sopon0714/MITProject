@@ -12,7 +12,17 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <title>Profile</title>
     <?php require_once('../../views/layout/MainCSS.php');
     include("../../dbConnect.php");
+
+    $sql_tableRequest = "SELECT DATE_FORMAT(request.date,'%T ')As TimeRequest,DATE_FORMAT(request.date, '%d/%m/%Y')As DateRequest,room.rnumber As room,request.detail As detail,request.requestId  FROM `request` INNER JOIN user ON request.uid = user.uid
+INNER JOIN agreement ON agreement.uid = user.uid 
+INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
+    $sql_NumRequest = "SELECT COUNT(request.requestId) AS numRequest FROM request";
+    $NumRequest = selectData($sql_NumRequest);
+    $TableRequest = selectData($sql_tableRequest);
+
     ?>
+
+
 </head>
 
 <body>
@@ -52,7 +62,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="font-weight-bold  text-uppercase mb-1">คำร้องทั้งหมด</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">2 คำร้อง</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $NumRequest[1]['numRequest'] ?> คำร้อง</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="material-icons icon-big">home</i>
@@ -92,7 +102,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                     <th rowspan="1" colspan="1">เวลา</th>
                                                     <th rowspan="1" colspan="1">วันที่</th>
                                                     <th rowspan="1" colspan="1">หมายเลขห้อง</th>
-                                                    <th rowspan="1" colspan="1">ปัญหา</th>
+                                                    <th rowspan="1" colspan="1">รายละเอียดปัญหา</th>
                                                     <th rowspan="1" colspan="1">จัดการ</th>
 
                                                 </tr>
@@ -102,28 +112,33 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                     <th rowspan="1" colspan="1">เวลา</th>
                                                     <th rowspan="1" colspan="1">วันที่</th>
                                                     <th rowspan="1" colspan="1">หมายเลขห้อง</th>
-                                                    <th rowspan="1" colspan="1">ปัญหา</th>
+                                                    <th rowspan="1" colspan="1">รายละเอียดปัญหา</th>
                                                     <th rowspan="1" colspan="1">จัดการ</th>
                                                 </tr>
                                             </tfoot>
                                             <tbody>
 
-                                                <tr>
-                                                    <td>15.33</td>
-                                                    <td>8/3/2563</td>
-                                                    <td>101</td>
-                                                    <td style="text-align:center;">
-                                                        <a href="../../views/payment/detailPayment.php">
-                                                            <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailPayment()">
-                                                                <i class="fas fa-file-alt"></i>
-                                                            </button>
-                                                        </a>
+                                                <?php for ($i = 0; $i < $TableRequest[0]['numrow']; $i++) { ?>
+                                                    <tr role="row" class="odd">
+                                                        <td class="sorting_1">
+                                                            <?php echo $TableRequest[$i + 1]['TimeRequest'] ?>น.</td>
+                                                        <td>
+                                                            <?php echo $TableRequest[$i + 1]['DateRequest'] ?></td>
+                                                        <td>
+                                                            <?php echo $TableRequest[$i + 1]['room'] ?></td>
+                                                        <td style="text-align:center;">
+                                                            <a href="#" class="detailRequest" detail="<?php echo $TableRequest[$i + 1]['detail'] ?>">
+                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดปัญหา'>
+                                                                    <i class="fas fa-file-alt"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                        <td style="text-align:center;">
 
-                                                    </td>
-                                                    <td style="text-align:center;">
-                                                        <button type="button" onclick="delfunction('ห้อง','001A')" class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบรายการ"><i class="far fa-trash-alt"></i></button>
-                                                    </td>
-                                                </tr>
+                                                            <button onclick="delfunction('คำร้อง','<?php echo $TableRequest[$i + 1]['requestId'] ?>')" type='button' id='btn_delete' class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบคำร้อง"><i class="far fa-trash-alt"></i></button>
+                                                        </td>
+                                                    </tr>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -142,6 +157,32 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <!-- footer -->
 <?php require_once('../../views/layout/MainJS.php') ?>
 <!-- Start Modal -->
+<div id="modalDetail" class="modal fade">
+    <form class="modal-dialog modal-lg ">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#00ace6">
+
+                <h4 class="modal-title" style="color:white">รายละเอียดปัญหา</h4>
+            </div>
+            <br>
+            <div class="row mb-4">
+                <div class="col-xl-3 col-12 text-right">
+                    <span>ปัญหา :</span>
+                </div>
+                <div class="col-xl-8 col-12">
+                    <input type="text" class="form-control" id="detail" name="detail" value="" maxlength="100" disabled>
+                </div>
+            </div>
+
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+            </div>
+        </div>
+</div>
+</form>
+</div>
 <div>
 
 
@@ -153,18 +194,53 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         console.log("ready!");
         $('[data-toggle="tooltip"]').tooltip();
     });
-    $(document).ready(function() {
-        console.log("ready!");
-        $("#addAgreement").click(function() {
-            $("#modalAddAgreement").modal();
-        });
+
+
+
+    $(".detailRequest").click(function() {
+        var detail = $(this).attr('detail');
+
+
+        $('#detail').val(detail);
+
+        $("#modalDetail").modal('show');
     });
 
-    function detailAgreement() {
-        $("#modalDetailAgreement").modal('show');
+    function delfunction(title, requestId) {
+        //alert(uid + " dddd")
+        swal({
+                title: "คุณต้องการลบ",
+                text: title + "หรือไม่ ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! Your imaginary file has been deleted!", {
+                        icon: "success",
+                        buttons: false
+                    });
+                    delete_1(requestId);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+                } else {
+                    swal("Your imaginary file is safe!");
+                }
+            });
     }
 
-    function EditAgreement() {
-        $("#modalEdit").modal('show');
+    function delete_1(requestId1) {
+        $.ajax({
+            type: "POST",
+            data: {
+                requestId1: requestId1,
+                delete: "delete"
+            },
+            url: "./manage.php",
+            async: false,
+            success: function(result) {}
+        });
     }
 </script>
