@@ -1,9 +1,24 @@
 <?php
 session_start();
+require_once('../../dbConnect.php');
 if (!isset($_SESSION['DATAUSER'])) {
     header("location:../../index.php?msg=กระบวนการเข้าเว็บไซต์ไม่ถูกต้อง");
 }
 $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
+$sqlInfoPayment = "SELECT `date`.`dateId`,`date`.`year`,`date`.`month` ,COUNT(*) as roomAll ,COUNT(`payment`.`timeSlip`)-COUNT(`payment`.`timeConfirm`) as roomCommit ,COUNT(`payment`.`timeConfirm`) as Confirm
+FROM `payment` 
+INNER JOIN `date` ON `date`.`dateId` = `payment`.`dateId`
+GROUP BY  `date`.`year`,`date`.`month`
+ORDER BY `date`.`year` DESC ,`date`.`month` DESC";
+$INFOPAYMENT = selectData($sqlInfoPayment);
+$numberNotCommit  = 0;
+$numberWait = 0;
+for ($i = 1; $i <= $INFOPAYMENT[0]['numrow']; $i++) {
+    $numberNotCommit  += $INFOPAYMENT[$i]['roomAll'] - $INFOPAYMENT[$i]['roomCommit'] - $INFOPAYMENT[$i]['Confirm'];
+    $numberWait  += $INFOPAYMENT[$i]['roomCommit'];
+}
+$arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +26,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <head>
     <title>Profile</title>
     <?php require_once('../../views/layout/MainCSS.php');
-    include("../../dbConnect.php");
+
     ?>
 </head>
 
@@ -52,8 +67,23 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold  text-uppercase mb-1">จำนวนห้องที่ยังไม่ได้ชำระค่าเช่า(เดือนล่าสุด)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">5 ห้อง</div>
+                                            <div class="font-weight-bold  text-uppercase mb-1">ห้องที่ยังไม่ได้ชำระค่าเช่า</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numberNotCommit ?> ห้อง</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="material-icons icon-big">home</i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-12 mb-4">
+                            <div class="card border-left-primary card-color-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold  text-uppercase mb-1">ห้องที่รอยืนยัน</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numberWait ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="material-icons icon-big">home</i>
@@ -107,40 +137,36 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
                                                     <tr role="row">
-                                                        <th rowspan="1" colspan="1">ปี</th>
+                                                        <th rowspan="1" colspan="1">ปีพ.ศ</th>
                                                         <th rowspan="1" colspan="1">เดือน</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ต้องชำระ(ห้อง)</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ชำระแล้ว(ห้อง)</th>
+                                                        <th rowspan="1" colspan="1">จำนวนห้องที่ยังไม่ได้ชำระ</th>
+                                                        <th rowspan="1" colspan="1">จำนวนห้องที่รอยืนยัน</th>
+                                                        <th rowspan="1" colspan="1">จำนวนห้องที่ชำระเสร็จสมบูรณ์</th>
                                                         <th rowspan="1" colspan="1">รายละเอียด</th>
 
                                                     </tr>
                                                 </thead>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th rowspan="1" colspan="1">ปี</th>
-                                                        <th rowspan="1" colspan="1">เดือน</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ต้องชำระ(ห้อง)</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ชำระแล้ว(ห้อง)</th>
-                                                        <th rowspan="1" colspan="1">รายละเอียด</th>
-                                                    </tr>
-                                                </tfoot>
-                                                <tbody>
 
-                                                    <tr>
-                                                        <td>2563</td>
-                                                        <td>1</td>
-                                                        <td>3</td>
-                                                        <td>10</td>
-                                                        <td style="text-align:center;">
-                                                            <a href="../../views/payment/detailPayment.php">
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียด' onclick="detailPayment()">
-                                                                    <i class="fas fa-file-alt"></i>
+                                                <tbody>
+                                                    <?php
+                                                    for ($i = 1; $i <= $INFOPAYMENT[0]['numrow']; $i++) {
+                                                        echo "<tr>
+                                                        <td>{$INFOPAYMENT[$i]['year']}</td>
+                                                        <td>{$arrMonth[$INFOPAYMENT[$i]['month']]}</td>
+                                                        <td>{$INFOPAYMENT[$i]['roomAll']}</td>
+                                                        <td>{$INFOPAYMENT[$i]['roomCommit']}</td>
+                                                        <td>{$INFOPAYMENT[$i]['Confirm']}</td>
+                                                        <td style=\"text-align:center;\">
+                                                            <a href=\"../../views/payment/detailPayment.php?dateID={$INFOPAYMENT[$i]['dateId']}\">
+                                                                <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"tooltip\" title='รายละเอียด' onclick=\"detailPayment()\">
+                                                                    <i class=\"fas fa-file-alt\"></i>
                                                                 </button>
                                                             </a>
-
                                                         </td>
 
-                                                    </tr>
+                                                    </tr>";
+                                                    }
+                                                    ?>
 
 
                                                 </tbody>
