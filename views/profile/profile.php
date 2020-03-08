@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once('../../dbConnect.php');
+if (!isset($_SESSION['DATAUSER'])) {
+    header("location:../../index.php?msg=กระบวนการเข้าเว็บไซต์ไม่ถูกต้อง");
+}
 $sql = "SELECT * FROM user WHERE `user`.`uid` = {$_SESSION['DATAUSER']['uid']}";
 $DATAUSER = selectDataOne($sql);
 ?>
@@ -27,24 +30,13 @@ $DATAUSER = selectDataOne($sql);
                 <?php require_once('../../views/layout/Topbar.php') ?>
                 <!-- End of Topbar -->
                 <div class="container">
+
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
-                                <div class="card-header card-bg" style="background-color: white">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <span class="link-active font-weight-bold" style="color:#006664;">บัญชีผู้ใช้</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-12 col-12 mb-4">
-                            <div class="card">
-                                <div class="card-header card-bg font-weight-bold" style="color:#006664;background-color: white;">
-                                    รายละเอียดบัญชี
+                                <div class="card-header card-bg " style="background-color: #bf4040">
+                                    <span class="link-active " style="font-size: 15px; color:white;">รายละเอียดบัญชีผู้ใช้</span>
+
                                     <span style="float:right;">
 
                                         <button type="button" id="btn_info" class="btn btn-warning btn-sm tt" title='แก้ไขข้อมูลผู้ใช้'>

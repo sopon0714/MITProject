@@ -37,11 +37,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
-                                <div class="card-header card-bg" style="background-color: white">
+                                <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class="row">
                                         <div class="col-12">
-
-                                            <span class="link-active font-weight-bold" style="color:#006664;">การจัดการห้อง</span>
+                                            <span class="link-active " style="font-size: 15px; color:white;">การจัดการห้อง</span>
 
                                             </span>
                                         </div>
@@ -185,8 +184,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card">
-                            <div class="card-header card-bg font-weight-bold" style="color:#006664;background-color: white;">
-                                รายชื่อห้องในระบบ
+                            <div class="card-header card-bg " style="background-color: #bf4040">
+                                <span class="link-active " style="font-size: 15px; color:white;">รายชื่อห้องในระบบ</span>
 
                             </div>
                         </div>
@@ -228,8 +227,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                             <td><?php echo $tableRoom[$i + 1]['title'] ?> <?php echo $tableRoom[$i + 1]['firstname'] ?> <?php echo $tableRoom[$i + 1]['lastname'] ?> </td>
                                                             <td><?php echo $tableRoom[$i + 1]['detail'] ?></td>
                                                             <td style="text-align:center;">
-                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" style="width:15px;height:20px" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
-                                                                <button type="button" onclick="delfunction(<?= $tableRoom[$i + 1]['rid'] ?>,<?= $tableRoom[$i + 1]['rnumber'] ?>)" class="btn btn-danger btn-sm btndel" data-toggle="tooltip" title="" data-original-title="ลบห้อง" style="width:15px;height:20px"><i class="far fa-trash-alt"></i></button>
+                                                                <button type="button" class="btn btn-warning  btn-sm" data-toggle="tooltip" title="" data-original-title="แก้ไขข้อมูล"><i class="fas fa-edit" onclick="EditRoom()"></i></button>
+                                                                <button type="button" onclick="delfunction(<?= $tableRoom[$i + 1]['rid'] ?>,<?= $tableRoom[$i + 1]['rnumber'] ?>)" class="btn btn-danger btn-sm btndel" data-toggle="tooltip" title="" data-original-title="ลบห้อง"><i class="far fa-trash-alt"></i></button>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>

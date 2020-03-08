@@ -1,12 +1,15 @@
 <?php
 session_start();
+if (!isset($_SESSION['DATAUSER'])) {
+    header("location:../../index.php?msg=กระบวนการเข้าเว็บไซต์ไม่ถูกต้อง");
+}
 $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Profile</title>
+    <title>การจัดการผู้เช่า</title>
     <?php require_once('../../views/layout/MainCSS.php');
     include("../../dbConnect.php");
 
@@ -17,7 +20,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
     $TableAgreement = selectData($sql_TableAgreement);
     $NumAgreement = selectData($sql_NumAgreement);
-    //echo ($TableAgreement[2]['firstname']);
 
     ?>
 
@@ -47,12 +49,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
-                                <div class="card-header card-bg" style="background-color: white">
-                                    <div class="row">
+                                <div class="card-header card-bg" style="background-color: #bf4040">
+                                    <div class=" row">
                                         <div class="col-12">
-
-                                            <span class="link-active font-weight-bold" style="color:#006664;">การจัดการผู้เช่า</span>
-
+                                            <span class="link-active " style="font-size: 15px; color:white;">การจัดการผู้เช่า</span>
                                             </span>
                                         </div>
                                     </div>
@@ -67,7 +67,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">จำนวนสัญญา</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $NumAgreement[1]['numAgreement'] ?> ห้อง</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo $NumAgreement[1]['numAgreement'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="material-icons icon-big">home</i>
@@ -99,17 +100,15 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <!-- ######################## start filter ######################## -->
                     <div class="row center">
                         <div class="col-xl-12 col-12 mb-4 ">
-                            <!-- <div class="card-header header-background-color-filter" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style=" color:white;">
-                                            การค้นหาขั้นสูง  สัญญาการเช่าทั้งหมด
-                                        </div> -->
                         </div>
                     </div>
                     <!-- ######################## end filter ######################## -->
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card">
-                            <div class="card-header card-bg font-weight-bold" style="color:#006664;background-color: white;">
-                                สัญญาการเช่าทั้งหมด
+                            <div class="card-header card-bg " style="background-color: #bf4040">
+                                <span class="link-active " style="font-size: 15px; color:white;">สัญญาการเช่าทั้งหมด</span>
+
 
                             </div>
                         </div>
@@ -142,22 +141,31 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                 <tbody>
                                                     <?php for ($i = 0; $i < $TableAgreement[0]['numrow']; $i++) { ?>
                                                         <tr role="row" class="odd">
-                                                            <td class="sorting_1"><?php echo $TableAgreement[$i + 1]['rnumber'] ?></td>
-                                                            <td><?php echo $TableAgreement[$i + 1]['title'] ?> <?php echo $TableAgreement[$i + 1]['firstname'] ?> <?php echo $TableAgreement[$i + 1]['lastname'] ?></td>
+                                                            <td class="sorting_1">
+                                                                <?php echo $TableAgreement[$i + 1]['rnumber'] ?></td>
+                                                            <td><?php echo $TableAgreement[$i + 1]['title'] ?>
+                                                                <?php echo $TableAgreement[$i + 1]['firstname'] ?>
+                                                                <?php echo $TableAgreement[$i + 1]['lastname'] ?></td>
                                                             <td><?php echo $TableAgreement[$i + 1]['startDate'] ?></td>
                                                             <td><?php echo $TableAgreement[$i + 1]['endDate'] ?></td>
                                                             <td style="text-align:center;">
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดสัญญา' onclick="detailAgreement()">
-                                                                    <i class="fas fa-file-alt"></i>
-                                                                </button>
+                                                                <a href="#" class="detailAgreement" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" firstname="<?php echo $TableAgreement[$i + 1]['firstname']; ?>" lastname="<?php echo $TableAgreement[$i + 1]['lastname']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>" phoneNumber="<?php echo $TableAgreement[$i + 1]['phoneNumber']; ?>" email="<?php echo $TableAgreement[$i + 1]['email']; ?>">
+                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดสัญญา'>
+                                                                        <i class="fas fa-file-alt"></i>
+                                                                    </button>
+                                                                </a>
                                                             </td>
                                                             <td style="text-align:center;">
-                                                                <button onclick="EditAgreement(<?php $i ?>)" type="button" class="btn btn-warning  btn-sm" 4 data-toggle="tooltip" title="แก้ไขข้อมูล"><i class="fas fa-edit" idAgree="<?php echo $TableAgreement[$i + 1]['agreeId']; ?>" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>"></i></button>
+                                                                <a href="#" class="EditAgreement" idAgree="<?php echo $TableAgreement[$i + 1]['agreeId']; ?>" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>">
+                                                                    <button type="button" class="btn btn-warning  btn-sm" 4 data-toggle="tooltip" title="แก้ไขข้อมูล">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                </a>
+
                                                                 <button onclick="delfunction('สัญญาห้อง<?php echo $TableAgreement[$i + 1]['rnumber'] ?>','<?php echo $TableAgreement[$i + 1]['uid'] ?>')" type='button' id='btn_delete' class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบสัญญา"><i class="far fa-trash-alt"></i></button>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
-
                                                 </tbody>
                                             </table>
                                         </div>
@@ -195,9 +203,11 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <select class="custom-select  mb-3" id="rnumber" name="rnumber">
                                 <?php for ($i = 0; $i < $room[0]['numrow']; $i++) {
                                 ?>
-                                    <option value="<?= $room[$i + 1]['rid'] ?>">ห้อง <?php echo $room[$i + 1]['rnumber'] ?></option>
+                                    <option value="<?= $room[$i + 1]['rid'] ?>">ห้อง <?php echo $room[$i + 1]['rnumber'] ?>
+                                    </option>
                                 <?php } ?>
-                            </select> </div>
+                            </select>
+                        </div>
                     </div>
                     <div class="row mb-4" style="margin:10px;">
                         <div class="col-xl-3 col-12 text-right">
@@ -295,14 +305,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     </div>
 
     <!-- แก้ไขสัญญาเช่า -->
-    <?php $sql_AgreeEdit = "SELECT * FROM `user` INNER JOIN agreement ON agreement.uid = user.uid
-        INNER JOIN room ON room.rid = agreement.rid 
-        where agreement.agreeId = 1";
-    $AgreeEdit = selectData($sql_AgreeEdit);
-    ?>
-
     <div id="modalEdit" class="modal fade">
-        <form class="modal-dialog modal-lg ">
+        <form class="modal-dialog modal-lg " method="POST" action='manage.php'>
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#eecc0b">
                     <h4 class="modal-title" style="color:white">แก้ไขสัญญาสัญญาการเช่า </h4>
@@ -314,11 +318,13 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                         <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
                             <select class="custom-select  mb-3" id="e_rnumber" name="e_rnumber">
-                                <option value="" selected=""><?php $AgreeEdit[1]['agreeId'] ?></option>
-                                <option>ห้อง 512</option>
-                                <option>ห้อง 513</option>
-                                <option>ห้อง 514</option>
-                            </select> </div>
+                                <?php for ($i = 0; $i < $room[0]['numrow']; $i++) {
+                                ?>
+                                    <option value="<?= $room[$i + 1]['rid'] ?>">ห้อง <?php echo $room[$i + 1]['rnumber'] ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
                     </div>
                     <div class="row mb-4" style="margin:10px;">
                         <div class="col-xl-3 col-12 text-right">
@@ -336,11 +342,13 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <input type="date" class="form-control" id="e_endDate" name="e_endDate" value="2020-03-07" maxlength="100">
                         </div>
                     </div>
+                    <input type="hidden" id="e_idAgree" name="e_idAgree">
+                    <input type="hidden" id="e_idAgree" name="edit">
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">บันทึก</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                 </div>
             </div>
         </form>
@@ -359,11 +367,12 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>เลขห้อง :</span>
                         </div>
                         <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                            <select class="custom-select  mb-3" id="course_e" name="course_e">
-                                <option>ห้อง 511</option>
-                                <option>ห้อง 512</option>
-                                <option>ห้อง 513</option>
-                                <option>ห้อง 514</option>
+                            <select class="custom-select  mb-3" id="e_rnumber" name="e_rnumber">
+                                <?php for ($i = 0; $i < $room[0]['numrow']; $i++) {
+                                ?>
+                                    <option value="<?= $room[$i + 1]['rid'] ?>">ห้อง <?php echo $room[$i + 1]['rnumber'] ?>
+                                    </option>
+                                <?php } ?>
                             </select> </div>
                     </div>
                     <div class="row mb-4">
@@ -371,7 +380,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ชื่อผู้เข้าพักอาศัย :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกชื่อ" maxlength="100">
+                            <input type="text" class="form-control" id="e_firstname" name="e_firstname" value="" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -379,25 +388,31 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>นามสกุล:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100">
+                            <input type="text" class="form-control" id="e_lastname" name="e_lastname" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100">
                         </div>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row mb-4" style="margin:10px;">
                         <div class="col-xl-3 col-12 text-right">
-                            <span>ระยะสัญญา :</span>
+                            <span>วันที่เข้า: </span>
                         </div>
-                        <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                            <select class="custom-select  mb-3" id="course_e" name="course_e">
-                                <option>1 ปี</option>
-                                <option>2 ปี</option>
-                            </select> </div>
+                        <div class="col-xl-5 col-12">
+                            <input type="date" class="form-control" id="e_startDate" name="e_startDate" value="2020-03-07" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="row mb-4" style="margin:10px;">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>วันที่ออก: </span>
+                        </div>
+                        <div class="col-xl-5 col-12">
+                            <input type="date" class="form-control" id="e_endDate" name="e_endDate" value="2020-03-07" maxlength="100">
+                        </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
                             <span>เบอร์โทรติดต่อ:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="mail" value="" placeholder="กรุณากรอกเบอร์โทร">
+                            <input type="text" class="form-control" id="e_phoneNumber" name="e_phoneNumber" value="" placeholder="กรุณากรอกเบอร์โทร">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -405,11 +420,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>อีเมล์ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="mail" value="" placeholder="กรุณากรอกอีเมล์">
+                            <input type="text" class="form-control" id="e_email" name="e_email" value="" placeholder="กรุณากรอกอีเมล์">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">บันทึก</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
                     </div>
                 </div>
@@ -418,92 +432,4 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     </div>
 </div>
 <!-- End Modal -->
-<script>
-    $(document).ready(function() {
-        console.log("ready!");
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-    $(document).ready(function() {
-        console.log("ready!");
-        $("#addAgreement").click(function() {
-            $("#modalAddAgreement").modal();
-        });
-    });
-
-    function detailAgreement() {
-        $("#modalDetailAgreement").modal('show');
-    }
-    $("#EditAgreement").click(function() {
-        $("#modalEdit").modal();
-        var idAgree = $(this).attr('idAgree');
-        var rnumber = $(this).attr('rnumber');
-        var startDate = $(this).attr('startDate');
-        var endDate = $(this).attr('endDate');
-
-        $('#e_idAgree').val(idAgree);
-        $('#e_rnumber').val(rnumber);
-        $('#e_startDate').val(startDate);
-        $('#e_endDate').val(endDate);
-    });
-
-    function delfunction(title, uid) {
-        alert(uid + " dddd")
-        swal({
-                title: "คุณต้องการลบ",
-                text: title + "หรือไม่ ?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    swal("Poof! Your imaginary file has been deleted!", {
-                        icon: "success",
-                        buttons: false
-                    });
-                    delete_1(uid);
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1500);
-                } else {
-                    swal("Your imaginary file is safe!");
-                }
-            });
-    }
-
-    function delete_1(uid1) {
-        $.ajax({
-            type: "POST",
-
-            data: {
-                uid: uid1,
-                delete: "delete"
-
-            },
-            url: "./manage.php",
-            async: false,
-
-            success: function(result) {
-
-            }
-        });
-    }
-
-    function EditAgreement() {
-        $("#modalEdit").modal('show');
-    }
-    // var dataTable = $('#Agreement_table').DataTable({
-    //     "processing": true,
-    //     "serverSide": true,
-    //     "order": [],
-    //     "ajax": {
-    //         url: "fetch.php",
-    //         type: "POST"
-    //     },
-    //     "columnDefs": [{
-    //         "targets": [0, 3, 4],
-    //         "orderable": false,
-    //     }, ],
-
-    // });
-</script>
+<script src="function.js"></script>
