@@ -84,6 +84,10 @@ function delete_1(uid1) {
 // ***************************************AdminRead.php****************************************************
 $(document).ready(function () {
     console.log("ready!");
+    $('[data-toggle="tooltip"]').tooltip();
+});
+$(document).ready(function () {
+    console.log("ready!");
     $("#addAdmin").click(function () {
         $("#modalAddAdmin").modal();
     });
@@ -133,12 +137,12 @@ function delfunctionAdmin(title, uid) {
         });
 }
 
-function delete_2(uid1) {
+function delete_2(uid) {
     //alert(55555555);
     $.ajax({
         type: "POST",
         data: {
-            uid1: uid1,
+            uid: uid,
             deleteAdmin: "deleteAdmin"
         },
         url: "./manage.php",
