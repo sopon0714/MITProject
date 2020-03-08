@@ -20,7 +20,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css.map">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css.map">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
@@ -46,7 +47,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <div class="card">
 
                                 <div class="card-header card-bg " style="background-color: #bf4040">
-                                    <span class="link-active " style="font-size: 15px; color:white;">การจัดการผู้ดูแล</span>
+                                    <span class="link-active "
+                                        style="font-size: 15px; color:white;">การจัดการผู้ดูแล</span>
                                 </div>
 
                                 </span>
@@ -72,7 +74,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             </div>
                         </div>
                         <div class="col-xl-3 col-12 mb-4">
-                            <div class="card border-left-primary card-color-add shadow h-100 py-2" id="addAdmin" style="cursor:pointer;">
+                            <div class="card border-left-primary card-color-add shadow h-100 py-2" id="addAdmin"
+                                style="cursor:pointer;">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -112,7 +115,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                     <div class="row center">
                                         <table WIDTH=50%>
                                             <div class="col-sm-11" id="Agreement_table">
-                                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <table class="table table-bordered" id="dataTable" width="100%"
+                                                    cellspacing="0">
                                                     <thead>
                                                         <tr role="row" style="text-align:center;">
                                                             <th rowspan="1" colspan="1">ชื่อผู้ดูแล</th>
@@ -124,22 +128,35 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
                                                     <tbody>
                                                         <?php for ($i = 0; $i < $TableAdmin[0]['numrow']; $i++) { ?>
-                                                            <tr role="row" class="odd" style="text-align:center;">
-                                                                <td><?php echo $TableAdmin[$i + 1]['title'] ?>
-                                                                    <?php echo $TableAdmin[$i + 1]['firstname'] ?>
-                                                                    <?php echo $TableAdmin[$i + 1]['lastname'] ?></td>
-                                                                <td><?php echo $TableAdmin[$i + 1]['phoneNumber'] ?></td>
-                                                                <td><?php echo $TableAdmin[$i + 1]['email'] ?></td>
-                                                                <td style="text-align:center;">
-                                                                    <a href="#" class="detailAdmin" firstname="<?php echo $TableAdmin[$i + 1]['firstname']; ?>" lastname="<?php echo $TableAdmin[$i + 1]['lastname']; ?>" formalId="<?php echo $TableAdmin[$i + 1]['formalId']; ?>" phoneNumber="<?php echo $TableAdmin[$i + 1]['phoneNumber']; ?>" email="<?php echo $TableAdmin[$i + 1]['email']; ?>" username="<?php echo $TableAdmin[$i + 1]['username']; ?>" password="<?php echo $TableAdmin[$i + 1]['password']; ?>">
-                                                                        <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดแอดมิน'>
-                                                                            <i class="fas fa-file-alt"></i>
-                                                                        </button>
-                                                                    </a>
-                                                                    <button onclick="delfunctionAdmin('<?php echo $TableAdmin[$i + 1]['firstname'] ?>','<?php echo $TableAdmin[$i + 1]['uid'] ?>')" type='button' id='btn_delete' class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบผู้ดูแลระบบ"><i class="far fa-trash-alt"></i>
+                                                        <tr role="row" class="odd" style="text-align:center;">
+                                                            <td><?php echo $TableAdmin[$i + 1]['title'] ?>
+                                                                <?php echo $TableAdmin[$i + 1]['firstname'] ?>
+                                                                <?php echo $TableAdmin[$i + 1]['lastname'] ?></td>
+                                                            <td><?php echo $TableAdmin[$i + 1]['phoneNumber'] ?></td>
+                                                            <td><?php echo $TableAdmin[$i + 1]['email'] ?></td>
+                                                            <td style="text-align:center;">
+                                                                <a href="#" class="detailAdmin"
+                                                                    firstname="<?php echo $TableAdmin[$i + 1]['firstname']; ?>"
+                                                                    lastname="<?php echo $TableAdmin[$i + 1]['lastname']; ?>"
+                                                                    formalId="<?php echo $TableAdmin[$i + 1]['formalId']; ?>"
+                                                                    phoneNumber="<?php echo $TableAdmin[$i + 1]['phoneNumber']; ?>"
+                                                                    email="<?php echo $TableAdmin[$i + 1]['email']; ?>"
+                                                                    username="<?php echo $TableAdmin[$i + 1]['username']; ?>"
+                                                                    password="<?php echo $TableAdmin[$i + 1]['password']; ?>">
+                                                                    <button type="button" class="btn btn-info btn-sm"
+                                                                        data-toggle="tooltip" title='รายละเอียดแอดมิน'>
+                                                                        <i class="fas fa-file-alt"></i>
                                                                     </button>
-                                                                </td>
-                                                            </tr>
+                                                                </a>
+                                                                <button
+                                                                    onclick="delfunctionAdmin('<?php echo $TableAdmin[$i + 1]['firstname'] ?>','<?php echo $TableAdmin[$i + 1]['uid'] ?>')"
+                                                                    type='button' id='btn_delete'
+                                                                    class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                    title="" data-original-title="ลบผู้ดูแลระบบ"><i
+                                                                        class="far fa-trash-alt"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
                                                         <?php } ?>
                                                     </tbody>
                                                 </table>
@@ -162,7 +179,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <!-- Start Modal -->
 <div>
     <!-- เพิ่มแอดมิน -->
-    <?php $sql_room = "SELECT * FROM `room`";
+    <?php $sql_room = "SELECT * FROM `room` WHERE room.status = 'ว่าง' && room.isDelete LIKE 0";
     $room = selectData($sql_room); ?>
     <div id="modalAddAdmin" class="modal fade">
         <form class="modal-dialog modal-lg " method="POST" action='manage.php'>
@@ -187,7 +204,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ชื่อผู้ดูแลระบบ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="firstname" name="firstname" value="" placeholder="กรุณากรอกชื่อ" maxlength="100">
+                            <input type="text" class="form-control" id="firstname" name="firstname" value=""
+                                placeholder="กรุณากรอกชื่อ" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -195,7 +213,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>นามสกุล:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="lastname" name="lastname" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100">
+                            <input type="text" class="form-control" id="lastname" name="lastname" value=""
+                                placeholder="กรุณากรอกนามสกุล" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -203,7 +222,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>รหัสประจำตัวประชาชน:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="formalId" name="formalId" value="" placeholder="กรุณากรอกรหัสประจำตัวประชาชน">
+                            <input type="text" class="form-control" id="formalId" name="formalId" value=""
+                                placeholder="กรุณากรอกรหัสประจำตัวประชาชน">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -211,7 +231,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>เบอร์โทรติดต่อ:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="" placeholder="กรุณากรอกเบอร์โทร">
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value=""
+                                placeholder="กรุณากรอกเบอร์โทร">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -219,7 +240,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>อีเมล์ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="email" name="email" value="" placeholder="กรุณากรอกอีเมล์">
+                            <input type="text" class="form-control" id="email" name="email" value=""
+                                placeholder="กรุณากรอกอีเมล์">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -227,7 +249,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>username :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" name="username" value="" placeholder="กรุณากรอกusername">
+                            <input type="text" class="form-control" id="username" name="username" value=""
+                                placeholder="กรุณากรอกusername">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -235,7 +258,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>password :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="password" name="password" value="" placeholder="กรุณากรอกpassword">
+                            <input type="text" class="form-control" id="password" name="password" value=""
+                                placeholder="กรุณากรอกpassword">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -243,7 +267,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ยืนยัน password :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="password2" name="password2" value="" placeholder="กรุณากรอกpassword">
+                            <input type="text" class="form-control" id="password2" name="password2" value=""
+                                placeholder="กรุณากรอกpassword">
                         </div>
                     </div>
 
@@ -272,7 +297,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ชื่อผู้ดูแลระบบ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_firstname" name="e_firstname" value="" maxlength="100">
+                            <input type="text" class="form-control" id="e_firstname" name="e_firstname" value=""
+                                maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -280,7 +306,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>นามสกุล:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_lastname" name="e_lastname" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100">
+                            <input type="text" class="form-control" id="e_lastname" name="e_lastname" value=""
+                                placeholder="กรุณากรอกนามสกุล" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -288,7 +315,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>รหัสประจำตัวประชาชน:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_formalId" name="e_formalId" value="" placeholder="กรุณากรอกเบอร์โทร">
+                            <input type="text" class="form-control" id="e_formalId" name="e_formalId" value=""
+                                placeholder="กรุณากรอกเบอร์โทร">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -296,7 +324,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>เบอร์โทรติดต่อ:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_phoneNumber" name="e_phoneNumber" value="" placeholder="กรุณากรอกเบอร์โทร">
+                            <input type="text" class="form-control" id="e_phoneNumber" name="e_phoneNumber" value=""
+                                placeholder="กรุณากรอกเบอร์โทร">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -304,7 +333,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>อีเมล์ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_email" name="e_email" value="" placeholder="กรุณากรอกอีเมล์">
+                            <input type="text" class="form-control" id="e_email" name="e_email" value=""
+                                placeholder="กรุณากรอกอีเมล์">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -312,7 +342,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>username :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_username" name="e_username" value="" placeholder="กรุณากรอกusername">
+                            <input type="text" class="form-control" id="e_username" name="e_username" value=""
+                                placeholder="กรุณากรอกusername">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -320,7 +351,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>password :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_password" name="e_password" value="" placeholder="กรุณากรอกpassword">
+                            <input type="text" class="form-control" id="e_password" name="e_password" value=""
+                                placeholder="กรุณากรอกpassword">
                         </div>
                     </div>
                     <div class="modal-footer">

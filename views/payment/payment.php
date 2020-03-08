@@ -94,21 +94,22 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                             </div>
                         </div>
                         <div class="col-xl-3 col-12 mb-4">
-                            <div class="card border-left-primary card-color-add shadow h-100 py-2" id="addAgreement" style="cursor:pointer;">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold  text-uppercase mb-1">เพิ่มการชำระ
+                            <a href="../../views/payment/addPayment.php">
+                                <div class="card border-left-primary card-color-add shadow h-100 py-2" id="addPayment" style="cursor:pointer;">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="font-weight-bold  text-uppercase mb-1">เพิ่มการชำระ
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">+1 การชำระ</div>
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">+1 การชำระ</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="material-icons icon-big">add_circle</i>
+                                            <div class="col-auto">
+                                                <i class="material-icons icon-big">add_circle</i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
+                            </a>
                         </div>
 
 
