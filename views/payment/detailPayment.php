@@ -49,7 +49,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                 <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class="row">
                                         <div class="col-12">
-                                            <span class="link-active " style="font-size: 15px; color:white;">รายละเอียดการชำระค่าเช่ารายเดือน</span>
+                                            <span class="link-active " style="font-size: 15px; color:white;">การจัดการการชำระค่าเช่ารายเดือน</span>
 
                                             </span>
                                         </div>
@@ -59,6 +59,38 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-xl-3 col-12 mb-4">
+                            <div class="card border-left-primary card-color-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold  text-uppercase mb-1">ห้องที่ยังไม่ได้ชำระค่าเช่า</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">4 ห้อง</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-file-invoice-dollar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-12 mb-4">
+                            <div class="card border-left-primary card-color-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold  text-uppercase mb-1">ห้องที่รอยืนยัน</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">1 ห้อง</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-vote-yea"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- ######################## start filter ######################## -->
                     <div class="row center">
                         <div class="col-xl-12 col-12 mb-4 ">
@@ -72,10 +104,12 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                     <div class="card shadow mb-4">
                         <div class="card">
                             <div class="card-header card-bg " style="background-color: #bf4040">
-                                <span class="link-active " style="font-size: 15px; color:white;">รายละเอียดสัญญาการเช่าทั้งหมด</span>
+                                <span class="link-active " style="font-size: 15px; color:white;">รายละเอียดการชำระค่าเช่ารายเดือน</span>
 
                             </div>
                         </div>
+
+
 
                         <div class="row mb-2" style="margin:20px;">
                             <div class="col-xl-5  text-left" style="font-size:130%">

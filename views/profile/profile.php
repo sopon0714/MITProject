@@ -30,24 +30,12 @@ $DATAUSER = selectDataOne($sql);
                 <?php require_once('../../views/layout/Topbar.php') ?>
                 <!-- End of Topbar -->
                 <div class="container">
-                    <div class="row">
-                        <div class="col-xl-12 col-12 mb-4">
-                            <div class="card">
-                                <div class="card-header card-bg" style="background-color: #bf4040">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <span class="link-active " style="font-size: 15px; color:white;">บัญชีผู้ใช้</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
                                 <div class="card-header card-bg " style="background-color: #bf4040">
-                                    <span class="link-active " style="font-size: 15px; color:white;">รายละเอียดบัญชี</span>
+                                    <span class="link-active " style="font-size: 15px; color:white;">รายละเอียดบัญชีผู้ใช้</span>
 
                                     <span style="float:right;">
 
