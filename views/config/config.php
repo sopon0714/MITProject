@@ -1,6 +1,9 @@
 <?php
 include("../../dbConnect.php");
 session_start();
+if (!isset($_SESSION['DATAUSER'])) {
+    header("location:../../index.php?msg=กระบวนการเข้าเว็บไซต์ไม่ถูกต้อง");
+}
 $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 $query = "SELECT * FROM config";
 $result = selectData($query);
