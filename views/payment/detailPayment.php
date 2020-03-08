@@ -14,6 +14,13 @@ INNER JOIN `date` ON `date`.`dateId` = `payment`.`dateId`
 INNER JOIN `agreement` ON `agreement`.`agreeId` = `payment`.`agreeId`
 INNER JOIN `room` ON `room`.`rid` = `agreement`.`rid`
 WHERE `date`.`dateId`= $dateID";
+$sqlInfoPayment = "SELECT `date`.`dateId`,`date`.`year`,`date`.`month` ,COUNT(*) as roomAll ,COUNT(*) -COUNT(`payment`.`timeSlip`) as roomNotpay,COUNT(`payment`.`timeSlip`)-COUNT(`payment`.`timeConfirm`) as roomCommit ,COUNT(`payment`.`timeConfirm`) as Confirm
+FROM `payment` 
+INNER JOIN `date` ON `date`.`dateId` = `payment`.`dateId`
+WHERE `date`.`dateId`=$dateID
+GROUP BY  `date`.`year`,`date`.`month`
+ORDER BY `date`.`year` DESC ,`date`.`month` DESC";
+$INFOPAYMENT = selectDataOne($sqlInfoPayment);
 $DATAINFO = selectDataOne($sqlDate);
 $DATADETAIL = selectData($sqlDetail);
 $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
@@ -66,7 +73,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">ห้องที่ยังไม่ได้ชำระค่าเช่า</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">4 ห้อง</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $INFOPAYMENT['roomNotpay'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-file-invoice-dollar"></i>
@@ -81,7 +88,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">ห้องที่รอยืนยัน</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">1 ห้อง</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $INFOPAYMENT['roomCommit'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-vote-yea"></i>
@@ -147,11 +154,16 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                         <td>{$DATADETAIL[$i]['commonf']}</td>
                                                         <td>{$DATADETAIL[$i]['paymentAll']}</td>
                                                         <td>{$DATADETAIL[$i]['status']}</td>
-                                                        <td style=\"text-align:center;\">
-                                                            <button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"tooltip\" title='รายละเอียด' onclick=\"detailSlip()\">
+                                                        <td style=\"text-align:center;\">";
+                                                        if ($DATADETAIL[$i]['status'] != 'ยังไม่ได้จ่าย') {
+                                                            echo "<button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"tooltip\" title='รายละเอียด' onclick=\"detailSlip({$DATADETAIL[$i]['pId']},'{$arrMonth[$DATAINFO['month']]}','{$DATAINFO['year']}')\">
                                                                 <i class=\"fas fa-file-alt\"></i>
-                                                            </button>
-                                                        </td>
+                                                            </button>";
+                                                        } else {
+                                                            echo "-";
+                                                        }
+
+                                                        echo "</td>
 
                                                     </tr>";
                                                     }
@@ -177,23 +189,77 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 <!-- รายละเอียดสัญญา -->
 <div id="modalDetailSlip" class="modal fade">
     <form class="modal-dialog modal-lg ">
-        <div class="modal-content">
+        <div class="modal-content" id="contentModal">
             <div class="modal-header" style="background-color:#00ace6">
-
-                <h4 class="modal-title" style="color:white">รายละเอียดสัญญาการเช่า</h4>
+                <h4 class="modal-title" style="color:white">รายละเอียดการชำระค่าเช่า</h4>
             </div>
-            <div class="modal-body" id="addModalBody">
-                <div class="row mb-4">
-                    <div class="col-xl-12 col-12 " style="font-size:25px">
-                        <span>ห้อง : 101 ปี 2563 เดือนที่ 1</span>
+            <div class="modal-body" id="addModalBody" style="font-size:25px">
+
+                <div class="row mb-3">
+                    <div class="col-xl-4 col-2 text-right ">
+                        <span>ห้อง:</span>
+                    </div>
+                    <div class="col-xl-6 col-6 ">
+                        <span>101</span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-xl-4 col-2 text-right ">
+                        <span>เดือนที่ชำระ:</span>
+                    </div>
+                    <div class="col-xl-6 col-6 ">
+                        <span>ปี 2563 เดือนที่ 1</span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-xl-4 col-2 text-right ">
+                        <span>ค่าน้ำ:</span>
+                    </div>
+                    <div class="col-xl-6 col-6 ">
+                        <span>2 (บาท) x 25 (ยูนิต) = 50 บาท</span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-xl-4 col-2 text-right ">
+                        <span>ค่าไฟ:</span>
+                    </div>
+                    <div class="col-xl-6 col-6 ">
+                        <span>7 (บาท) x100 (ยูนิต) = 700 บาท</span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-xl-4 col-2 text-right ">
+                        <span>ค่าห้องและค่าอื่นๆ:</span>
+                    </div>
+                    <div class="col-xl-6 col-6 ">
+                        <span>4000 บาท</span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-xl-4 col-2 text-right ">
+                        <span>ยอดที่ต้องชำระ:</span>
+                    </div>
+                    <div class="col-xl-6 col-6 ">
+                        <span>4700 บาท</span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-xl-4 col-2 text-right ">
+                        <span>วันเวลาที่ส่งสลิป:</span>
+                    </div>
+                    <div class="col-xl-6 col-6 ">
+                        <span>15:00:00 11/2/2563</span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-xl-4 col-2 text-right ">
+                        <span>วันเวลาที่ยันยืน:</span>
+                    </div>
+                    <div class="col-xl-6 col-6 ">
+                        <span>15:00:00 11/2/2563</span>
                     </div>
                 </div>
 
-                <div class="row mb-4">
-                    <div class="col-xl-12 col-12 " style="font-size:25px">
-                        <span>หลักฐานการโอน เวลา 22:59:00 น. วันที่ 07-03-63</span>
-                    </div>
-                </div>
 
                 <div class="row mb-4">
 
@@ -213,17 +279,33 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 <!-- End Modal -->
 <script>
     $(document).ready(function() {
-        console.log("ready!");
+
         $('[data-toggle="tooltip"]').tooltip();
-    });
-    $(document).ready(function() {
-        console.log("ready!");
         $("#addAgreement").click(function() {
             $("#modalAddAgreement").modal();
         });
     });
 
-    function detailSlip() {
-        $("#modalDetailSlip").modal('show');
+    function detailSlip(id, month, year) {
+        $.ajax({
+            type: "POST",
+
+            data: {
+                action: "detailslip",
+                pId: id,
+                monthS: month,
+                yearS: year
+            },
+            url: "../../views/payment/manage.php",
+            async: false,
+            success: function(result) {
+                $("#contentModal").empty();
+                $("#contentModal").append(result);
+                console.log(result);
+                $("#modalDetailSlip").modal('show');
+
+            }
+        });
+
     }
 </script>
