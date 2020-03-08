@@ -33,11 +33,11 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <div class="row">
                         <div class="col-xl-12 col-12 mb-4">
                             <div class="card">
-                                <div class="card-header card-bg" style="background-color: white">
+                                <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class="row">
                                         <div class="col-12">
+                                            <span class="link-active font-weight-bold" style="font-size: 15px; color:white;">การจัดการการชำระค่าเช่ารายเดือน</span>
 
-                                            <span class="link-active font-weight-bold" style="color:#006664;">การจัดการการชำระค่าเช่ารายเดือน</span>
 
                                             </span>
                                         </div>
