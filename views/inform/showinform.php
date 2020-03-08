@@ -166,11 +166,19 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
             </div>
             <br>
             <div class="row mb-4">
-                <div class="col-xl-3 col-12 text-right">
+                <div class="col-xl-2 col-10 text-right" style="font-size:20px">
                     <span>ปัญหา :</span>
                 </div>
-                <div class="col-xl-8 col-12">
-                    <input type="text" class="form-control" id="detail" name="detail" value="" maxlength="100" disabled>
+                <div class="col-xl-5 col-8 " style="font-size:20px">
+                    <!-- <label for="detail" >
+                        
+                    
+                    </label> -->
+
+                    <textarea type="text" rows="4" cols="50" id="detail" name="detail" value="" disabled>
+
+                    </textarea>
+                    <!-- <input type="text" class="form-control" id="detail" name="detail" value="" maxlength="100" disabled> -->
                 </div>
             </div>
 
