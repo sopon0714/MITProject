@@ -147,11 +147,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                 </tfoot>-->
                                                 <tbody>
                                                     <?php for ($i = 0; $i <  $tableRoom[0]['numrow']; $i++) { ?>
-<<<<<<< HEAD
-                                                        <tr role="row" class="odd" style="text-align:center;">
-                                                            <td>
-                                                                <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน">R</a>
-=======
                                                         <tr role="row" class="odd">
                                                             <td style="text-align:center;">
                                                                 <?php if ($tableRoom[$i + 1]['status'] == 'ว่าง') { ?>
@@ -159,7 +154,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                                 <?php } else { ?>
                                                                     <a class="btn btn-danger btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="ไม่พร้อมใช้งาน">R</a>
                                                                 <?php } ?>
->>>>>>> 9d38c93ee3d831f313a58f200bb51671501f37a4
                                                             </td>
                                                             <td><?php echo $tableRoom[$i + 1]['rnumber'] ?></td>
                                                             <td><?php echo $tableRoom[$i + 1]['rent'] ?></td>
