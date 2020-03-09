@@ -126,4 +126,37 @@ if ($action == "detailslip") {
     $sql = "UPDATE `payment` SET `uid` = '$idsuersubmit', `timeConfirm` = '$time', `status` = 'ยืนยันแล้ว'  WHERE `payment`.`pId` =  $IDpayment";
     updateData($sql);
     header("location:./detailPayment.php?dateID=$dateID");
+} else if ($action == "checkPayment") {
+    header('Content-Type: application/json');
+    $time = time();
+    $month = (int) (date("m", $time));
+    $year = (int) (date("Y", $time) + 543);
+    $sql = "SELECT * FROM `date` WHERE `month`=$month AND `year`=$year";
+    $DATA = selectDataOne($sql);
+    $arr = array();
+    if (is_null($DATA)) {
+        $arr['type'] = 1;
+        $sql = "INSERT INTO `date` (`dateId`, `month`, `year`) VALUES (NULL, '$month', '$year')";
+        $arr['iddate'] = (int) addinsertData($sql);
+        $sql = "SELECT * FROM `config` WHERE `config_key` = \"WaterBil\" OR   `config_key` = \"ElectricityBill\" OR  `config_key` = \"CommonFee\"";
+        $CONFIG = selectData($sql);
+        for ($i = 1; $i <= $CONFIG[0]['numrow']; $i++) {
+            $arr[$CONFIG[$i]['config_key']] = (int) $CONFIG[$i]['config_value'];
+        }
+    } else {
+        $sql = "SELECT * FROM `payment` INNER JOIN `date` ON `date`.`dateId` = `payment`.`dateId`
+         WHERE `month`=$month AND `year`=$year";
+        $DATA2 = selectData($sql);
+        if ($DATA2[0]['numrow'] == 0) {
+            $arr['type'] = 1;
+            $sql = "SELECT * FROM `config` WHERE `config_key` = \"WaterBil\" OR   `config_key` = \"ElectricityBill\" OR  `config_key` = \"CommonFee\"";
+            $CONFIG = selectData($sql);
+            for ($i = 1; $i <= $CONFIG[0]['numrow']; $i++) {
+                $arr[$CONFIG[$i]['config_key']] = (int) $CONFIG[$i]['config_value'];
+            }
+        } else {
+            $arr['type'] = 0;
+        }
+    }
+    echo json_encode($arr);
 }

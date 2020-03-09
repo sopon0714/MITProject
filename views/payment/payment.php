@@ -94,25 +94,23 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                             </div>
                         </div>
                         <div class="col-xl-3 col-12 mb-4">
-                            <a href="../../views/payment/addPayment.php">
-                                <div class="card border-left-primary card-color-add shadow h-100 py-2" id="addPayment" style="cursor:pointer;">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="font-weight-bold  text-uppercase mb-1">เพิ่มการชำระ
-                                                </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">+1 การชำระ</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="material-icons icon-big">add_circle</i>
-                                            </div>
+
+                            <div class="card border-left-primary card-color-info shadow h-100 py-2" id="addPayment" style="cursor:pointer;">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="font-weight-bold  text-uppercase mb-1">เพิ่มการชำระ</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">+1 การชำระ</div>
                                         </div>
+                                        <div class="col-auto">
+                                            <i class="material-icons icon-big">add_circle</i>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </a>
+                            </div>
+
                         </div>
-
-
                     </div>
                     <!-- ######################## start filter ######################## -->
                     <div class="row center">
@@ -193,9 +191,82 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 <?php require_once('../../views/layout/MainJS.php') ?>
 <!-- Start Modal -->
 <div>
+    <div class="modal fade" id="addModal" name="ChangeinfoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document" style="width: 50%">
+            <div class="modal-content">
+                <form method="post" id="Changeinfo" name="Changeinfo" action="manage.php">
+                    <div class="Changeinfo">
+                        <div class="modal-header header-modal" style="background-color: #3E49BB;">
+                            <h4 class="modal-title" style="color: white">เพิ่มรายการค่าเช่า</h4>
+                        </div>
+                        <div class="modal-body" id="ChangeModalBody">
+                            <div class="container">
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>คำนำหน้า:</span>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="title" value="นาย" <?php if ($DATAUSER['title'] == 'นาย') echo "checked" ?>>นาย
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="title" value="นาง" <?php if ($DATAUSER['title'] == 'นาง') echo "checked" ?>>นาง
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline disabled">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="title" value="นางสาว" <?php if ($DATAUSER['title'] == 'นางสาว') echo "checked" ?>>นางสาว
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>ชื่อ:</span>
+                                    </div>
+                                    <div class="col-xl-6 col-6 text-right">
+                                        <input type="text" class="form-control" id="fnameEdit" name="fnameEdit" value="<?= $DATAUSER['firstname'] ?>" placeholder="กรุณากรอกชื่อ">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>นามสกุล:</span>
+                                    </div>
+                                    <div class="col-xl-6 col-6 text-right">
+                                        <input type="text" class="form-control" id="lnameEdit" name="lnameEdit" value="<?= $DATAUSER['lastname'] ?>" placeholder="กรุณากรอกนามสกุล">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>เลขบัตรประชาชน:</span>
+                                    </div>
+                                    <div class="col-xl-6 col-6 text-right">
+                                        <input type="text" class="form-control" id="formalIdEdit" name="formalIdEdit" value="<?= $DATAUSER['formalId'] ?>" placeholder="กรุณากรอกเลขบัตรประชาชน">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>เบอร์โทร:</span>
+                                    </div>
+                                    <div class="col-xl-6 col-6 text-right">
+                                        <input type="text" class="form-control" id="phoneNumberEdit" name="phoneNumberEdit" value="<?= $DATAUSER['phoneNumber'] ?>" placeholder="กรุณากรอกเบอร์โทร">
+                                    </div>
+                                </div>
+                                <!-- hidden -->
+                                <input type="hidden" class="form-control" id="IDEdit" name="IDEdit" value="<?= $DATAUSER['uid'] ?>">
+                            </div>
 
-
-
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" name="saveInfo" id="saveInfo" value="insert" class="btn btn-success save">ยืนยัน</button>
+                            <button type="button" class="btn btn-danger cancel" id="a_cancelInfo" data-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- End Modal -->
 <script>
@@ -205,8 +276,33 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
     });
     $(document).ready(function() {
         console.log("ready!");
-        $("#addAgreement").click(function() {
-            $("#modalAddAgreement").modal();
+        $("#addPayment").click(function() {
+            $.ajax({
+                type: "POST",
+
+                data: {
+                    action: "checkPayment"
+                },
+                url: "./manage.php",
+                async: false,
+
+                success: function(result) {
+                    console.log(result);
+                    if (result.type == 0) {
+                        swal({
+                            title: "คุณไม่สามารถทำรายการได้",
+                            text: "คุณไม่สามารถทำได้เนื่องคุณได้ทำไปแล้ว",
+                            icon: "error",
+                            confirmButtonClass: "btn-danger",
+                            dangerMode: true,
+                        })
+                    } else {
+                        $("#addModal").modal();
+                    }
+
+                }
+            });
+
         });
     });
 </script>
