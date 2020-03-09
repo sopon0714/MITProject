@@ -58,10 +58,11 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                         <div class="col-12">
                                             <span class="link-active " style="font-size: 15px; color:white;">การจัดการการชำระค่าเช่ารายเดือน</span>
                                             <span style="float:right;">
-
-                                                <button type="button" id="btn_info" class="btn btn-warning btn-sm tt" title='ย้อนกลับ'>
-                                                    <i class="fas fa-undo-alt"></i>
-                                                </button>
+                                                <a href="./payment.php">
+                                                    <button type="button" id="btn_info" class="btn btn-warning btn-sm tt">
+                                                        ย้อนกลับ
+                                                    </button>
+                                                </a>
                                             </span>
                                             </span>
                                         </div>
@@ -192,7 +193,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 <!-- Start Modal -->
 <!-- รายละเอียดสัญญา -->
 <div id="modalDetailSlip" class="modal fade">
-    <form class="modal-dialog modal-lg ">
+    <form class="modal-dialog modal-lg " method="post" id="submit" name="submit" action="./manage.php">
         <div class="modal-content" id="contentModal">
             <div class="modal-header" style="background-color:#00ace6">
                 <h4 class="modal-title" style="color:white">รายละเอียดการชำระค่าเช่า</h4>

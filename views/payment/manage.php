@@ -2,12 +2,13 @@
 session_start();
 require_once('../../dbConnect.php');
 $action = $_POST['action'] ?? "";
+$USER = $_SESSION['DATAUSER'];
 if ($action == "detailslip") {
 
     $pId = $_POST['pId'] ?? "";
     $month = $_POST['monthS'] ?? "";
     $year = $_POST['yearS'] ?? "";
-    $sql = "SELECT `payment`.`pId`,`room`.`rnumber`,`payment`.`waterb`,`payment`.`waterUnit`, 
+    $sql = "SELECT `payment`.`pId`,`date`.`dateId`,`room`.`rnumber`,`payment`.`waterb`,`payment`.`waterUnit`, 
     `payment`.`waterb`*`payment`.`waterUnit` as costwater,
     `payment`.`elecb`,`payment`.`elecUnit`,`payment`.`elecb`*`payment`.`elecUnit` as costelec
     ,`payment`.`commonf`,`payment`.`paymentAll`,
@@ -98,12 +99,15 @@ if ($action == "detailslip") {
                             <img src=\"../../{$DATA['picPath']}\" style=\"width:50%\">
                         </div>
                     </div>";
+    $content .= " <input type=\"hidden\" class=\"form-control\" id=\"IDpayment\" name=\"IDpayment\" value=\"$pId\">";
+    $content .= " <input type=\"hidden\" class=\"form-control\" id=\"action\" name=\"action\" value=\"conf\">";
+    $content .= " <input type=\"hidden\" class=\"form-control\" id=\"dateID\" name=\"dateID\" value=\"{$DATA['dateId']}\">";
     $content .= "</div>";
     $content .= "<div class=\"modal-footer\">";
     if ($check == 1) {
         $content .= "   <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">ปิด</button>";
     } else {
-        $content .= "   <button type=\"button\" class=\"btn btn-success\" data-dismiss=\"modal\">บันทึก</button>
+        $content .= "   <button type=\"submit\" class=\"btn btn-success\" >ยืนยัน</button>
                         <button type=\"button\" class=\"btn btn-danger\" data-dismiss=\"modal\">ยกเลิก</button>";
     }
     $content .= "</div>";
@@ -114,4 +118,12 @@ if ($action == "detailslip") {
 
     // }
 
+} else if ($action == "conf") {
+    $IDpayment = $_POST['IDpayment'];
+    $dateID = $_POST['dateID'];
+    $idsuersubmit = $USER['uid'];
+    $time = time();
+    $sql = "UPDATE `payment` SET `uid` = '$idsuersubmit', `timeConfirm` = '$time', `status` = 'ยืนยันแล้ว'  WHERE `payment`.`pId` =  $IDpayment";
+    updateData($sql);
+    header("location:./detailPayment.php?dateID=$dateID");
 }
