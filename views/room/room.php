@@ -9,8 +9,9 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <title>Profile</title>
     <?php require_once('../../views/layout/MainCSS.php');
     include("../../dbConnect.php");
-    $sql_tableRoom = "SELECT room.rid,room.status as status,rnumber,rent,COALESCE(title,'-') as title,firstname,lastname ,detail ,user.uid
-    FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete LIKE 0";
+    $sql_tableRoom = "SELECT room.rid,room.status as status,rnumber,rent,IF(room.status LIKE 'ไม่ว่าง%',title,'-') as title,IF(room.status LIKE 'ไม่ว่าง%',firstname,NULL) AS firstname,
+     IF(room.status LIKE 'ไม่ว่าง%',lastname,NULL) AS lastname ,detail ,user.uid
+     FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete LIKE 0";
     $sqlnumroom = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0";
     $sqlRoomEmpty = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0 AND status LIKE 'ว่าง' ";
 
@@ -71,7 +72,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
                         <div class="col-xl-3 col-12 mb-4">
 
-                            <div class="card border-left-primary card-color-info shadow h-100 py-2" style="cursor:pointer;">
+                            <div class="card border-left-primary card-color-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -296,7 +297,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         <form class="modal-dialog modal-lg" method="POST" action='manage.php'>
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#eecc0b">
-                    <h4 class="modal-title" style="color:white">แก้ไขห้อง</h4>
+                    <h4 class="modal-title" style="color:white">รายละเอียดห้องห้อง</h4>
                 </div>
 
                 <div class="modal-body" id="addModalBody">
@@ -312,8 +313,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">บันทึก</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">ตกลง</button>
+
                 </div>
             </div>
         </form>
