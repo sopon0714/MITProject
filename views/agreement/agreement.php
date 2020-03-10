@@ -106,63 +106,60 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card">
-
                             <div class="card-header card-bg " style="background-color: #bf4040">
                                 <span class="link-active " style="font-size: 15px; color:white;">สัญญาการเช่าทั้งหมด</span>
                             </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row center">
 
-                            <div class="card-body">
-                                <div class="table-responsive">
+                                        <div class="col-sm-12" id="Agreement_table">
+                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                <thead>
 
-                                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                        <div class="row center">
+                                                    <tr role="row" style="text-align:center;">
 
-                                            <div class="col-sm-12" id="Agreement_table">
-                                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                                    <thead>
+                                                        <th rowspan="1" colspan="1">หมายเลขห้อง</th>
+                                                        <th rowspan="1" colspan="1">ชื่อผู้เช่า</th>
+                                                        <th rowspan="1" colspan="1">วันที่เริ่มสัญญา</th>
+                                                        <th rowspan="1" colspan="1">วันที่สิ้นสุดสัญญา</th>
+                                                        <th rowspan="1" colspan="1">รายละเอียด</th>
+                                                        <th rowspan="1" colspan="1">จัดการ</th>
 
-                                                        <tr role="row" style="text-align:center;">
+                                                <tbody>
+                                                    <?php for ($i = 0; $i < $TableAgreement[0]['numrow']; $i++) { ?>
+                                                        <tr role="row" class="odd" style="text-align:center;">
+                                                            <td class="sorting_1">
+                                                                <?php echo $TableAgreement[$i + 1]['rnumber'] ?></td>
+                                                            <td><?php echo $TableAgreement[$i + 1]['title'] ?>
+                                                                <?php echo $TableAgreement[$i + 1]['firstname'] ?>
+                                                                <?php echo $TableAgreement[$i + 1]['lastname'] ?></td>
+                                                            <td><?php echo $TableAgreement[$i + 1]['startDate'] ?></td>
+                                                            <td><?php echo $TableAgreement[$i + 1]['endDate'] ?></td>
+                                                            <td style="text-align:center;">
+                                                                <a href="#" class="detailAgreement" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" firstname="<?php echo $TableAgreement[$i + 1]['firstname']; ?>" lastname="<?php echo $TableAgreement[$i + 1]['lastname']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>" phoneNumber="<?php echo $TableAgreement[$i + 1]['phoneNumber']; ?>" email="<?php echo $TableAgreement[$i + 1]['email']; ?>">
+                                                                    <button type="button" class="btn btn-info btn-sm tt" title='รายละเอียดสัญญา'>
+                                                                        <i class="fas fa-file-alt"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </td>
+                                                            <td style="text-align:center;">
+                                                                <a href="#" class="EditAgreement" idAgree="<?php echo $TableAgreement[$i + 1]['agreeId']; ?>" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>">
+                                                                    <button type="button" class="btn btn-warning  btn-sm tt" title="แก้ไขข้อมูล">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                </a>
 
-                                                            <th rowspan="1" colspan="1">หมายเลขห้อง</th>
-                                                            <th rowspan="1" colspan="1">ชื่อผู้เช่า</th>
-                                                            <th rowspan="1" colspan="1">วันที่เริ่มสัญญา</th>
-                                                            <th rowspan="1" colspan="1">วันที่สิ้นสุดสัญญา</th>
-                                                            <th rowspan="1" colspan="1">รายละเอียด</th>
-                                                            <th rowspan="1" colspan="1">จัดการ</th>
-
-                                                    <tbody>
-                                                        <?php for ($i = 0; $i < $TableAgreement[0]['numrow']; $i++) { ?>
-                                                            <tr role="row" class="odd" style="text-align:center;">
-                                                                <td class="sorting_1">
-                                                                    <?php echo $TableAgreement[$i + 1]['rnumber'] ?></td>
-                                                                <td><?php echo $TableAgreement[$i + 1]['title'] ?>
-                                                                    <?php echo $TableAgreement[$i + 1]['firstname'] ?>
-                                                                    <?php echo $TableAgreement[$i + 1]['lastname'] ?></td>
-                                                                <td><?php echo $TableAgreement[$i + 1]['startDate'] ?></td>
-                                                                <td><?php echo $TableAgreement[$i + 1]['endDate'] ?></td>
-                                                                <td style="text-align:center;">
-                                                                    <a href="#" class="detailAgreement" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" firstname="<?php echo $TableAgreement[$i + 1]['firstname']; ?>" lastname="<?php echo $TableAgreement[$i + 1]['lastname']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>" phoneNumber="<?php echo $TableAgreement[$i + 1]['phoneNumber']; ?>" email="<?php echo $TableAgreement[$i + 1]['email']; ?>">
-                                                                        <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดสัญญา'>
-                                                                            <i class="fas fa-file-alt"></i>
-                                                                        </button>
-                                                                    </a>
-                                                                </td>
-                                                                <td style="text-align:center;">
-                                                                    <a href="#" class="EditAgreement" idAgree="<?php echo $TableAgreement[$i + 1]['agreeId']; ?>" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>">
-                                                                        <button type="button" class="btn btn-warning  btn-sm" 4 data-toggle="tooltip" title="แก้ไขข้อมูล">
-                                                                            <i class="fas fa-edit"></i>
-                                                                        </button>
-                                                                    </a>
-
-                                                                    <button onclick="delfunction('สัญญาห้อง<?php echo $TableAgreement[$i + 1]['rnumber'] ?>','<?php echo $TableAgreement[$i + 1]['uid'] ?>')" type='button' id='btn_delete' class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบสัญญา"><i class="far fa-trash-alt"></i></button>
-                                                                </td>
-                                                            </tr>
-                                                        <?php } ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
+                                                                <button onclick="delfunction('สัญญาห้อง<?php echo $TableAgreement[$i + 1]['rnumber'] ?>','<?php echo $TableAgreement[$i + 1]['uid'] ?>')" type='button' id='btn_delete' class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบสัญญา"><i class="far fa-trash-alt"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
+                                                </tbody>
+                                            </table>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -171,6 +168,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                 </div>
             </div>
         </div>
+    </div>
 </body>
 
 </html>
@@ -434,3 +432,51 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 </div>
 <!-- End Modal -->
 <script src="function.js"></script>
+<script>
+    $(document).ready(function() {
+        console.log("ready!");
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $('.tt').tooltip({
+            trigger: "hover"
+        });
+    });
+
+    function delfunction(title, uid) {
+        //alert(uid + " dddd")
+        swal({
+                title: "คุณต้องการลบ",
+                text: title + "หรือไม่ ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("ลบรายการสำเร็จเรียบร้อยแล้ว", {
+                        icon: "success",
+                        buttons: false
+                    });
+                    delete_1(uid);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+                } else {
+                    swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
+                }
+            });
+    }
+
+    function delete_1(uid1) {
+        $.ajax({
+            type: "POST",
+            data: {
+                uid: uid1,
+                delete: "delete"
+            },
+            url: "./manage.php",
+            async: false,
+            success: function(result) {}
+        });
+    }
+</script>

@@ -139,10 +139,10 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                             <div class="table-responsive">
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row center">
-                                        <div class="col-sm-11">
+                                        <div class="col-sm-12">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
-                                                    <tr role="row">
+                                                    <tr role="row" style="text-align:center;">
                                                         <th rowspan="1" colspan="1">ปีพ.ศ</th>
                                                         <th rowspan="1" colspan="1">เดือน</th>
                                                         <th rowspan="1" colspan="1">ห้องที่ต้องชำระ</th>
@@ -154,7 +154,7 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                                     </tr>
                                                 </thead>
 
-                                                <tbody>
+                                                <tbody style="text-align:center;">
                                                     <?php
                                                     for ($i = 1; $i <= $INFOPAYMENT[0]['numrow']; $i++) {
                                                         echo "<tr>
