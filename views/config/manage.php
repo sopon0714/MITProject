@@ -25,7 +25,7 @@ if (isset($_POST['save'])) {
     updateData($sql);
     // dormitorytel
     $sql = "UPDATE `config` SET `config_value` = '$dormittel'
-        WHERE `config`.`config_key` = 'dormitorytel'";
+        WHERE `config`.`config_key` = 'DomitoryTel'";
     echo $sql . "</br>";
     updateData($sql);
     // email
@@ -35,12 +35,12 @@ if (isset($_POST['save'])) {
     updateData($sql);
     // waterbill
     $sql = "UPDATE `config` SET `config_value` = '$waterbill'
-        WHERE `config`.`config_key` = 'waterbill'";
+        WHERE `config`.`config_key` = 'WaterBil'";
     echo $sql . "</br>";
     updateData($sql);
     // electricitybill
     $sql = "UPDATE `config` SET `config_value` = '$elecbill'
-    WHERE `config`.`config_key` = 'electricitybill'";
+    WHERE `config`.`config_key` = 'ElectricityBill'";
     echo $sql . "</br>";
     updateData($sql);
     // router

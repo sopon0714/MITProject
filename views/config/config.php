@@ -92,7 +92,7 @@ $accountname = $result[11]['config_value'];
                                         <span>เบอร์โทร : </span>
                                     </div>
                                     <div class="col-xl-5 col-12">
-                                        <input type="text" class="form-control" id="dormitorytel" value="<?php echo $dormitorytel ?>" maxlength="100" disabled>
+                                        <input type="text" class="form-control" id="dormittel" value="<?php echo $dormitorytel ?>" maxlength="100" disabled>
                                     </div>
                                 </div>
                                 <div class="row mb-4" style="margin:20px;">
