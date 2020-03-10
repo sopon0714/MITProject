@@ -4,6 +4,28 @@ $(document).ready(function () {
     console.log("ready!");
     $("#addAgreement").click(function () {
         $("#modalAddAgreement").modal();
+        swal({
+            title: 'ยืนยัน Email',
+            text: 'ได้ทำการส่งEmailไปที่:' + emailEdit + ' กรุณาเข้าไปยืนยัน',
+            icon: 'success',
+        });
+        // $.ajax({
+        //     type: "POST",
+
+        //     data: {
+        //         userid: iduser,
+        //         action: "changeemail",
+        //         emailEdit: emailEdit
+
+        //     },
+        //     url: "../../views/profile/manage.php",
+        //     async: false,
+        //     success: function(result) {
+        //         console.log("5555");
+        //         console.table(result);
+
+        //     }
+        // });
     });
 });
 $(".detailAgreement").click(function () {
