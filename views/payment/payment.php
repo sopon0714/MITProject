@@ -18,7 +18,8 @@ for ($i = 1; $i <= $INFOPAYMENT[0]['numrow']; $i++) {
     $numberWait  += $INFOPAYMENT[$i]['roomCommit'];
 }
 $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
-$sqlpayRoom = "SELECT `agreement`.`agreeId`,`room`.`rnumber`,`user`.`title`,`user`.`firstname`,`user`.`lastname`,`room`.`rent`
+$sqlpayRoom = "SELECT `agreement`.`agreeId`,`room`.`rnumber`,`user`.`title`,`user`.`firstname`,
+`user`.`lastname`,`room`.`rent`,`user`.`email`
 FROM `user` INNER JOIN `agreement` ON `user`.`uid` = `agreement`.`uid` 
 INNER JOIN `room` ON `room`.`rid` = `agreement`.`rid`
 WHERE `user`.`isDelete`=0 AND `room`.`isDelete`= 0
@@ -212,7 +213,8 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                         <span>เดือน:</span>
                                     </div>
                                     <div class="col-xl-5 col-6 text-right">
-                                        <input type="text" class="form-control" id="addmonth" name="admonth" value="<?php echo $arrMonth[(int) (date("m", time()))] ?>" disabled>
+                                        <input type="text" class="form-control" id="addmonth" name="admonth" value="<?php echo $arrMonth[(int) (date("m", time()))] ?>" readonly>
+                                        <input type="hidden" class="form-control" id="addmonthID" name="addmonthID" value="<?php echo (int) (date("m", time())) ?>" readonly>
 
                                     </div>
                                 </div>
@@ -221,7 +223,7 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                         <span>ปีพุทธศักราช:</span>
                                     </div>
                                     <div class="col-xl-5 col-6 text-right">
-                                        <input type="text" class="form-control" id="addyear" name="addyear" value="<?= (int) (date("Y", time()) + 543) ?>" disabled>
+                                        <input type="text" class="form-control" id="addyear" name="addyear" value="<?= (int) (date("Y", time()) + 543) ?>" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -229,7 +231,7 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                         <span>ค่าน้ำ(บาท/ยูนิต):</span>
                                     </div>
                                     <div class="col-xl-5 col-6 text-right" id="inputwater">
-                                        <input type="text" class="form-control" id="inputwater" name="inputwater" value="" disabled>
+                                        <input type="text" class="form-control" id="inputwater" name="inputwater" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -237,7 +239,7 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                         <span>ค่าไฟ(บาท/ยูนิต):</span>
                                     </div>
                                     <div class="col-xl-5 col-6 text-right" id="inputelec">
-                                        <input type="text" class="form-control" id="inputelec" name="inputelec" value="" disabled>
+                                        <input type="text" class="form-control" id="inputelec" name="inputelec" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -245,15 +247,15 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                         <span>ค่าส่วนกลางและอื่นๆ(บาท):</span>
                                     </div>
                                     <div class="col-xl-5 col-6 text-right" id="inputcomf">
-                                        <input type="text" class="form-control" id="inputcomf" name="inputcomf" value="" disabled>
+                                        <input type="text" class="form-control" id="inputcomf2" name="inputcomf" value="" readonly>
                                     </div>
                                 </div>
                                 <div id="iddate">
-                                    <input type="text" class="form-control" id="hiddeniddate" name="inputcomf" value="" disabled>
+                                    <input type="text" class="form-control" id="hiddeniddate" name="hiddeniddate" value="" readonly>
                                 </div>
-
+                                <input type="hidden" class="form-control" name="action" value="addpayment">
                                 <div class="row mb-3">
-                                    <div class="col-sm-11">
+                                    <div class="col-sm-12">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr role="row">
@@ -268,13 +270,16 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                             <tbody>
                                                 <?php
                                                 for ($i = 1; $i <= $INFOPAYROOM[0]['numrow']; $i++) {
-                                                    echo " <input type=\"hidden\" class=\"form-control\" id=\"pid_$i\" name=\"pid[]\" value=\"{$INFOPAYROOM[$i]['agreeId']}\" >";
+                                                    echo " <input type=\"hidden\" class=\"form-control\" id=\"rname_$i\" name=\"rname[]\" value=\"{$INFOPAYROOM[$i]['rnumber']}\" >";
+                                                    echo " <input type=\"hidden\" class=\"form-control\" id=\"pid_$i\" name=\"aid[]\" value=\"{$INFOPAYROOM[$i]['agreeId']}\" >";
+                                                    echo " <input type=\"hidden\" class=\"form-control\" id=\"email_$i\" name=\"email[]\" value=\"{$INFOPAYROOM[$i]['email']}\" >";
                                                     echo "<tr>
                                                         <td>{$INFOPAYROOM[$i]['rnumber']}</td>
                                                         <td>{$INFOPAYROOM[$i]['title']} {$INFOPAYROOM[$i]['firstname']} {$INFOPAYROOM[$i]['lastname']}</td>
                                                         <td>{$INFOPAYROOM[$i]['rent']}</td>
-                                                        <td><input type=\"number\"   min=\"0\" class=\"form-control\" id=\"water_$i\" onfocus=\"sel(this)\" name=\"water[]\" value=\"\" ></td>
-                                                        <td><input type=\"number\"   min=\"0\" class=\"form-control\" id=\"eclec$i\"  onfocus=\"sel(this)\"name=\"eclec[]\" value=\"\" ></td>
+                                                        <input type=\"hidden\"   min=\"0\" class=\"form-control\" id=\"rent_$i\"  name=\"rent[]\" value=\"{$INFOPAYROOM[$i]['rent']}\" >
+                                                        <td><input type=\"number\"   min=\"0\" class=\"form-control\" id=\"water_$i\"  name=\"water[]\" value=\"\" ></td>
+                                                        <td><input type=\"number\"   min=\"0\" class=\"form-control\" id=\"eclec$i\"   name=\"eclec[]\" value=\"\" ></td>
                                                     </tr>";
                                                 }
                                                 ?>
@@ -287,7 +292,7 @@ $INFOPAYROOM = selectData($sqlpayRoom);
 
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" name="addpayment" id="addpayment" value="insert" class="btn btn-success save">ยืนยัน</button>
+                                <button type="submit" name="submitpayment" id="submitpayment" value="insert" class="btn btn-success save">ยืนยัน</button>
                                 <button type="button" class="btn btn-danger cancel" id="a_cancelInfo" data-dismiss="modal">ยกเลิก</button>
                             </div>
                         </div>
@@ -326,13 +331,13 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                         })
                     } else {
                         $("#inputwater").empty();
-                        $("#inputwater").append("<input type=\"text\" class=\"form-control\" id=\"inputwater\" name=\"inputwater\" value=\"" + result.WaterBil + "\" disabled>");
+                        $("#inputwater").append("<input type=\"text\" class=\"form-control\" id=\"inputwater\" name=\"inputwater\" value=\"" + result.WaterBil + "\" readonly >");
                         $("#inputelec").empty();
-                        $("#inputelec").append("<input type=\"text\" class=\"form-control\" id=\"inputelec\" name=\"inputelec\" value=\"" + result.ElectricityBill + "\" disabled>");
+                        $("#inputelec").append("<input type=\"text\" class=\"form-control\" id=\"inputelec\" name=\"inputelec\" value=\"" + result.ElectricityBill + "\" readonly >");
                         $("#inputcomf").empty();
-                        $("#inputcomf").append("<input type=\"text\" class=\"form-control\" id=\"inputwater\" name=\"inputwater\" value=\"" + result.CommonFee + "\" disabled>");
+                        $("#inputcomf").append("<input type=\"text\" class=\"form-control\" id=\"inputcomf2\" name=\"inputcomf\" value=\"" + result.CommonFee + "\" readonly >");
                         $("#iddate").empty();
-                        $("#iddate").append("<input type=\"hidden\" class=\"form-control\" id=\"hiddeniddate\" name=\"hiddeniddate\" value=\"" + result.iddate + "\" disabled>");
+                        $("#iddate").append("<input type=\"hidden\" class=\"form-control\" id=\"hiddeniddate\" name=\"hiddeniddate\" value=\"" + result.iddate + "\" readonly >");
                         $("#addPaymentModal").modal();
                     }
 
