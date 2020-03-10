@@ -134,10 +134,10 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                             <div class="table-responsive">
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row center">
-                                        <div class="col-sm-11">
+                                        <div class="col-sm-12">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
-                                                    <tr role="row">
+                                                    <tr role="row" style="text-align:center;">
                                                         <th rowspan="1" colspan="1">ห้อง</th>
                                                         <th rowspan="1" colspan="1">ค่าน้ำ</th>
                                                         <th rowspan="1" colspan="1">ค่าไฟ</th>
@@ -149,7 +149,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody style="text-align:center;">
                                                     <?php
                                                     for ($i = 1; $i <= $DATADETAIL[0]['numrow']; $i++) {
                                                         echo "<tr>
