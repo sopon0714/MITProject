@@ -161,7 +161,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                         <td>{$DATADETAIL[$i]['status']}</td>
                                                         <td style=\"text-align:center;\">";
                                                         if ($DATADETAIL[$i]['status'] != 'ยังไม่ได้จ่าย') {
-                                                            echo "<button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"tooltip\" title='รายละเอียด' onclick=\"detailSlip({$DATADETAIL[$i]['pId']},'{$arrMonth[$DATAINFO['month']]}','{$DATAINFO['year']}')\">
+                                                            echo "<button type=\"button\" class=\"btn btn-info btn-sm tt\" title='รายละเอียด' onclick=\"detailSlip({$DATADETAIL[$i]['pId']},'{$arrMonth[$DATAINFO['month']]}','{$DATAINFO['year']}')\">
                                                                 <i class=\"fas fa-file-alt\"></i>
                                                             </button>";
                                                         } else {
@@ -284,6 +284,10 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 <!-- End Modal -->
 <script>
     $(document).ready(function() {
+
+        $('.tt').tooltip({
+            trigger: "hover"
+        });
 
         $('[data-toggle="tooltip"]').tooltip();
         $("#addAgreement").click(function() {
