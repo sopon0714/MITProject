@@ -116,7 +116,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         <div class="card">
                             <div class="card-header card-bg " style="background-color: #bf4040">
                                 <span class="link-active " style="font-size: 15px; color:white;">รายชื่อห้องในระบบ</span>
-
                             </div>
                         </div>
                         <div class="card-body">
@@ -148,8 +147,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                 </tfoot>-->
                                                 <tbody>
                                                     <?php for ($i = 0; $i <  $tableRoom[0]['numrow']; $i++) { ?>
-                                                        <tr role="row" class="odd">
-                                                            <td style="text-align:center;">
+                                                        <tr role="row" class="odd" style="text-align:center;">
+                                                            <td>
                                                                 <?php if ($tableRoom[$i + 1]['status'] == 'ว่าง') { ?>
                                                                     <a class="btn btn-success btn-square btn-sm active" data-toggle="tooltip" title="" data-original-title="พร้อมใช้งาน">R</a>
                                                                 <?php } else { ?>
@@ -161,14 +160,14 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                             <td><?php echo $tableRoom[$i + 1]['title'] ?> <?php echo $tableRoom[$i + 1]['firstname'] ?> <?php echo $tableRoom[$i + 1]['lastname'] ?> </td>
                                                             <td style="text-align:center;">
                                                                 <a href="#" class="detailRoom" detail="<?php echo $tableRoom[$i + 1]['detail']; ?>">
-                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดห้อง'>
+                                                                    <button type="button" class="btn btn-info btn-sm tt" title='รายละเอียดห้อง'>
                                                                         <i class="fas fa-file-alt"></i>
                                                                     </button>
                                                                 </a>
                                                             </td>
                                                             <td style="text-align:center;">
                                                                 <a href="#" class="EditRoom" rid=<?php echo  $tableRoom[$i + 1]['rid'] ?> rnumber=<?php echo $tableRoom[$i + 1]['rnumber'] ?> rent=<?php echo $tableRoom[$i + 1]['rent'] ?> detail=' <?php echo $tableRoom[$i + 1]['detail'] ?>'>
-                                                                    <button type="button" class="btn btn-warning  btn-sm" 4 data-toggle="tooltip" title="แก้ไขข้อมูล">
+                                                                    <button type="button" class="btn btn-warning  btn-sm tt" title="แก้ไขข้อมูล">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
                                                                 </a>
@@ -307,7 +306,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                         <div class="col-xl-8 col-12">
                             <!-- <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด"> -->
-                            <textarea id="d_detail" name="d_detail" rows="5" cols="60" class="form-control" value="" placeholder=""></textarea>
+                            <textarea id="d_detail" name="d_detail" rows="5" cols="60" class="form-control" value="" placeholder="" disabled></textarea>
                         </div>
                     </div>
 

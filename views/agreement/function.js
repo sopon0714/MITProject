@@ -1,12 +1,31 @@
 // ***************************************agreement.php****************************************************
-$(document).ready(function () {
-    console.log("ready!");
-    $('[data-toggle="tooltip"]').tooltip();
-});
+
 $(document).ready(function () {
     console.log("ready!");
     $("#addAgreement").click(function () {
         $("#modalAddAgreement").modal();
+        swal({
+            title: 'ยืนยัน Email',
+            text: 'ได้ทำการส่งEmailไปที่:' + emailEdit + ' กรุณาเข้าไปยืนยัน',
+            icon: 'success',
+        });
+        // $.ajax({
+        //     type: "POST",
+
+        //     data: {
+        //         userid: iduser,
+        //         action: "changeemail",
+        //         emailEdit: emailEdit
+
+        //     },
+        //     url: "../../views/profile/manage.php",
+        //     async: false,
+        //     success: function(result) {
+        //         console.log("5555");
+        //         console.table(result);
+
+        //     }
+        // });
     });
 });
 $(".detailAgreement").click(function () {
@@ -44,43 +63,7 @@ $(".EditAgreement").click(function () {
 
     $("#modalEdit").modal();
 });
-function delfunction(title, uid) {
-    //alert(uid + " dddd")
-    swal({
-        title: "คุณต้องการลบ",
-        text: title + "หรือไม่ ?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    })
-        .then((willDelete) => {
-            if (willDelete) {
-                swal("Poof! Your imaginary file has been deleted!", {
-                    icon: "success",
-                    buttons: false
-                });
-                delete_1(uid);
-                setTimeout(function () {
-                    location.reload();
-                }, 1500);
-            } else {
-                swal("Your imaginary file is safe!");
-            }
-        });
-}
-function delete_1(uid1) {
-    $.ajax({
-        type: "POST",
-        data: {
-            uid: uid1,
-            delete: "delete"
-        },
-        url: "./manage.php",
-        async: false,
-        success: function (result) {
-        }
-    });
-}
+
 // ***************************************AdminRead.php****************************************************
 $(document).ready(function () {
     console.log("ready!");
@@ -123,7 +106,7 @@ function delfunctionAdmin(title, uid) {
     })
         .then((willDelete) => {
             if (willDelete) {
-                swal("Poof! Your imaginary file has been deleted!", {
+                swal("ลบรายการสำเร็จเรียบร้อยแล้ว", {
                     icon: "success",
                     buttons: false
                 });
@@ -131,8 +114,9 @@ function delfunctionAdmin(title, uid) {
                 setTimeout(function () {
                     location.reload();
                 }, 1500);
-            } else {
-                swal("Your imaginary file is safe!");
+            }
+            else {
+                swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
             }
         });
 }
