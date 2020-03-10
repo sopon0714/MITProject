@@ -134,6 +134,7 @@ if ($action == "detailslip") {
     $sql = "SELECT * FROM `date` WHERE `month`=$month AND `year`=$year";
     $DATA = selectDataOne($sql);
     $arr = array();
+
     if (is_null($DATA)) {
         $arr['type'] = 1;
         $sql = "INSERT INTO `date` (`dateId`, `month`, `year`) VALUES (NULL, '$month', '$year')";
@@ -144,6 +145,7 @@ if ($action == "detailslip") {
             $arr[$CONFIG[$i]['config_key']] = (int) $CONFIG[$i]['config_value'];
         }
     } else {
+        $arr['iddate'] = (int) $DATA['dateId'];
         $sql = "SELECT * FROM `payment` INNER JOIN `date` ON `date`.`dateId` = `payment`.`dateId`
          WHERE `month`=$month AND `year`=$year";
         $DATA2 = selectData($sql);

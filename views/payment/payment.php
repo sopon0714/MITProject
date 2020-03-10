@@ -18,6 +18,12 @@ for ($i = 1; $i <= $INFOPAYMENT[0]['numrow']; $i++) {
     $numberWait  += $INFOPAYMENT[$i]['roomCommit'];
 }
 $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+$sqlpayRoom = "SELECT `agreement`.`agreeId`,`room`.`rnumber`,`user`.`title`,`user`.`firstname`,`user`.`lastname`,`room`.`rent`
+FROM `user` INNER JOIN `agreement` ON `user`.`uid` = `agreement`.`uid` 
+INNER JOIN `room` ON `room`.`rid` = `agreement`.`rid`
+WHERE `user`.`isDelete`=0 AND `room`.`isDelete`= 0
+ORDER BY `room`.`rnumber`";
+$INFOPAYROOM = selectData($sqlpayRoom);
 
 ?>
 <!DOCTYPE html>
@@ -191,78 +197,100 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 <?php require_once('../../views/layout/MainJS.php') ?>
 <!-- Start Modal -->
 <div>
-    <div class="modal fade" id="addModal" name="ChangeinfoModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="addPaymentModal" name="addPaymentModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document" style="width: 50%">
             <div class="modal-content">
-                <form method="post" id="Changeinfo" name="Changeinfo" action="manage.php">
+                <form method="post" id="addPayment" name="addPayment" action="manage.php">
                     <div class="Changeinfo">
                         <div class="modal-header header-modal" style="background-color: #3E49BB;">
                             <h4 class="modal-title" style="color: white">เพิ่มรายการค่าเช่า</h4>
                         </div>
-                        <div class="modal-body" id="ChangeModalBody">
+                        <div class="modal-body" id="addModalBody">
                             <div class="container">
                                 <div class="row mb-3">
                                     <div class="col-xl-4 col-2 text-right textreq">
-                                        <span>คำนำหน้า:</span>
+                                        <span>เดือน:</span>
                                     </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="title" value="นาย" <?php if ($DATAUSER['title'] == 'นาย') echo "checked" ?>>นาย
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="title" value="นาง" <?php if ($DATAUSER['title'] == 'นาง') echo "checked" ?>>นาง
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline disabled">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="title" value="นางสาว" <?php if ($DATAUSER['title'] == 'นางสาว') echo "checked" ?>>นางสาว
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-xl-4 col-2 text-right textreq">
-                                        <span>ชื่อ:</span>
-                                    </div>
-                                    <div class="col-xl-6 col-6 text-right">
-                                        <input type="text" class="form-control" id="fnameEdit" name="fnameEdit" value="<?= $DATAUSER['firstname'] ?>" placeholder="กรุณากรอกชื่อ">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-xl-4 col-2 text-right textreq">
-                                        <span>นามสกุล:</span>
-                                    </div>
-                                    <div class="col-xl-6 col-6 text-right">
-                                        <input type="text" class="form-control" id="lnameEdit" name="lnameEdit" value="<?= $DATAUSER['lastname'] ?>" placeholder="กรุณากรอกนามสกุล">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-xl-4 col-2 text-right textreq">
-                                        <span>เลขบัตรประชาชน:</span>
-                                    </div>
-                                    <div class="col-xl-6 col-6 text-right">
-                                        <input type="text" class="form-control" id="formalIdEdit" name="formalIdEdit" value="<?= $DATAUSER['formalId'] ?>" placeholder="กรุณากรอกเลขบัตรประชาชน">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-xl-4 col-2 text-right textreq">
-                                        <span>เบอร์โทร:</span>
-                                    </div>
-                                    <div class="col-xl-6 col-6 text-right">
-                                        <input type="text" class="form-control" id="phoneNumberEdit" name="phoneNumberEdit" value="<?= $DATAUSER['phoneNumber'] ?>" placeholder="กรุณากรอกเบอร์โทร">
-                                    </div>
-                                </div>
-                                <!-- hidden -->
-                                <input type="hidden" class="form-control" id="IDEdit" name="IDEdit" value="<?= $DATAUSER['uid'] ?>">
-                            </div>
+                                    <div class="col-xl-5 col-6 text-right">
+                                        <input type="text" class="form-control" id="addmonth" name="admonth" value="<?php echo $arrMonth[(int) (date("m", time()))] ?>" disabled>
 
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>ปีพุทธศักราช:</span>
+                                    </div>
+                                    <div class="col-xl-5 col-6 text-right">
+                                        <input type="text" class="form-control" id="addyear" name="addyear" value="<?= (int) (date("Y", time()) + 543) ?>" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>ค่าน้ำ(บาท/ยูนิต):</span>
+                                    </div>
+                                    <div class="col-xl-5 col-6 text-right" id="inputwater">
+                                        <input type="text" class="form-control" id="inputwater" name="inputwater" value="" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>ค่าไฟ(บาท/ยูนิต):</span>
+                                    </div>
+                                    <div class="col-xl-5 col-6 text-right" id="inputelec">
+                                        <input type="text" class="form-control" id="inputelec" name="inputelec" value="" disabled>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>ค่าส่วนกลางและอื่นๆ(บาท):</span>
+                                    </div>
+                                    <div class="col-xl-5 col-6 text-right" id="inputcomf">
+                                        <input type="text" class="form-control" id="inputcomf" name="inputcomf" value="" disabled>
+                                    </div>
+                                </div>
+                                <div id="iddate">
+                                    <input type="text" class="form-control" id="hiddeniddate" name="inputcomf" value="" disabled>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-11">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th rowspan="1" colspan="1">ห้อง</th>
+                                                    <th rowspan="1" colspan="1">ผู้เช่า</th>
+                                                    <th rowspan="1" colspan="1">ค่าเช่าห้อง</th>
+                                                    <th rowspan="1" colspan="1">ยูนิตน้ำ(ยูนิต)</th>
+                                                    <th rowspan="1" colspan="1">ยูนิตไฟฟ้าที่ใช้(ยูนิต)</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                <?php
+                                                for ($i = 1; $i <= $INFOPAYROOM[0]['numrow']; $i++) {
+                                                    echo " <input type=\"hidden\" class=\"form-control\" id=\"pid_$i\" name=\"pid[]\" value=\"{$INFOPAYROOM[$i]['agreeId']}\" >";
+                                                    echo "<tr>
+                                                        <td>{$INFOPAYROOM[$i]['rnumber']}</td>
+                                                        <td>{$INFOPAYROOM[$i]['title']} {$INFOPAYROOM[$i]['firstname']} {$INFOPAYROOM[$i]['lastname']}</td>
+                                                        <td>{$INFOPAYROOM[$i]['rent']}</td>
+                                                        <td><input type=\"number\"   min=\"0\" class=\"form-control\" id=\"water_$i\" onfocus=\"sel(this)\" name=\"water[]\" value=\"\" ></td>
+                                                        <td><input type=\"number\"   min=\"0\" class=\"form-control\" id=\"eclec$i\"  onfocus=\"sel(this)\"name=\"eclec[]\" value=\"\" ></td>
+                                                    </tr>";
+                                                }
+                                                ?>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" name="addpayment" id="addpayment" value="insert" class="btn btn-success save">ยืนยัน</button>
+                                <button type="button" class="btn btn-danger cancel" id="a_cancelInfo" data-dismiss="modal">ยกเลิก</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="submit" name="saveInfo" id="saveInfo" value="insert" class="btn btn-success save">ยืนยัน</button>
-                            <button type="button" class="btn btn-danger cancel" id="a_cancelInfo" data-dismiss="modal">ยกเลิก</button>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>
@@ -297,12 +325,22 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                             dangerMode: true,
                         })
                     } else {
-                        $("#addModal").modal();
+                        $("#inputwater").empty();
+                        $("#inputwater").append("<input type=\"text\" class=\"form-control\" id=\"inputwater\" name=\"inputwater\" value=\"" + result.WaterBil + "\" disabled>");
+                        $("#inputelec").empty();
+                        $("#inputelec").append("<input type=\"text\" class=\"form-control\" id=\"inputelec\" name=\"inputelec\" value=\"" + result.ElectricityBill + "\" disabled>");
+                        $("#inputcomf").empty();
+                        $("#inputcomf").append("<input type=\"text\" class=\"form-control\" id=\"inputwater\" name=\"inputwater\" value=\"" + result.CommonFee + "\" disabled>");
+                        $("#iddate").empty();
+                        $("#iddate").append("<input type=\"hidden\" class=\"form-control\" id=\"hiddeniddate\" name=\"hiddeniddate\" value=\"" + result.iddate + "\" disabled>");
+                        $("#addPaymentModal").modal();
                     }
 
                 }
             });
 
         });
+
+
     });
 </script>
