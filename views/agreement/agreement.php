@@ -528,7 +528,7 @@ $(".EditAgreement").click(function() {
     // alert(rnumber);
     // alert(startDate);
     // alert(endDate);
-    //alert(rid);
+
     $('#e_idAgree').val(idAgree);
     $('#e_rnumber').val(rnumber);
     $('#e_startDate').val(startDate);
