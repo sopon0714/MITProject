@@ -124,13 +124,21 @@ if (isset($_POST['edit'])) {
     $e_rnumber = $_POST['e_rnumber'];
     $e_startDate = $_POST['e_startDate'];
     $e_endDate = $_POST['e_endDate'];
+    $e_rid = $_POST['e_rid'];
     echo ("$e_idAgree    ");
     echo ("$e_rnumber    ");
     echo "$e_startDate    ";
     echo "$e_endDate     ";
-
+    echo "$e_rid";
     $sql_editAgree = "UPDATE agreement SET rid = '$e_rnumber', startDate ='$e_startDate', `endDate` = '$e_endDate' WHERE agreement.agreeId =  $e_idAgree";
     updateData($sql_editAgree);
+    if ($e_rid != $e_rnumber) {
+        $sql_statusOld = "UPDATE room SET status = 'ว่าง' WHERE room.rid = $e_rid";
+        updateData($sql_statusOld);
+    }
+    $sql_statusNew = "UPDATE room SET status = 'ไม่ว่าง' WHERE room.rid = $e_rnumber";
+    updateData($sql_statusNew);
+
     header("location:./agreement.php");
 }
 // ********************************************Admin*************************************************
