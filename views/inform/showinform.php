@@ -13,7 +13,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <?php require_once('../../views/layout/MainCSS.php');
     include("../../dbConnect.php");
 
-    $sql_tableRequest = "SELECT DATE_FORMAT(request.date,'%T ')As TimeRequest,DATE_FORMAT(request.date, '%d/%m/%Y')As DateRequest,room.rnumber As room,request.detail As detail,request.requestId  FROM `request` INNER JOIN user ON request.uid = user.uid
+    $sql_tableRequest = "SELECT DATE_FORMAT(request.date,'%T ')As TimeRequest,DATE_FORMAT(request.date, '%d/%m/%Y')As DateRequest,room.rnumber As room,request.detail As detail,request.requestId  FROM `request` 
+    INNER JOIN user ON request.uid = user.uid
 INNER JOIN agreement ON agreement.uid = user.uid 
 INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
     $sql_NumRequest = "SELECT COUNT(request.requestId) AS numRequest FROM request";
@@ -220,7 +221,7 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
             })
             .then((willDelete) => {
                 if (willDelete) {
-                    swal("Poof! Your imaginary file has been deleted!", {
+                    swal("ลบรายการสำเร็จเรียบร้อยแล้ว", {
                         icon: "success",
                         buttons: false
                     });
@@ -229,7 +230,7 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
                         location.reload();
                     }, 1500);
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
                 }
             });
     }
