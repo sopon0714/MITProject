@@ -220,7 +220,7 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
             })
             .then((willDelete) => {
                 if (willDelete) {
-                    swal("Poof! Your imaginary file has been deleted!", {
+                    swal("ลบรายการสำเร็จเรียบร้อยแล้ว", {
                         icon: "success",
                         buttons: false
                     });
@@ -229,7 +229,7 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
                         location.reload();
                     }, 1500);
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
                 }
             });
     }

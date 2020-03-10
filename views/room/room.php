@@ -306,7 +306,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                         <div class="col-xl-8 col-12">
                             <!-- <input type="text" class="form-control" id="mail" value="ทีวี ตู้เย็น" placeholder="กรุณากรอกรายละเอียด"> -->
-                            <textarea id="d_detail" name="d_detail" rows="5" cols="60" class="form-control" value="" placeholder=""></textarea>
+                            <textarea id="d_detail" name="d_detail" rows="5" cols="60" class="form-control" value="" placeholder="" disabled></textarea>
                         </div>
                     </div>
 

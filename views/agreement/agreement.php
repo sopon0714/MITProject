@@ -117,10 +117,12 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row center">
-
                                         <div class="col-sm-12" id="Agreement_table">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
+
+                                                    <tr role="row" style="text-align:center;">
+
                                                     <tr role="row" style="text-align:center;">
 
                                                         <th rowspan="1" colspan="1">หมายเลขห้อง</th>
@@ -129,7 +131,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                         <th rowspan="1" colspan="1">วันที่สิ้นสุดสัญญา</th>
                                                         <th rowspan="1" colspan="1">รายละเอียด</th>
                                                         <th rowspan="1" colspan="1">จัดการ</th>
-                                                    </tr>
 
                                                 <tbody>
                                                     <?php for ($i = 0; $i < $TableAgreement[0]['numrow']; $i++) { ?>
@@ -143,14 +144,14 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                             <td><?php echo $TableAgreement[$i + 1]['endDate'] ?></td>
                                                             <td style="text-align:center;">
                                                                 <a href="#" class="detailAgreement" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" firstname="<?php echo $TableAgreement[$i + 1]['firstname']; ?>" lastname="<?php echo $TableAgreement[$i + 1]['lastname']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>" phoneNumber="<?php echo $TableAgreement[$i + 1]['phoneNumber']; ?>" email="<?php echo $TableAgreement[$i + 1]['email']; ?>">
-                                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดสัญญา'>
+                                                                    <button type="button" class="btn btn-info btn-sm tt" title='รายละเอียดสัญญา'>
                                                                         <i class="fas fa-file-alt"></i>
                                                                     </button>
                                                                 </a>
                                                             </td>
                                                             <td style="text-align:center;">
                                                                 <a href="#" class="EditAgreement" idAgree="<?php echo $TableAgreement[$i + 1]['agreeId']; ?>" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>">
-                                                                    <button type="button" class="btn btn-warning  btn-sm" 4 data-toggle="tooltip" title="แก้ไขข้อมูล">
+                                                                    <button type="button" class="btn btn-warning  btn-sm tt" title="แก้ไขข้อมูล">
                                                                         <i class="fas fa-edit"></i>
                                                                     </button>
                                                                 </a>
@@ -161,16 +162,13 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                     <?php } ?>
                                                 </tbody>
                                             </table>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>
@@ -381,7 +379,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ชื่อผู้เข้าพักอาศัย :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_firstname" name="e_firstname" value="" maxlength="100">
+                            <<<<<<< HEAD <input type="text" class="form-control" id="e_firstname" name="e_firstname" value="" maxlength="100">
+                                =======
+                                <input type="text" class="form-control" id="e_firstname" name="e_firstname" value="" maxlength="100" disabled>
+                                >>>>>>> 17b24a414c65f045a669d654e6c1b7adf1beb38a
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -389,7 +390,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>นามสกุล:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_lastname" name="e_lastname" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100">
+                            <<<<<<< HEAD <input type="text" class="form-control" id="e_lastname" name="e_lastname" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100">
+                                =======
+                                <input type="text" class="form-control" id="e_lastname" name="e_lastname" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100" disabled>
+                                >>>>>>> 17b24a414c65f045a669d654e6c1b7adf1beb38a
                         </div>
                     </div>
                     <div class="row mb-4" style="margin:10px;">
@@ -397,7 +401,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่เข้า: </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="e_startDate" name="e_startDate" value="2020-03-07" maxlength="100">
+                            <<<<<<< HEAD <input type="date" class="form-control" id="e_startDate" name="e_startDate" value="2020-03-07" maxlength="100">
+                                =======
+                                <input type="date" class="form-control" id="e_startDate" name="e_startDate" value="2020-03-07" maxlength="100" disabled>
+                                >>>>>>> 17b24a414c65f045a669d654e6c1b7adf1beb38a
                         </div>
                     </div>
                     <div class="row mb-4" style="margin:10px;">
@@ -405,7 +412,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่ออก: </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="e_endDate" name="e_endDate" value="2020-03-07" maxlength="100">
+                            <<<<<<< HEAD <input type="date" class="form-control" id="e_endDate" name="e_endDate" value="2020-03-07" maxlength="100">
+                                =======
+                                <input type="date" class="form-control" id="e_endDate" name="e_endDate" value="2020-03-07" maxlength="100" disabled>
+                                >>>>>>> 17b24a414c65f045a669d654e6c1b7adf1beb38a
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -413,7 +423,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>เบอร์โทรติดต่อ:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_phoneNumber" name="e_phoneNumber" value="" placeholder="กรุณากรอกเบอร์โทร">
+                            <<<<<<< HEAD <input type="text" class="form-control" id="e_phoneNumber" name="e_phoneNumber" value="" placeholder="กรุณากรอกเบอร์โทร">
+                                =======
+                                <input type="text" class="form-control" id="e_phoneNumber" name="e_phoneNumber" value="" placeholder="กรุณากรอกเบอร์โทร" disabled>
+                                >>>>>>> 17b24a414c65f045a669d654e6c1b7adf1beb38a
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -421,7 +434,10 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>อีเมล์ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_email" name="e_email" value="" placeholder="กรุณากรอกอีเมล์">
+                            <<<<<<< HEAD <input type="text" class="form-control" id="e_email" name="e_email" value="" placeholder="กรุณากรอกอีเมล์">
+                                =======
+                                <input type="text" class="form-control" id="e_email" name="e_email" value="" placeholder="กรุณากรอกอีเมล์" disabled>
+                                >>>>>>> 17b24a414c65f045a669d654e6c1b7adf1beb38a
                         </div>
                     </div>
                     <div class="modal-footer">
