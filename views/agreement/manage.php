@@ -222,7 +222,7 @@ if (isset($_POST['addAdmin'])) {
     }
     echo json_encode($arr);
 
-    //header("location:./adminRead.php");
+    header("location:./adminRead.php");
 }
 if (isset($_POST['deleteAdmin'])) {
     $uid = $_POST['uid'];
