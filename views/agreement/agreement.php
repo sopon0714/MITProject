@@ -68,7 +68,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold  text-uppercase mb-1">จำนวนสัญญา</div>
+                                            <div class="font-weight-bold  text-uppercase mb-1">จำนวนผู้เช่า</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <?php echo $NumAgreement[1]['numAgreement'] ?> ห้อง</div>
                                         </div>
@@ -85,9 +85,9 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="font-weight-bold  text-uppercase mb-1">เพิ่มสัญญาการเช่า
+                                            <div class="font-weight-bold  text-uppercase mb-1">เพิ่มผู้เช่า
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">+1 สัญญา</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">+1 คน</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="material-icons icon-big">add_circle</i>
@@ -111,7 +111,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         <div class="card">
                             <div class="card-header card-bg " style="background-color: #bf4040">
                                 <span class="link-active "
-                                    style="font-size: 15px; color:white;">สัญญาการเช่าทั้งหมด</span>
+                                    style="font-size: 15px; color:white;">ผู้เช่าทั้งหมดในระบบ</span>
                             </div>
                         </div>
                         <div class="card-body">
@@ -189,11 +189,11 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                                             </a>
 
                                                                             <button
-                                                                                onclick="delfunction('สัญญาห้อง<?php echo $TableAgreement[$i + 1]['rnumber'] ?>','<?php echo $TableAgreement[$i + 1]['uid'] ?>')"
+                                                                                onclick="delfunction('ผู้เช่าห้อง<?php echo $TableAgreement[$i + 1]['rnumber'] ?>','<?php echo $TableAgreement[$i + 1]['uid'] ?>')"
                                                                                 type='button' id='btn_delete'
                                                                                 class="btn btn-danger btn-sm"
                                                                                 data-toggle="tooltip" title=""
-                                                                                data-original-title="ลบสัญญา"><i
+                                                                                data-original-title="ลบผู้เช่า"><i
                                                                                     class="far fa-trash-alt"></i></button>
                                                                         </td>
                                                                     </tr>
@@ -225,7 +225,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         <form class="modal-dialog modal-lg " method="POST" action='manage.php'>
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#3E49BB">
-                    <h4 class="modal-title" style="color:white">เพิ่มสัญญาการเช่า</h4>
+                    <h4 class="modal-title" style="color:white">เพิ่มผู้เช่า</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4">
@@ -360,7 +360,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         <form class="modal-dialog modal-lg " method="POST" action='manage.php'>
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#eecc0b">
-                    <h4 class="modal-title" style="color:white">แก้ไขสัญญาสัญญาการเช่า </h4>
+                    <h4 class="modal-title" style="color:white">แก้ไขข้อมูลผู้เช่า </h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4">
@@ -413,7 +413,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
             <div class="modal-content">
                 <div class="modal-header" style="background-color:#00ace6">
 
-                    <h4 class="modal-title" style="color:white">รายละเอียดสัญญาการเช่า</h4>
+                    <h4 class="modal-title" style="color:white">รายละเอียดของผู้เช่า</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4">
