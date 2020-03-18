@@ -350,10 +350,8 @@ $DATAUSER2 = selectDataOne($sql);
                 success: function(result) {
                     console.log("5555");
                     console.table(result);
-
                 }
             });
-
         });
 
         function changepassword(iduser, pass1, pass2, pass3) {
