@@ -299,7 +299,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <div id="modalDetailRoom" class="modal fade">
         <form class="modal-dialog modal-lg" method="POST" action='manage.php'>
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#eecc0b">
+                <div class="modal-header" style="background-color:#00ace6">
                     <h4 class="modal-title" style="color:white">รายละเอียดห้อง</h4>
                 </div>
 
@@ -316,7 +316,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">ตกลง</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
 
                 </div>
             </div>

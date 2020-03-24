@@ -186,7 +186,7 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
 
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
             </div>
         </div>
 </div>
