@@ -262,7 +262,6 @@ $accountname = $result[11]['config_value'];
                                         <div class="col-xl-9 col-12">
                                             <select class="form-control" id="bank" name=bank>
 
-
                                                 <option value="กรุงเทพ" <?php if ($bank == "กรุงเทพ") {
                                                                             echo "selected";
                                                                         } ?>>กรุงเทพ</option>
