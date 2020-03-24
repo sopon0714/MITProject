@@ -16,7 +16,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     $sql_tableRequest = "SELECT DATE_FORMAT(request.date,'%T ')As TimeRequest,DATE_FORMAT(request.date, '%d/%m/%Y')As DateRequest,room.rnumber As room,request.detail As detail,request.requestId  FROM `request` 
     INNER JOIN user ON request.uid = user.uid
 INNER JOIN agreement ON agreement.uid = user.uid 
-INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
+INNER JOIN room ON room.rid = agreement.rid  WHERE 1 ORDER BY request.date DESC";
     $sql_NumRequest = "SELECT COUNT(request.requestId) AS numRequest FROM request";
     $NumRequest = selectData($sql_NumRequest);
     $TableRequest = selectData($sql_tableRequest);
@@ -186,7 +186,7 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
 
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
             </div>
         </div>
 </div>
