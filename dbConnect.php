@@ -4,7 +4,7 @@
 function connectDB()
 {
 
-	$servername = "localhost";
+	$servername = "127.0.0.1";
 	$username = "root";
 	$password = ""; //"cabku";
 	$db_name = "dormitory"; //"palm3";
