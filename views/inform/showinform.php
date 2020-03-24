@@ -13,7 +13,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <?php require_once('../../views/layout/MainCSS.php');
     include("../../dbConnect.php");
 
-    $sql_tableRequest = "SELECT DATE_FORMAT(request.date,'%T ')As TimeRequest,DATE_FORMAT(request.date, '%d/%m/%Y')As DateRequest,room.rnumber As room,request.detail As detail,request.requestId  FROM `request` INNER JOIN user ON request.uid = user.uid
+    $sql_tableRequest = "SELECT DATE_FORMAT(request.date,'%T ')As TimeRequest,DATE_FORMAT(request.date, '%d/%m/%Y')As DateRequest,room.rnumber As room,request.detail As detail,request.requestId  FROM `request` 
+    INNER JOIN user ON request.uid = user.uid
 INNER JOIN agreement ON agreement.uid = user.uid 
 INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
     $sql_NumRequest = "SELECT COUNT(request.requestId) AS numRequest FROM request";
@@ -28,7 +29,13 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
 <body>
     <div id="wrapper">
         <!-- Sidebar -->
-        <?php require_once('../../views/layout/SidebarAdmin.php') ?>
+        <?php
+        if ($_SESSION['DATAUSER']['type'] == "ผู้ดูแลระบบ") {
+            require_once('../../views/layout/SidebarAdmin.php');
+        } else {
+            require_once('../../views/layout/SidebarUser.php');
+        }
+        ?>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -65,7 +72,8 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $NumRequest[1]['numRequest'] ?> คำร้อง</div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="material-icons icon-big">home</i>
+
+                                        <i class="fas fa-home"></i>
                                     </div>
                                 </div>
                             </div>
@@ -118,16 +126,17 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
                                                             <?php echo $TableRequest[$i + 1]['DateRequest'] ?></td>
                                                         <td>
                                                             <?php echo $TableRequest[$i + 1]['room'] ?></td>
-                                                        <td style="text-align:center;">
+                                                        <td>
                                                             <a href="#" class="detailRequest" detail="<?php echo $TableRequest[$i + 1]['detail'] ?>">
-                                                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" title='รายละเอียดปัญหา'>
+
+                                                                <button type="button" class="btn btn-info btn-sm tt" title='รายละเอียดปัญหา'>
                                                                     <i class="fas fa-file-alt"></i>
                                                                 </button>
                                                             </a>
                                                         </td>
                                                         <td style="text-align:center;">
 
-                                                            <button onclick="delfunction('คำร้อง','<?php echo $TableRequest[$i + 1]['requestId'] ?>')" type='button' id='btn_delete' class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบคำร้อง"><i class="far fa-trash-alt"></i></button>
+                                                            <button onclick="delfunction('คำร้อง','<?php echo $TableRequest[$i + 1]['requestId'] ?>')" type='button' class="btn btn-danger btn-sm tt" title='ลบคำร้อง'><i class="far fa-trash-alt"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
@@ -192,7 +201,9 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
 <script>
     $(document).ready(function() {
         console.log("ready!");
-        $('[data-toggle="tooltip"]').tooltip();
+        $('.tt').tooltip({
+            trigger: "hover"
+        });
     });
 
 
@@ -217,7 +228,7 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
             })
             .then((willDelete) => {
                 if (willDelete) {
-                    swal("Poof! Your imaginary file has been deleted!", {
+                    swal("ลบรายการสำเร็จเรียบร้อยแล้ว", {
                         icon: "success",
                         buttons: false
                     });
@@ -226,7 +237,7 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
                         location.reload();
                     }, 1500);
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
                 }
             });
     }

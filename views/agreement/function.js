@@ -9,41 +9,7 @@ $(document).ready(function () {
         $("#modalAddAgreement").modal();
     });
 });
-$(".detailAgreement").click(function () {
-    var rnumber = $(this).attr('rnumber');
-    var firstname = $(this).attr('firstname');
-    var lastname = $(this).attr('lastname');
-    var startDate = $(this).attr('startDate');
-    var endDate = $(this).attr('endDate');
-    var phoneNumber = $(this).attr('phoneNumber');
-    var email = $(this).attr('email');
 
-    $('#e_rnumber').val(rnumber);
-    $('#e_firstname').val(firstname);
-    $('#e_lastname').val(lastname);
-    $('#e_startDate').val(startDate);
-    $('#e_endDate').val(endDate);
-    $('#e_phoneNumber').val(phoneNumber);
-    $('#e_email').val(email);
-
-    $("#modalDetailAgreement").modal();
-});
-$(".EditAgreement").click(function () {
-    var idAgree = $(this).attr('idAgree');
-    var rnumber = $(this).attr('rnumber');
-    var startDate = $(this).attr('startDate');
-    var endDate = $(this).attr('endDate');
-    // alert(idAgree);
-    // alert(rnumber);
-    // alert(startDate);
-    // alert(endDate);
-    $('#e_idAgree').val(idAgree);
-    $('#e_rnumber').val(rnumber);
-    $('#e_startDate').val(startDate);
-    $('#e_endDate').val(endDate);
-
-    $("#modalEdit").modal();
-});
 function delfunction(title, uid) {
     //alert(uid + " dddd")
     swal({

@@ -39,7 +39,7 @@ if (is_null($DATAUSER)) {
     <!DOCTYPE html>
     <html>
         <head>
-            <meta charset=utf-8'/>
+            <meta charset='utf-8'/>
         </head>
         <body>
             <h1 style='background: #E91E63;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;' >

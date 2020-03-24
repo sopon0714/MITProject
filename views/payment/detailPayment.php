@@ -38,7 +38,13 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 <body>
     <div id="wrapper">
         <!-- Sidebar -->
-        <?php require_once('../../views/layout/SidebarAdmin.php') ?>
+        <?php
+        if ($_SESSION['DATAUSER']['type'] == "ผู้ดูแลระบบ") {
+            require_once('../../views/layout/SidebarAdmin.php');
+        } else {
+            require_once('../../views/layout/SidebarUser.php');
+        }
+        ?>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -58,10 +64,11 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                         <div class="col-12">
                                             <span class="link-active " style="font-size: 15px; color:white;">การจัดการการชำระค่าเช่ารายเดือน</span>
                                             <span style="float:right;">
-
-                                                <button type="button" id="btn_info" class="btn btn-warning btn-sm tt" title='ย้อนกลับ'>
-                                                    <i class="fas fa-undo-alt"></i>
-                                                </button>
+                                                <a href="./payment.php">
+                                                    <button type="button" id="btn_info" class="btn btn-warning btn-sm tt">
+                                                        ย้อนกลับ
+                                                    </button>
+                                                </a>
                                             </span>
                                             </span>
                                         </div>
@@ -133,10 +140,10 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                             <div class="table-responsive">
                                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                     <div class="row center">
-                                        <div class="col-sm-11">
+                                        <div class="col-sm-12">
                                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                 <thead>
-                                                    <tr role="row">
+                                                    <tr role="row" style="text-align:center;">
                                                         <th rowspan="1" colspan="1">ห้อง</th>
                                                         <th rowspan="1" colspan="1">ค่าน้ำ</th>
                                                         <th rowspan="1" colspan="1">ค่าไฟ</th>
@@ -148,7 +155,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody style="text-align:center;">
                                                     <?php
                                                     for ($i = 1; $i <= $DATADETAIL[0]['numrow']; $i++) {
                                                         echo "<tr>
@@ -160,7 +167,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                         <td>{$DATADETAIL[$i]['status']}</td>
                                                         <td style=\"text-align:center;\">";
                                                         if ($DATADETAIL[$i]['status'] != 'ยังไม่ได้จ่าย') {
-                                                            echo "<button type=\"button\" class=\"btn btn-info btn-sm\" data-toggle=\"tooltip\" title='รายละเอียด' onclick=\"detailSlip({$DATADETAIL[$i]['pId']},'{$arrMonth[$DATAINFO['month']]}','{$DATAINFO['year']}')\">
+                                                            echo "<button type=\"button\" class=\"btn btn-info btn-sm tt\" title='รายละเอียด' onclick=\"detailSlip({$DATADETAIL[$i]['pId']},'{$arrMonth[$DATAINFO['month']]}','{$DATAINFO['year']}')\">
                                                                 <i class=\"fas fa-file-alt\"></i>
                                                             </button>";
                                                         } else {
@@ -192,7 +199,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 <!-- Start Modal -->
 <!-- รายละเอียดสัญญา -->
 <div id="modalDetailSlip" class="modal fade">
-    <form class="modal-dialog modal-lg ">
+    <form class="modal-dialog modal-lg " method="post" id="submit" name="submit" action="./manage.php">
         <div class="modal-content" id="contentModal">
             <div class="modal-header" style="background-color:#00ace6">
                 <h4 class="modal-title" style="color:white">รายละเอียดการชำระค่าเช่า</h4>
@@ -283,6 +290,10 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
 <!-- End Modal -->
 <script>
     $(document).ready(function() {
+
+        $('.tt').tooltip({
+            trigger: "hover"
+        });
 
         $('[data-toggle="tooltip"]').tooltip();
         $("#addAgreement").click(function() {

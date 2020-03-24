@@ -37,7 +37,13 @@ $accountname = $result[11]['config_value'];
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!--start Sidebar -->
-        <?php include("../layout/SidebarAdmin.php"); ?>
+        <?php
+        if ($_SESSION['DATAUSER']['type'] == "ผู้ดูแลระบบ") {
+            require_once('../../views/layout/SidebarAdmin.php');
+        } else {
+            require_once('../../views/layout/SidebarUser.php');
+        }
+        ?>
         <!--end Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -57,14 +63,17 @@ $accountname = $result[11]['config_value'];
                             <div class="card ">
 
                                 <div class="card-header card-bg " style="background-color: #bf4040">
-                                    <span class="link-active " style="font-size: 15px; color:white;">ข้อมูลการจัดการหอพัก</span>
+                                    <span class="link-active " style="font-size: 15px; color:white;">ข้อมูลหอพัก</span>
+                                    <?php
+                                    if ($DATAUSER['type'] == "ผู้ดูแลระบบ") {
+                                        echo "  <span style=\"float:right;\">
+                                                        <button type=\button\" id=\"btn_edit\" class=\"btn btn-warning btn-sm tt \" title='แก้ไขข้อมูลหอพัก'>
+                                                            <i class=\"fas fa-edit\"></i>
+                                                        </button>
+                                                    </span>";
+                                    }
+                                    ?>
 
-                                    <span style="float:right;">
-
-                                        <button type="button" id="btn_edit" class="btn btn-warning btn-sm tt " title='แก้ไขข้อมูลหอพัก'>
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </span>
                                 </div>
 
 
@@ -74,7 +83,7 @@ $accountname = $result[11]['config_value'];
 
                                     </div>
                                     <div class="col-xl-5 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $dormitoryname ?>" maxlength="100" disabled>
+                                        <input type="text" class="form-control" id="dormitoryname" value="<?php echo $dormitoryname ?>" maxlength="100" disabled>
                                     </div>
                                 </div>
                                 <div class="row mb-4" style="margin:10px;">
@@ -92,7 +101,7 @@ $accountname = $result[11]['config_value'];
                                         <span>เบอร์โทร : </span>
                                     </div>
                                     <div class="col-xl-5 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $dormitorytel ?>" maxlength="100" disabled>
+                                        <input type="text" class="form-control" id="dormittel" value="<?php echo $dormitorytel ?>" maxlength="100" disabled>
                                     </div>
                                 </div>
                                 <div class="row mb-4" style="margin:20px;">
@@ -100,7 +109,7 @@ $accountname = $result[11]['config_value'];
                                         <span>Email : </span>
                                     </div>
                                     <div class="col-xl-5 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $email ?>" maxlength="100" disabled>
+                                        <input type="text" class="form-control" id="email" value="<?php echo $email ?>" maxlength="100" disabled>
                                     </div>
                                 </div>
                                 <div class="row mb-4" style="margin:20px;">
@@ -109,7 +118,7 @@ $accountname = $result[11]['config_value'];
 
                                     </div>
                                     <div class="col-xl-2 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $waterbill ?>" maxlength="100" disabled>
+                                        <input type="text" class="form-control" id="waterbill" value="<?php echo $waterbill ?>" maxlength="100" disabled>
                                     </div>
                                     บาท/ยูนิต
                                 </div>
@@ -120,7 +129,7 @@ $accountname = $result[11]['config_value'];
 
                                     </div>
                                     <div class="col-xl-2 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $electricitybill ?>" maxlength="100" disabled>
+                                        <input type="text" class="form-control" id="electricitybill" value="<?php echo $electricitybill ?>" maxlength="100" disabled>
                                     </div>
                                     บาท/ยูนิต
                                 </div>
@@ -129,7 +138,7 @@ $accountname = $result[11]['config_value'];
                                         <span>ค่าส่วนกลางและอื่นๆ: </span>
                                     </div>
                                     <div class="col-xl-2 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $commonfee ?>" maxlength="100" disabled>
+                                        <input type="text" class="form-control" id="commonfee" value="<?php echo $commonfee ?>" maxlength="100" disabled>
                                     </div>
                                     บาท / เดือน
                                 </div>
@@ -138,7 +147,7 @@ $accountname = $result[11]['config_value'];
                                         <span>ชื่อบัญชีธนาคาร: </span>
                                     </div>
                                     <div class="col-xl-2 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $accountname ?>" maxlength="100" disabled>
+                                        <input type="text" class="form-control" id="accountname" value="<?php echo $accountname ?>" maxlength="100" disabled>
                                     </div>
                                 </div>
 
@@ -147,7 +156,7 @@ $accountname = $result[11]['config_value'];
                                         <span>เลขบัญชีธนาคาร: </span>
                                     </div>
                                     <div class="col-xl-2 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $account ?>" maxlength="100" disabled>
+                                        <input type="text" class="form-control" id="account" value="<?php echo $account ?>" maxlength="100" disabled>
                                     </div>
                                 </div>
                                 <div class="row mb-4" style="margin:20px;">
@@ -155,7 +164,7 @@ $accountname = $result[11]['config_value'];
                                         <span>ธนาคาร: </span>
                                     </div>
                                     <div class="col-xl-2 col-12">
-                                        <input type="text" class="form-control" id="semester" value="<?php echo $bank ?>" maxlength="100" disabled>
+                                        <input type="text" class="form-control" id="bank" value="<?php echo $bank ?>" maxlength="100" disabled>
                                     </div>
                                 </div>
 
@@ -258,7 +267,6 @@ $accountname = $result[11]['config_value'];
                                         </div>
                                         <div class="col-xl-9 col-12">
                                             <select class="form-control" id="bank" name=bank>
-
 
                                                 <option value="กรุงเทพ" <?php if ($bank == "กรุงเทพ") {
                                                                             echo "selected";
