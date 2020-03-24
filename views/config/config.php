@@ -57,14 +57,17 @@ $accountname = $result[11]['config_value'];
                             <div class="card ">
 
                                 <div class="card-header card-bg " style="background-color: #bf4040">
-                                    <span class="link-active " style="font-size: 15px; color:white;">ข้อมูลการจัดการหอพัก</span>
+                                    <span class="link-active " style="font-size: 15px; color:white;">ข้อมูลหอพัก</span>
+                                    <?php
+                                    if ($DATAUSER['type'] == "ผู้ดูแลระบบ") {
+                                        echo "  <span style=\"float:right;\">
+                                                        <button type=\button\" id=\"btn_edit\" class=\"btn btn-warning btn-sm tt \" title='แก้ไขข้อมูลหอพัก'>
+                                                            <i class=\"fas fa-edit\"></i>
+                                                        </button>
+                                                    </span>";
+                                    }
+                                    ?>
 
-                                    <span style="float:right;">
-
-                                        <button type="button" id="btn_edit" class="btn btn-warning btn-sm tt " title='แก้ไขข้อมูลหอพัก'>
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                    </span>
                                 </div>
 
 
