@@ -18,7 +18,7 @@
         </a>
     </li>
     <li class='nav-item'>
-        <a class='nav-link collapsed' href="../../views/payment/payment.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+        <a class='nav-link collapsed' href="../../views/config/config.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
             <i class="fas fa-coins"></i>
             <span>ข้อมูลหอพัก</span>
         </a>
