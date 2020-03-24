@@ -157,8 +157,8 @@ if (!isset($_SESSION['DATAUSER'])) {
                                                         <td style="text-align:center;">
                                                             <a href="#" class="addPay"
                                                                 paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?>
-                                                                <?php echo $tbPayment[$i + 1]['pId'] ?>
-                                                                <?php echo $tbPayment[$i + 1]['pId'] ?>>
+                                                                year=<?php echo $tbPayment[$i + 1]['year'] ?>
+                                                                month=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
                                                                 <button type="button" class="btn btn-danger btn-sm"
                                                                     data-toggle="tooltip" title='รายละเอียด'>
                                                                     <i class="fas fa-file-alt"></i>
@@ -220,6 +220,24 @@ if (!isset($_SESSION['DATAUSER'])) {
                     <h4 class="modal-title" style="color:white">รายละเอียดของผู้เช่า</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
+                    <div class="row mb-4" style="margin:20px;">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>ปีพ.ศ. : </span>
+                        </div>
+                        <div class="col-xl-5 col-12">
+                            <input type="text" class="form-control" id="e_year" name="e_year" maxlength="100"
+                                disabled="">
+                        </div>
+                    </div>
+                    <div class="row mb-4" style="margin:20px;">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>เดือน : </span>
+                        </div>
+                        <div class="col-xl-5 col-12">
+                            <input type="text" class="form-control" id="e_month" name="e_month" maxlength="100"
+                                disabled="">
+                        </div>
+                    </div>
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
                             <span>เพิ่มรูปใบชำระเงิน :</span>
@@ -261,9 +279,13 @@ $(document).ready(function() {
 });
 $(".addPay").click(function() {
     var pId = $(this).attr('paymentID');
-    alert(pId);
+    var year = $(this).attr('year');
+    var month = $(this).attr('month');
+    alert(month);
 
     $('#e_pId').val(pId);
+    $('#e_year').val(year);
+    $('#e_month').val(month);
     $("#modalAddPayment").modal();
 });
 
