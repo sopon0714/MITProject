@@ -11,7 +11,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     include("../../dbConnect.php");
     $sql_tableRoom = "SELECT room.rid,room.status as status,rnumber,rent,IF(room.status LIKE 'ไม่ว่าง%',title,'-') as title,IF(room.status LIKE 'ไม่ว่าง%',firstname,NULL) AS firstname,
      IF(room.status LIKE 'ไม่ว่าง%',lastname,NULL) AS lastname ,detail ,user.uid
-     FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete LIKE 0";
+     FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete = 0 ";
     $sqlnumroom = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0";
     $sqlRoomEmpty = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0 AND status LIKE 'ว่าง' ";
 

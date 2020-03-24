@@ -5,7 +5,7 @@ if (!isset($_SESSION['DATAUSER'])) {
     header("location:../../index.php?msg=กระบวนการเข้าเว็บไซต์ไม่ถูกต้อง");
 }
 $sql = "SELECT * FROM user WHERE `user`.`uid` = {$_SESSION['DATAUSER']['uid']}";
-$DATAUSER = selectDataOne($sql);
+$DATAUSER2 = selectDataOne($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +97,7 @@ $DATAUSER = selectDataOne($sql);
                                             <span>อีเมล:</span>
                                         </div>
                                         <div class="col-xl-4 col-6 text-right">
-                                            <input type="text" class="form-control" id="email" value="<?= $DATAUSER['email'] ?>" disabled>
+                                            <input type="text" class="form-control" id="email" value="<?= $DATAUSER2['email'] ?>" disabled>
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -350,10 +350,8 @@ $DATAUSER = selectDataOne($sql);
                 success: function(result) {
                     console.log("5555");
                     console.table(result);
-
                 }
             });
-
         });
 
         function changepassword(iduser, pass1, pass2, pass3) {
