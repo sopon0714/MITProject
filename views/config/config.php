@@ -37,7 +37,13 @@ $accountname = $result[11]['config_value'];
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!--start Sidebar -->
-        <?php include("../layout/SidebarAdmin.php"); ?>
+        <?php
+        if ($_SESSION['DATAUSER']['type'] == "ผู้ดูแลระบบ") {
+            require_once('../../views/layout/SidebarAdmin.php');
+        } else {
+            require_once('../../views/layout/SidebarUser.php');
+        }
+        ?>
         <!--end Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
