@@ -7,7 +7,7 @@ if (!isset($_SESSION['DATAUSER']) || !isset($_GET['dateID'])) {
 $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 $dateID = $_GET['dateID'];
 $sqlDate = "SELECT * FROM `date` WHERE dateId= $dateID";
-$sqlDetail = "SELECT `payment`.`pId`,`room`.`rnumber`,`payment`.`waterb`*`payment`.`waterUnit` as costWater,
+$sqlDetail = "SELECT `payment`.`pId`,`room`.`rnumber`,`payment`.`waterUnit`,`payment`.`elecUnit`,`payment`.`waterb`*`payment`.`waterUnit` as costWater,
 `payment`.`elecb`*`payment`.`elecUnit` as costElect,`payment`.`commonf`,`payment`.`paymentAll`,`payment`.`status`
 FROM `payment` 
 INNER JOIN `date` ON `date`.`dateId` = `payment`.`dateId`
@@ -150,8 +150,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                         <th rowspan="1" colspan="1">ค่าเช่าห้อง+ค่าอื่นๆ</th>
                                                         <th rowspan="1" colspan="1">ยอดที่ต้องชำระ</th>
                                                         <th rowspan="1" colspan="1">สถานะ</th>
-                                                        <th rowspan="1" colspan="1">รายละเอียด</th>
-
+                                                        <th rowspan="1" colspan="1">การจัดการ</th>
 
                                                     </tr>
                                                 </thead>
@@ -171,12 +170,13 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                                                 <i class=\"fas fa-file-alt\"></i>
                                                             </button>";
                                                         } else {
-                                                            echo "-";
+                                                            echo "<button type=\"button\"  water=\"{$DATADETAIL[$i]['waterUnit']}\" elec=\"{$DATADETAIL[$i]['elecUnit']}\" pid=\"{$DATADETAIL[$i]['pId']}\"class=\"btn btn-warning btn-sm btnedit tt\" title='แก้ไขข้อมูลการชำระ'>
+                                                            <i class=\"fas fa-edit\"></i>
+                                                            </button>";
                                                         }
 
                                                         echo "</td>
-
-                                                    </tr>";
+                                                        </tr>";
                                                     }
                                                     ?>
                                                 </tbody>
@@ -275,7 +275,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                 <div class="row mb-4">
 
                     <div ALIGN="center">
-                        <img src="../../img/slip.jpg" style="width:50%">
+                        <img src="../../pic/1/3.jpg" style="width:50%">
                     </div>
                 </div>
 
@@ -286,6 +286,65 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
             </div>
         </div>
     </form>
+</div>
+<div>
+    <div class="modal fade" id="editPaymentModal" name="editPaymentModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document" style="width: 50%">
+            <div class="modal-content">
+                <form method="post" id="editPayment" name="editPayment" action="manage.php">
+                    <div class="Changeinfo">
+                        <div class="modal-header header-modal" style="background-color: #eecc0b;">
+                            <h4 class="modal-title" style="color: white">แก้ไขรายการค่าเช่า</h4>
+                        </div>
+                        <div class="modal-body" id="addModalBody">
+                            <div class="container">
+                                <div class="row mb-3">
+                                    <input type="hidden" class="form-control" id="idpayment" name="idpayment" value="">
+                                    <input type="hidden" class="form-control" id="action2" name="action" value="editpayment">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>เดือน:</span>
+                                    </div>
+                                    <div class="col-xl-5 col-6 text-right">
+                                        <input type="text" class="form-control" id="addmonth2" name="admonth" value="<?php echo $arrMonth[(int) (date("m", time()))] ?>" readonly>
+                                        <input type="hidden" class="form-control" id="addmonthID2" name="addmonthID" value="<?php echo (int) (date("m", time())) ?>" readonly>
+
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>ปีพุทธศักราช:</span>
+                                    </div>
+                                    <div class="col-xl-5 col-6 text-right">
+                                        <input type="text" class="form-control" id="addyear2" name="addyear" value="<?= (int) (date("Y", time()) + 543) ?>" readonly>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>น้ำที่ใช้(ยูนิต):</span>
+                                    </div>
+                                    <div class="col-xl-5 col-6 text-right">
+                                        <input type="number" class="form-control" id="editwater" name="inputwater" min="0" value="">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-xl-4 col-2 text-right textreq">
+                                        <span>ไฟฟ้าที่ใช้(ยูนิต):</span>
+                                    </div>
+                                    <div class="col-xl-5 col-6 text-right">
+                                        <input type="number" class="form-control" id="editelec" name="inputelec" min="0" value="">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" name="submitpayment" id="submiteditpayment" value="insert" class="btn btn-success save">ยืนยัน</button>
+                                <button type="button" class="btn btn-danger cancel" id="a_cancelInfo" data-dismiss="modal">ยกเลิก</button>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- End Modal -->
 <script>
@@ -298,6 +357,12 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
         $('[data-toggle="tooltip"]').tooltip();
         $("#addAgreement").click(function() {
             $("#modalAddAgreement").modal();
+        });
+        $(".btnedit").click(function() {
+            $('#idpayment').val($(this).attr('pid'));
+            $('#editwater').val($(this).attr('water'));
+            $('#editelec').val($(this).attr('elec'));
+            $("#editPaymentModal").modal();
         });
     });
 
