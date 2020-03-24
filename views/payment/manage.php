@@ -321,4 +321,155 @@ if ($action == "detailslip") {
         }
     }
     header("location:./payment.php");
+} else if ($action == "editpayment") {
+    $pid =  $_POST['idpayment'];
+    $elec =  $_POST['inputelec'];
+    $water =  $_POST['inputwater'];
+    $sql = "SELECT `payment`.*,`date`.`month`,`date`.`year` ,`room`.`rnumber`,`user`.`email`		
+    FROM `payment`INNER JOIN `date` ON `payment`.`dateId`=`date`.`dateId`
+    INNER JOIN `agreement` ON `agreement`.`agreeId`=`payment`.`agreeId`
+    INNER JOIN `user` ON `agreement`.`uid` = `user`.`uid`
+    INNER JOIN `room` ON `room`.`rid`=`agreement`.`rid`
+    WHERE `pId` =  $pid";
+    $DATA = selectDataOne($sql);
+    $addmonthID = $DATA['month'];
+    $addyear =  $DATA['year'];
+    $inputwater = $DATA['waterb'];
+    $inputelec = $DATA['elecb'];
+    $inputcomf =  $DATA['commonf'];
+    $allpay = ($inputwater * $water) + ($inputelec * $elec) + $inputcomf;
+    $sql = "SELECT * FROM `config` WHERE config_key = 'Account' OR config_key = 'Bank' ";
+    $DATA2 = selectData($sql);
+    $Account = "{$DATA2[1]['config_value']} ({$DATA2[2]['config_value']})";
+    $sql = "UPDATE `payment` SET `waterUnit` = '$water', `elecUnit` = '$elec', `paymentAll` = '$allpay' WHERE `payment`.`pId` = $pid";
+    updateData($sql);
+    $mail = new PHPMailer;
+    $mail->CharSet = "utf-8";
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+    $gmail_username = "sopon0369@gmail.com"; // gmail ที่ใช้ส่ง
+    $gmail_password = "toyai0369"; // รหัสผ่าน gmail
+    // ตั้งค่าอนุญาตการใช้งานได้ที่นี่ https://myaccount.google.com/lesssecureapps?pli=1
+    $sender = "YuDeeMeeSuk Dormitory"; // ชื่อผู้ส่ง
+    $email_sender = "sopon0369@gmail.com"; // เมล์ผู้ส่ง 
+    $email_receiver = $DATA['email']; // เมล์ผู้รับ ***
+    $subject = "แก้ไขใบแจ้งค่าเช่าห้อง {$DATA['rnumber']} เดือน {$arrMonth[$DATA['month']]} ปี {$DATA['year']} "; // หัวข้อเมล์ 
+    $mail->Username = $gmail_username;
+    $mail->Password = $gmail_password;
+    $mail->setFrom($email_sender, $sender);
+    $mail->addAddress($email_receiver);
+    $mail->Subject = $subject;
+    $email_content = "
+                        <!DOCTYPE html>
+                        <html>
+
+                        <head>
+                            <meta charset=\"utf-8\">
+                            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+                            <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css\">
+                            <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>
+                            <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js\"></script>
+                            <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js\"></script>
+                        </head>
+                        <center>
+
+                            <body>
+                                <h1 style='background: #eecc0b;padding: 10px 0 20px 10px;margin-bottom:10px;font-size:30px;color:white;'>
+                                แก้ไขใบแจ้งค่าเช่าห้อง
+                                </h1>
+                                <div style='padding:20px;'>
+                                    <div class=\"container-fluid\">
+                                        <div class=\"card shadow mb-4\">
+                                            <div class=\"card\">
+                                                <div class=\"card-header card-bg \" style=\"background-color: #eecc0b\">
+                                                    <span class=\"link-active \" style=\"font-size: 30px; color:white;\">ประจำเดือน {$arrMonth[$DATA['month']]} ปี {$DATA['year']} </span>
+                                                </div>
+                                            </div>
+                                            <div class=\"card-body\" style=\"font-size: 20px\">
+                                                <div class=\"row mb-3\">
+                                                    <div class=\"col-xl-4 col-2 text-right \">
+                                                        <span>ห้อง:</span>
+                                                    </div>
+                                                    <div class=\"col-xl-6 col-6 \">
+                                                        <span>{$DATA['rnumber']}</span>
+                                                    </div>
+                                                </div>
+                                                <div class=\"row mb-3\">
+                                                    <div class=\"col-xl-4 col-2 text-right \">
+                                                        <span>เดือนที่ชำระ:</span>
+                                                    </div>
+                                                    <div class=\"col-xl-6 col-6 \">
+                                                        <span>เดือน {$arrMonth[$DATA['month']]} ปี {$DATA['year']}</span>
+                                                    </div>
+                                                </div>
+                                                <div class=\"row mb-3\">
+                                                    <div class=\"col-xl-4 col-2 text-right \">
+                                                        <span>ค่าน้ำ:</span>
+                                                    </div>
+                                                    <div class=\"col-xl-6 col-6 \">
+                                                        <span>$inputwater (บาท) x $water (ยูนิต) = " . $inputwater * $water . " บาท</span>
+                                                    </div>
+                                                </div>
+                                                <div class=\"row mb-3\">
+                                                    <div class=\"col-xl-4 col-2 text-right \">
+                                                        <span>ค่าไฟ:</span>
+                                                    </div>
+                                                    <div class=\"col-xl-6 col-6 \">
+                                                        <span>$inputelec (บาท) x $elec (ยูนิต) = " . $inputelec * $elec . " บาท</span>
+                                                    </div>
+                                                </div>
+                                                <div class=\"row mb-3\">
+                                                    <div class=\"col-xl-4 col-2 text-right \">
+                                                        <span>ค่าห้องและค่าอื่นๆ:</span>
+                                                    </div>
+                                                    <div class=\"col-xl-6 col-6 \">
+                                                        <span>$inputcomf บาท</span>
+                                                    </div>
+                                                </div>
+                                                <div class=\"row mb-3\">
+                                                    <div class=\"col-xl-4 col-2 text-right \">
+                                                        <span>ยอดที่ต้องชำระ:</span>
+                                                    </div>
+                                                    <div class=\"col-xl-6 col-6 \">
+                                                        <span>$allpay บาท</span>
+                                                    </div>
+                                                </div>
+                                                <div class=\"row mb-3\">
+                                                    <div class=\"col-xl-4 col-2 text-right \">
+                                                        <span>บัญชีที่ชำระ:</span>
+                                                    </div>
+                                                    <div class=\"col-xl-6 col-6 \">
+                                                        <span> $Account </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </body>
+                        </center>
+
+
+                        </html>
+                    ";
+    if ($email_receiver) {
+        $mail->msgHTML($email_content);
+
+
+        if (!$mail->send()) {  // สั่งให้ส่ง email
+
+            // กรณีส่ง email ไม่สำเร็จ
+            //echo "<h3 class='text-center'>ระบบมีปัญหา กรุณาลองใหม่อีกครั้ง</h3>";
+            //echo $mail->ErrorInfo; // ข้อความ รายละเอียดการ error
+        } else {
+
+            // กรณีส่ง email สำเร็จ
+            //echo "ระบบได้ส่งข้อความไปเรียบร้อย";
+        }
+    }
+    header("location:javascript://history.go(-1)");
 }

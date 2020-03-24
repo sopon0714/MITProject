@@ -29,7 +29,13 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
 <body>
     <div id="wrapper">
         <!-- Sidebar -->
-        <?php require_once('../../views/layout/SidebarAdmin.php') ?>
+        <?php
+        if ($_SESSION['DATAUSER']['type'] == "ผู้ดูแลระบบ") {
+            require_once('../../views/layout/SidebarAdmin.php');
+        } else {
+            require_once('../../views/layout/SidebarUser.php');
+        }
+        ?>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
