@@ -19,13 +19,14 @@ if (!isset($_SESSION['DATAUSER'])) {
     $commonf = selectDataOne($sql_commonf);
     // queryการ์ดแสดงค่าห้องค้างชำระของuser
     $sql_payall = "SELECT SUM(paymentAll) AS payall FROM `payment` INNER JOIN agreement ON agreement.agreeId = payment.agreeId
-    INNER JOIN user ON user.uid = agreement.uid WHERE user.uid = $uid AND payment.status = 'ยังไม่ได้จ่าย'";
+    INNER JOIN user ON user.uid = agreement.uid WHERE user.uid = 2 AND payment.status = 'ยังไม่ได้จ่าย'
+    GROUP BY payment.pId";
     $payall = selectDataOne($sql_payall);
     // queryตารางการจ่ายของuser
     $sql_tbPayment = "SELECT  payment.pId,`timeSlip`,`timeConfirm`, `picPath`,date.year,date.month,payment.waterUnit,payment.elecUnit,payment.paymentAll,payment.uid FROM `payment` 
     INNER JOIN agreement ON agreement.agreeId = payment.agreeId
     INNER JOIN user ON user.uid = agreement.uid
-    INNER JOIN date on date.dateId = payment.dateId WHERE user.uid =2 ORDER BY `payment`.`dateId`  DESC";
+    INNER JOIN date on date.dateId = payment.dateId WHERE user.uid =$uid ORDER BY `payment`.`dateId`  DESC";
     $tbPayment = selectData($sql_tbPayment);
     //print_r($tbPayment);
     $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
@@ -167,9 +168,11 @@ if (!isset($_SESSION['DATAUSER'])) {
                                                         </td>
                                                         <?php } else if (!is_null($tbPayment[$i + 1]['timeSlip']) && is_null($tbPayment[$i + 1]['uid'])) { ?>
                                                         <td style="text-align:center;">
-                                                            <a href="#">
+                                                            <a href="#" class="addPay"
+                                                                paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?>
+                                                                year=<?php echo $tbPayment[$i + 1]['year'] ?>
+                                                                month=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
                                                                 <button type="button" class="btn btn-warning btn-sm"
-                                                                    onclick="detailSlip(<?php echo $tbPayment[$i + 1]['pId'] ?> , '<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>' ,'<?php echo $tbPayment[$i + 1]['year'] ?>')"
                                                                     data-toggle="tooltip" title='รายละเอียด'>
                                                                     <i class="fas fa-file-alt"></i>
                                                                 </button>
@@ -281,7 +284,7 @@ $(".addPay").click(function() {
     var pId = $(this).attr('paymentID');
     var year = $(this).attr('year');
     var month = $(this).attr('month');
-    alert(month);
+    //alert(month);
 
     $('#e_pId').val(pId);
     $('#e_year').val(year);
@@ -290,7 +293,7 @@ $(".addPay").click(function() {
 });
 
 function detailSlip(id, month, year) {
-    alert(id + " " + month + " " + year);
+    //alert(id + " " + month + " " + year);
     $.ajax({
         type: "POST",
 

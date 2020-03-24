@@ -19,46 +19,18 @@ if (isset($_POST['addPic']) && !empty($_FILES["file"]["name"])) {
     if (!file_exists("../../pic/$id")) {
         mkdir("../../pic/$id");
         move_uploaded_file($_FILES["file"]["tmp_name"], "../../pic/$id/" . $_FILES["file"]["name"]);
-        //file_put_contents("../../pic/$id/$fileName", "");
     } else {
         move_uploaded_file($_FILES["file"]["tmp_name"], "../../pic/$id/" . $_FILES["file"]["name"]);
-        //file_put_contents("../../pic/$id/$fileName", "");
     }
 
     $time = time();
     $sqlUploadPIC = "UPDATE payment SET `picPath`='pic/$id/$fileName' ,timeSlip ='$time' WHERE pId='$pId' ";
     echo $sqlUploadPIC;
     updateData($sqlUploadPIC);
-    //header("location:./paymentuser.php");
-}
-if (isset($_POST['editPic']) && !empty($_FILES["file"]["name"])) {
-    //$pic = $_POST['file'];
-    $upload_image = $_FILES['file']["name"];
-    $file = $_FILES['file'];
-    echo $_FILES['file']['size'];
-    $fileName = basename($upload_image);
-    $pId = $_POST['e_pId'];
-    $sql = "SELECT user.uid FROM `payment` 
-    INNER JOIN agreement ON agreement.agreeId = payment.agreeId
-    INNER JOIN user ON user.uid = agreement.uid
-    INNER JOIN date on date.dateId = payment.dateId WHERE payment.pId =$pId ORDER BY `payment`.`dateId`  DESC";
-    $data = selectDataOne($sql);
-    $id = $data['uid'];
 
-    if (!file_exists("../../pic/$id")) {
-        mkdir("../../pic/$id");
-        move_uploaded_file($_FILES["file"]["tmp_name"], "../../pic/$id/" . $_FILES["file"]["name"]);
-        //file_put_contents("../../pic/$id/$fileName", "");
-    } else {
-        move_uploaded_file($_FILES["file"]["tmp_name"], "../../pic/$id/" . $_FILES["file"]["name"]);
-        //file_put_contents("../../pic/$id/$fileName", "");
-    }
-
-    $time = time();
-    $sqlUploadPIC = "UPDATE payment SET `picPath`='pic/$id/$fileName' ,timeSlip ='$time' WHERE pId='$pId' ";
-    echo $sqlUploadPIC;
-    updateData($sqlUploadPIC);
-    //header("location:./paymentuser.php");
+    $sqlStatus = "UPDATE payment SET `status`='รอยืนยัน' WHERE pId='$pId' ";
+    updateData($sqlStatus);
+    header("location:./paymentuser.php");
 }
 if (isset($_POST['action'])) {
 
