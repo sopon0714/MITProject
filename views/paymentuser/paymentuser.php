@@ -160,8 +160,8 @@ if (!isset($_SESSION['DATAUSER'])) {
                                                                 paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?>
                                                                 year=<?php echo $tbPayment[$i + 1]['year'] ?>
                                                                 month=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
-                                                                <button type="button" class="btn btn-danger btn-sm"
-                                                                    data-toggle="tooltip" title='รายละเอียด'>
+                                                                <button type="button" class="btn btn-success btn-sm"
+                                                                    data-toggle="tooltip" title='เพิ่มรายละเอียด'>
                                                                     <i class="fas fa-file-alt"></i>
                                                                 </button>
                                                             </a>
@@ -173,7 +173,7 @@ if (!isset($_SESSION['DATAUSER'])) {
                                                                 year=<?php echo $tbPayment[$i + 1]['year'] ?>
                                                                 month=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
                                                                 <button type="button" class="btn btn-warning btn-sm"
-                                                                    data-toggle="tooltip" title='รายละเอียด'>
+                                                                    data-toggle="tooltip" title='แก้ไขรายละเอียด'>
                                                                     <i class="fas fa-file-alt"></i>
                                                                 </button>
                                                             </a>
@@ -269,7 +269,7 @@ if (!isset($_SESSION['DATAUSER'])) {
     <div id="modalEditPayment" class="modal fade">
         <form class="modal-dialog modal-lg " enctype="multipart/form-data" method="POST" action='manage.php'>
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#00ace6">
+                <div class="modal-header" style="background-color:#eecc0b">
 
                     <h4 class="modal-title" style="color:white">แก้ไขรายละเอียดของผู้เช่า</h4>
                 </div>
