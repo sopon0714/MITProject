@@ -325,25 +325,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 placeholder="กรุณากรอกusername">
                         </div>
                     </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>password :</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="password" class="form-control" id="password" name="password" value=""
-                                placeholder="กรุณากรอกpassword">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>ยืนยัน password :</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="password" class="form-control" id="password2" name="password2" value=""
-                                placeholder="กรุณากรอกยืนยัน password">
-                        </div>
-                    </div>
-
                     <input type="hidden" name="add">
 
                 </div>
