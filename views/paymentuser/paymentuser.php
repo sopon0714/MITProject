@@ -167,9 +167,11 @@ if (!isset($_SESSION['DATAUSER'])) {
                                                         </td>
                                                         <?php } else if (!is_null($tbPayment[$i + 1]['timeSlip']) && is_null($tbPayment[$i + 1]['uid'])) { ?>
                                                         <td style="text-align:center;">
-                                                            <a href="#">
-                                                                <button type="button" class="btn btn-warning btn-sm"
-                                                                    onclick="detailSlip(<?php echo $tbPayment[$i + 1]['pId'] ?> , '<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>' ,'<?php echo $tbPayment[$i + 1]['year'] ?>')"
+                                                            <a href="#" class="addPay"
+                                                                paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?>
+                                                                year=<?php echo $tbPayment[$i + 1]['year'] ?>
+                                                                month=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
+                                                                <button type="button" class="btn btn-danger btn-sm"
                                                                     data-toggle="tooltip" title='รายละเอียด'>
                                                                     <i class="fas fa-file-alt"></i>
                                                                 </button>
