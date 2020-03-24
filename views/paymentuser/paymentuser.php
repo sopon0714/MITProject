@@ -12,7 +12,23 @@ if (!isset($_SESSION['DATAUSER'])) {
 <head>
     <title>Profile</title>
     <?php require_once('../../views/layout/MainCSS.php');
-
+    $uid = $_SESSION['DATAUSER']['uid'];
+    // queryการ์ดแสดงค่าห้องของuser
+    $sql_commonf = "SELECT `commonf` FROM `payment` INNER JOIN agreement ON agreement.agreeId = payment.agreeId
+    INNER JOIN user ON user.uid = agreement.uid WHERE user.uid = $uid GROUP BY payment.commonf";
+    $commonf = selectDataOne($sql_commonf);
+    // queryการ์ดแสดงค่าห้องค้างชำระของuser
+    $sql_payall = "SELECT SUM(paymentAll) AS payall FROM `payment` INNER JOIN agreement ON agreement.agreeId = payment.agreeId
+    INNER JOIN user ON user.uid = agreement.uid WHERE user.uid = $uid AND payment.status = 'ยังไม่ได้จ่าย'";
+    $payall = selectDataOne($sql_payall);
+    // queryตารางการจ่ายของuser
+    $sql_tbPayment = "SELECT  payment.pId,`timeSlip`,`timeConfirm`, `picPath`,date.year,date.month,payment.waterUnit,payment.elecUnit,payment.paymentAll,payment.uid FROM `payment` 
+    INNER JOIN agreement ON agreement.agreeId = payment.agreeId
+    INNER JOIN user ON user.uid = agreement.uid
+    INNER JOIN date on date.dateId = payment.dateId WHERE user.uid =2 ORDER BY `payment`.`dateId`  DESC";
+    $tbPayment = selectData($sql_tbPayment);
+    //print_r($tbPayment);
+    $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
     ?>
 </head>
 
@@ -62,7 +78,8 @@ if (!isset($_SESSION['DATAUSER'])) {
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">
                                                 ราคาห้อง</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">4500
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo $commonf['commonf'] ?>
                                                 บาท</div>
                                         </div>
                                         <div class="col-auto">
@@ -79,7 +96,8 @@ if (!isset($_SESSION['DATAUSER'])) {
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">ยอดค้างชำระ</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">4800 บาท
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                <?php echo $payall['payall'] ?> บาท
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -88,25 +106,6 @@ if (!isset($_SESSION['DATAUSER'])) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-3 col-12 mb-4">
-
-                            <div class="card border-left-primary card-color-info shadow h-100 py-2" id="addPayment"
-                                style="cursor:pointer;">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="font-weight-bold  text-uppercase mb-1">เพิ่มการชำระ</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">+1 การชำระ</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="material-icons icon-big">add_circle</i>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                     <!-- ######################## start filter ######################## -->
@@ -147,20 +146,36 @@ if (!isset($_SESSION['DATAUSER'])) {
                                                 </thead>
 
                                                 <tbody style="text-align:center;">
-                                                    <td>2562</td>
-                                                    <td>มีนาคม</td>
-                                                    <td>125</td>
-                                                    <td>35</td>
-                                                    <td>4660</td>
-                                                    <td style="text-align:center;">
-                                                        <a
-                                                            href="../../views/payment/detailPayment.php?dateID={$INFOPAYMENT[$i]['dateId']}">
-                                                            <button type="button" class="btn btn-info btn-sm"
-                                                                data-toggle="tooltip" title='รายละเอียด'>
-                                                                <i class="fas fa-file-alt"></i>
-                                                            </button>
-                                                        </a>
-                                                    </td>
+                                                    <?php for ($i = 0; $i < $tbPayment[0]['numrow']; $i++) { ?>
+                                                    <tr>
+                                                        <td><?php echo $tbPayment[$i + 1]['year'] ?></td>
+                                                        <td><?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?></td>
+                                                        <td><?php echo $tbPayment[$i + 1]['elecUnit'] ?></td>
+                                                        <td><?php echo $tbPayment[$i + 1]['waterUnit'] ?></td>
+                                                        <td><?php echo $tbPayment[$i + 1]['paymentAll'] ?></td>
+                                                        <?php if (is_null($tbPayment[$i + 1]['timeSlip'])) { ?>
+                                                        <td style="text-align:center;">
+                                                            <a href="#" class="addPay"
+                                                                paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?>>
+                                                                <button type="button" class="btn btn-danger btn-sm"
+                                                                    data-toggle="tooltip" title='รายละเอียด'>
+                                                                    <i class="fas fa-file-alt"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                        <?php } else { ?>
+                                                        <td style="text-align:center;">
+                                                            <a href="#">
+                                                                <button type="button" class="btn btn-info btn-sm"
+                                                                    onclick="detailSlip(<?php echo $tbPayment[$i + 1]['pId'] ?> , '<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>' ,'<?php echo $tbPayment[$i + 1]['year'] ?>')"
+                                                                    data-toggle="tooltip" title='รายละเอียด'>
+                                                                    <i class="fas fa-file-alt"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                        <?php } ?>
+                                                    </tr>
+                                                    <?php } ?>
 
 
 
@@ -183,116 +198,45 @@ if (!isset($_SESSION['DATAUSER'])) {
 <?php require_once('../../views/layout/MainJS.php') ?>
 <!-- Start Modal -->
 <div>
-    <div class="modal fade" id="addPaymentModal" name="addPaymentModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document" style="width: 50%">
+    <div id="modalAddPayment" class="modal fade">
+        <form class="modal-dialog modal-lg " enctype="multipart/form-data" method="POST" action='manage.php'>
             <div class="modal-content">
-                <form method="post" id="addPayment" name="addPayment" action="manage.php">
-                    <div class="Changeinfo">
-                        <div class="modal-header header-modal" style="background-color: #3E49BB;">
-                            <h4 class="modal-title" style="color: white">เพิ่มรายการค่าเช่า</h4>
+                <div class="modal-header" style="background-color:#00ace6">
+
+                    <h4 class="modal-title" style="color:white">รายละเอียดของผู้เช่า</h4>
+                </div>
+                <div class="modal-body" id="addModalBody">
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-12 text-right">
+                            <span>เพิ่มรูปใบชำระเงิน :</span>
                         </div>
-                        <div class="modal-body" id="addModalBody">
-                            <div class="container">
-                                <div class="row mb-3">
-                                    <div class="col-xl-4 col-2 text-right textreq">
-                                        <span>เดือน:</span>
-                                    </div>
-                                    <div class="col-xl-5 col-6 text-right">
-                                        <input type="text" class="form-control" id="addmonth" name="admonth"
-                                            value="<?php echo $arrMonth[(int) (date("m", time()))] ?>" readonly>
-                                        <input type="hidden" class="form-control" id="addmonthID" name="addmonthID"
-                                            value="<?php echo (int) (date("m", time())) ?>" readonly>
-
+                        <div class="col-xl-8 col-12">
+                            <div class=" upload-content">
+                                <div class="main-section">
+                                    <div class="file-loading">
+                                        <input id="file" type="file" name="file" multiple="" class="file"
+                                            data-overwrite-initial="false" data-min-file-count="1">
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-xl-4 col-2 text-right textreq">
-                                        <span>ปีพุทธศักราช:</span>
-                                    </div>
-                                    <div class="col-xl-5 col-6 text-right">
-                                        <input type="text" class="form-control" id="addyear" name="addyear"
-                                            value="<?= (int) (date("Y", time()) + 543) ?>" readonly>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-xl-4 col-2 text-right textreq">
-                                        <span>ค่าน้ำ(บาท/ยูนิต):</span>
-                                    </div>
-                                    <div class="col-xl-5 col-6 text-right" id="inputwater">
-                                        <input type="text" class="form-control" id="inputwater" name="inputwater"
-                                            value="" readonly>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-xl-4 col-2 text-right textreq">
-                                        <span>ค่าไฟ(บาท/ยูนิต):</span>
-                                    </div>
-                                    <div class="col-xl-5 col-6 text-right" id="inputelec">
-                                        <input type="text" class="form-control" id="inputelec" name="inputelec" value=""
-                                            readonly>
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-xl-4 col-2 text-right textreq">
-                                        <span>ค่าส่วนกลางและอื่นๆ(บาท):</span>
-                                    </div>
-                                    <div class="col-xl-5 col-6 text-right" id="inputcomf">
-                                        <input type="text" class="form-control" id="inputcomf2" name="inputcomf"
-                                            value="" readonly>
-                                    </div>
-                                </div>
-                                <div id="iddate">
-                                    <input type="text" class="form-control" id="hiddeniddate" name="hiddeniddate"
-                                        value="" readonly>
-                                </div>
-                                <input type="hidden" class="form-control" name="action" value="addpayment">
-                                <div class="row mb-3">
-                                    <div class="col-sm-12">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th rowspan="1" colspan="1">ห้อง</th>
-                                                    <th rowspan="1" colspan="1">ผู้เช่า</th>
-                                                    <th rowspan="1" colspan="1">ค่าเช่าห้อง</th>
-                                                    <th rowspan="1" colspan="1">ยูนิตน้ำ(ยูนิต)</th>
-                                                    <th rowspan="1" colspan="1">ยูนิตไฟฟ้าที่ใช้(ยูนิต)</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                <?php
-                                                for ($i = 1; $i <= $INFOPAYROOM[0]['numrow']; $i++) {
-                                                    echo " <input type=\"hidden\" class=\"form-control\" id=\"rname_$i\" name=\"rname[]\" value=\"{$INFOPAYROOM[$i]['rnumber']}\" >";
-                                                    echo " <input type=\"hidden\" class=\"form-control\" id=\"pid_$i\" name=\"aid[]\" value=\"{$INFOPAYROOM[$i]['agreeId']}\" >";
-                                                    echo " <input type=\"hidden\" class=\"form-control\" id=\"email_$i\" name=\"email[]\" value=\"{$INFOPAYROOM[$i]['email']}\" >";
-                                                    echo "<tr>
-                                                        <td>{$INFOPAYROOM[$i]['rnumber']}</td>
-                                                        <td>{$INFOPAYROOM[$i]['title']} {$INFOPAYROOM[$i]['firstname']} {$INFOPAYROOM[$i]['lastname']}</td>
-                                                        <td>{$INFOPAYROOM[$i]['rent']}</td>
-                                                        <input type=\"hidden\"   min=\"0\" class=\"form-control\" id=\"rent_$i\"  name=\"rent[]\" value=\"{$INFOPAYROOM[$i]['rent']}\" >
-                                                        <td><input type=\"number\"   min=\"0\" class=\"form-control\" id=\"water_$i\"  name=\"water[]\" value=\"\" ></td>
-                                                        <td><input type=\"number\"   min=\"0\" class=\"form-control\" id=\"eclec$i\"   name=\"eclec[]\" value=\"\" ></td>
-                                                    </tr>";
-                                                }
-                                                ?>
-
-                                            </tbody>
-                                        </table>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" name="submitpayment" id="submitpayment" value="insert"
-                                    class="btn btn-success save">ยืนยัน</button>
-                                <button type="button" class="btn btn-danger cancel" id="a_cancelInfo"
-                                    data-dismiss="modal">ยกเลิก</button>
                             </div>
                         </div>
-                </form>
+                    </div>
+                    <input type="hidden" name="addPic">
+                    <input type="hidden" name="e_pId" id="e_pId">
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">บันทึก</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
+    </div>
+    <div id="modalDetailSlip" class="modal fade">
+        <form class="modal-dialog modal-lg " method="post" id="submit" name="submit" action="./manage.php">
+            <div class="modal-content" id="contentModal">
+
+            </div>
+        </form>
     </div>
 </div>
 <!-- End Modal -->
@@ -301,6 +245,37 @@ $(document).ready(function() {
     console.log("ready!");
     $('[data-toggle="tooltip"]').tooltip();
 });
+$(".addPay").click(function() {
+    var pId = $(this).attr('paymentID');
+    alert(pId);
+
+    $('#e_pId').val(pId);
+    $("#modalAddPayment").modal();
+});
+
+function detailSlip(id, month, year) {
+    alert(id + " " + month + " " + year);
+    $.ajax({
+        type: "POST",
+
+        data: {
+            action: "detailslip",
+            pId: id,
+            monthS: month,
+            yearS: year
+        },
+        url: "../../views/paymentuser/manage.php",
+        async: false,
+        success: function(result) {
+            $("#contentModal").empty();
+            $("#contentModal").append(result);
+            console.log(result);
+            $("#modalDetailSlip").modal('show');
+
+        }
+    });
+
+}
 $(document).ready(function() {
     console.log("ready!");
     $("#addPayment").click(function() {
