@@ -1,11 +1,11 @@
 // ***************************************agreement.php****************************************************
-$(document).ready(function () {
+$(document).ready(function() {
     console.log("ready!");
     $('[data-toggle="tooltip"]').tooltip();
 });
-$(document).ready(function () {
+$(document).ready(function() {
     console.log("ready!");
-    $("#addAgreement").click(function () {
+    $("#addAgreement").click(function() {
         $("#modalAddAgreement").modal();
     });
 });
@@ -13,12 +13,12 @@ $(document).ready(function () {
 function delfunction(title, uid) {
     //alert(uid + " dddd")
     swal({
-        title: "คุณต้องการลบ",
-        text: title + "หรือไม่ ?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    })
+            title: "คุณต้องการลบ",
+            text: title + "หรือไม่ ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
         .then((willDelete) => {
             if (willDelete) {
                 swal("Poof! Your imaginary file has been deleted!", {
@@ -26,14 +26,15 @@ function delfunction(title, uid) {
                     buttons: false
                 });
                 delete_1(uid);
-                setTimeout(function () {
+                setTimeout(function() {
                     location.reload();
                 }, 1500);
             } else {
-                swal(การลบไม่สำเร็จ กรุณาทำรายการใหม่!);
+                swal("การลบไม่สำเร็จกรุณาทำรายการใหม่!");
             }
         });
 }
+
 function delete_1(uid1) {
     $.ajax({
         type: "POST",
@@ -43,22 +44,21 @@ function delete_1(uid1) {
         },
         url: "./manage.php",
         async: false,
-        success: function (result) {
-        }
+        success: function(result) {}
     });
 }
 // ***************************************AdminRead.php****************************************************
-$(document).ready(function () {
+$(document).ready(function() {
     console.log("ready!");
     $('[data-toggle="tooltip"]').tooltip();
 });
-$(document).ready(function () {
+$(document).ready(function() {
     console.log("ready!");
-    $("#addAdmin").click(function () {
+    $("#addAdmin").click(function() {
         $("#modalAddAdmin").modal();
     });
 });
-$(".detailAdmin").click(function () {
+$(".detailAdmin").click(function() {
     var firstname = $(this).attr('firstname');
     var lastname = $(this).attr('lastname');
     var formalId = $(this).attr('formalId');
@@ -81,12 +81,12 @@ $(".detailAdmin").click(function () {
 function delfunctionAdmin(title, uid) {
     //alert(uid + " dddd")
     swal({
-        title: "คุณต้องการลบ",
-        text: title + "หรือไม่ ?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-    })
+            title: "คุณต้องการลบ",
+            text: title + "หรือไม่ ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
         .then((willDelete) => {
             if (willDelete) {
                 swal("Poof! Your imaginary file has been deleted!", {
@@ -94,7 +94,7 @@ function delfunctionAdmin(title, uid) {
                     buttons: false
                 });
                 delete_2(uid);
-                setTimeout(function () {
+                setTimeout(function() {
                     location.reload();
                 }, 1500);
             } else {
@@ -113,6 +113,6 @@ function delete_2(uid) {
         },
         url: "./manage.php",
         async: false,
-        success: function (result) { }
+        success: function(result) {}
     });
 }

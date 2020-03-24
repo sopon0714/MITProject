@@ -333,8 +333,9 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         <div class="col-xl-3 col-12 text-right">
                             <span>เลขห้อง :</span>
                         </div>
-                        <div class="col-lg-auto col-md-9 col-sm-6 col-xs-6">
-                            <select class="custom-select  mb-3" id="e_rnumber" name="e_rnumber">
+                        <div class=" col-md-5 col-sm-6 col-xs-6">
+                            <select class="form-control " id="e_rnumber" name="e_rnumber">
+                                <option id="sel" value="0" selected>ห้อง xxxx </option>
                                 <?php for ($i = 0; $i < $room[0]['numrow']; $i++) {
                                 ?>
                                     <option value="<?= $room[$i + 1]['rid'] ?>">ห้อง <?php echo $room[$i + 1]['rnumber'] ?>
@@ -360,7 +361,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                     </div>
                     <input type="hidden" id="e_idAgree" name="e_idAgree">
-                    <input type="hidden" id="e_idAgree" name="edit">
+                    <input type="hidden" id="e_idAgree2" name="edit">
                     <input type="hidden" id="e_rid" name="e_rid">
 
                 </div>
@@ -409,7 +410,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่เข้า: </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="e_startDate" name="e_startDate" value="2020-03-07" maxlength="100" disabled>
+                            <input type="date" class="form-control" id="e_startDate2" name="e_startDate" value="2020-03-07" maxlength="100" disabled>
                         </div>
                     </div>
                     <div class="row mb-4" style="margin:10px;">
@@ -417,7 +418,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่ออก: </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="e_endDate" name="e_endDate" value="2020-03-07" maxlength="100" disabled>
+                            <input type="date" class="form-control" id="e_endDate2" name="e_endDate" value="2020-03-07" maxlength="100" disabled>
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -468,8 +469,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         $('#e_rnumber2').val(rnumber);
         $('#e_firstname').val(firstname);
         $('#e_lastname').val(lastname);
-        $('#e_startDate').val(startDate);
-        $('#e_endDate').val(endDate);
+        $('#e_startDate2').val(startDate);
+        $('#e_endDate2').val(endDate);
         $('#e_phoneNumber').val(phoneNumber);
         $('#e_email').val(email);
 
@@ -485,14 +486,15 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         // alert(rnumber);
         // alert(startDate);
         // alert(endDate);
-
+        $('#sel').val(rid);
+        $('#sel').text("ห้อง " + rnumber);
         $('#e_idAgree').val(idAgree);
-        $('#e_rnumber').val(rnumber);
         $('#e_startDate').val(startDate);
         $('#e_endDate').val(endDate);
         $('#e_rid').val(rid);
-
+        //$('#sel01').html("<option value=\"" + rid + "\" selected>ห้อง " + rnumber + " </option>");
         $("#modalEdit").modal();
+
     });
 
     function delfunction(title, uid) {
