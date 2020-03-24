@@ -44,7 +44,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class="row">
                                         <div class="col-12">
-                                            <span class="link-active " style="font-size: 15px; color:white;">การจัดการห้อง</span>
+                                            <span class="link-active " style="font-size: 15px; color:white; align-items-center">การจัดการห้อง</span>
 
                                             </span>
                                         </div>
@@ -319,9 +319,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         </form>
     </div>
 </div>
-
-
-
 
 </div>
 <!-- End Modal -->

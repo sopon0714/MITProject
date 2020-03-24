@@ -65,7 +65,8 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1";
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $NumRequest[1]['numRequest'] ?> คำร้อง</div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="material-icons icon-big">home</i>
+
+                                        <i class="fas fa-home"></i>
                                     </div>
                                 </div>
                             </div>
