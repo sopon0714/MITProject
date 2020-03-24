@@ -43,101 +43,45 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                 <?php require_once('../../views/layout/Topbar.php') ?>
                 <!-- End of Topbar -->
 
-                <!-- ######################## start filter ######################## -->
 
-                <!-- ######################## end filter ######################## -->
-                <!-- DataTales Example -->
-                <!-- <div class="card shadow mb-4">
+                <div class="col-xl-12 col-12 mb-4">
                     <div class="card">
-                        <div class="card-header card-bg " style="background-color: #bf4040">
-                            <span class="link-active " style="font-size: 15px; color:white;">แสดงคำร้องทั้งหมด</span>
+                        <div class="card-header card-bg  header-text-color" style="background-color:#bf4040;">
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="link-active " style="font-size: 15px; color:white;">หน้าแจ้งคำร้อง</span>
 
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                <div class="row center">
-                                    <div class="col-sm-12">
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr role="row" style="text-align:center;">
-                                                    <th rowspan="1" colspan="1">เวลา</th>
-                                                    <th rowspan="1" colspan="1">วันที่</th>
-                                                    <th rowspan="1" colspan="1">หมายเลขห้อง</th>
-                                                    <th rowspan="1" colspan="1">รายละเอียดปัญหา</th>
-                                                    <th rowspan="1" colspan="1">จัดการ</th>
-
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-
-                                                <?php for ($i = 0; $i < $TableRequest[0]['numrow']; $i++) { ?>
-                                                    <tr role="row" class="odd" style="text-align:center;">
-                                                        <td class="sorting_1">
-                                                            <?php echo $TableRequest[$i + 1]['TimeRequest'] ?>น.</td>
-                                                        <td>
-                                                            <?php echo $TableRequest[$i + 1]['DateRequest'] ?></td>
-                                                        <td>
-                                                            <?php echo $TableRequest[$i + 1]['room'] ?></td>
-                                                        <td>
-                                                            <a href="#" class="detailRequest" detail="<?php echo $TableRequest[$i + 1]['detail'] ?>">
-
-                                                                <button type="button" class="btn btn-info btn-sm tt" title='รายละเอียดปัญหา'>
-                                                                    <i class="fas fa-file-alt"></i>
-                                                                </button>
-                                                            </a>
-                                                        </td>
-                                                        <td style="text-align:center;">
-
-                                                            <button onclick="delfunction('คำร้อง','<?php echo $TableRequest[$i + 1]['requestId'] ?>')" type='button' class="btn btn-danger btn-sm tt" title='ลบคำร้อง'><i class="far fa-trash-alt"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> -->
-                <!-- ส่วนของคำว่า "แจ้งข้อเสนอแนะ" -->
+                </div>
 
                 <div class="col-xl-12 col-12 mb-4">
                     <div class="card">
-                        <div class="card-header card-bg  header-text-color" style="background-color:#fff;">
-                            หน้าแจ้งข้อเสนอแนะเพิ่มเติม
+                        <div class="card-header card-bg " style="background-color: #bf4040">
+                            <span class="link-active " style="font-size: 15px; color:white;">แจ้งคำร้อง</span>
+
                         </div>
                     </div>
+                    <form class="card " method="POST" action="manageUser.php">
+                        <div class="card-header card-bg">
+
+                            <div class="form-group">
+                                <!-- <label for="exampleFormControlTextarea2">แจ้งข้อเสนอแนะเพิ่มเติม</label> -->
+                                <textarea name="suggestion" id="suggestion_1" cols="132" rows="10"></textarea>
+                                <br>
+                                <button type="submit" id="suggestion_2" style="float:right;" class="btn btn-success" data-toggle="modal" data-target="#modal-1">ส่งคำร้อง</button>
+                            </div>
+                        </div>
+
+
+                        <input type="hidden" id="uid" name="uid">
+
+                        <input type="hidden" name="add">
+                    </form>
                 </div>
-                <!-- จบ ส่วนของคำว่า "แจ้งข้อเสนอแนะ" -->
-
-                <!-- ส่วนของข้อเสนอแนะเพิ่มเติม -->
-                <!-- <div class="col-xl-12 col-12 mb-4"> -->
-
-                <form class="card " method="POST" action="manageUser.php">
-                    <div class="card-header card-bg">
-                        <div class="card-header py-1">
-                            <h6 class="h5 m-0 font-weight-bold text-primary">แจ้งข้อเสนอแนะเพิ่มเติม</h6>
-                        </div>
-                        <div class="form-group">
-                            <!-- <label for="exampleFormControlTextarea2">แจ้งข้อเสนอแนะเพิ่มเติม</label> -->
-                            <textarea name="suggestion" id="suggestion_1" cols="160" rows="10"></textarea>
-                            <br>
-                            <button type="submit" id="suggestion_2" style="float:right;" class="btn btn-success" data-toggle="modal" data-target="#modal-1">ส่งข้อเสนอแนะ</button>
-                        </div>
-                    </div>
-
-                    <input type="hidden" id="uid" name="uid">
-
-                    <input type="hidden" name="add">
-                </form>
-            </div>
-
-
-            <!-- จบ ส่วนของข้อเสนอแนะเพิ่มเติม-->
+            </div> <!-- จบ ส่วนของข้อเสนอแนะเพิ่มเติม-->
         </div>
     </div>
     </div>
