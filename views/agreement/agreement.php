@@ -515,10 +515,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         location.reload();
                     }, 1500);
                 } else {
-                    swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!", {
-                        icon: "success",
-                        buttons: false
-                    });
+                    swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
                 }
             });
     }

@@ -30,7 +30,7 @@ function delfunction(title, uid) {
                     location.reload();
                 }, 1500);
             } else {
-                swal(การลบไม่สำเร็จ กรุณาทำรายการใหม่!);
+                swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
             }
         });
 }
