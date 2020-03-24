@@ -11,7 +11,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     include("../../dbConnect.php");
     $sql_tableRoom = "SELECT room.rid,room.status as status,rnumber,rent,IF(room.status LIKE 'ไม่ว่าง%',title,'-') as title,IF(room.status LIKE 'ไม่ว่าง%',firstname,NULL) AS firstname,
      IF(room.status LIKE 'ไม่ว่าง%',lastname,NULL) AS lastname ,detail ,user.uid
-     FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete LIKE 0";
+     FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete = 0 ";
     $sqlnumroom = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0";
     $sqlRoomEmpty = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0 AND status LIKE 'ว่าง' ";
 
@@ -26,7 +26,13 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <body>
     <div id="wrapper">
         <!-- Sidebar -->
-        <?php require_once('../../views/layout/SidebarAdmin.php') ?>
+        <?php
+        if ($_SESSION['DATAUSER']['type'] == "ผู้ดูแลระบบ") {
+            require_once('../../views/layout/SidebarAdmin.php');
+        } else {
+            require_once('../../views/layout/SidebarUser.php');
+        }
+        ?>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -44,7 +50,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class="row">
                                         <div class="col-12">
-                                            <span class="link-active " style="font-size: 15px; color:white;">การจัดการห้อง</span>
+                                            <span class="link-active " style="font-size: 15px; color:white; align-items-center">การจัดการห้อง</span>
 
                                             </span>
                                         </div>
@@ -319,9 +325,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
         </form>
     </div>
 </div>
-
-
-
 
 </div>
 <!-- End Modal -->
