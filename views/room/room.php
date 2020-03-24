@@ -9,9 +9,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <title>Profile</title>
     <?php require_once('../../views/layout/MainCSS.php');
     include("../../dbConnect.php");
-    $sql_tableRoom = "SELECT room.rid,room.status as status,rnumber,rent,IF(room.status LIKE 'ไม่ว่าง%',title,'-') as title,IF(room.status LIKE 'ไม่ว่าง%',firstname,NULL) AS firstname,
-     IF(room.status LIKE 'ไม่ว่าง%',lastname,NULL) AS lastname ,detail ,user.uid
-     FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete = 0 ";
+    $sql_tableRoom = "(SELECT user.uid,T1.rid,T1.status,T1.rnumber,T1.rent,IF(T1.status LIKE 'ไม่ว่าง%',title,'-') as title, IF(T1.status LIKE 'ไม่ว่าง%',firstname,NULL) AS firstname, IF(T1.status LIKE 'ไม่ว่าง%',lastname,NULL) AS lastname,T1.detail FROM (SELECT MAX(user.uid)AS uid ,room.rid,room.status as status,rnumber,rent,detail,user.isDelete FROM room LEFT JOIN agreement ON room.rid = agreement.rid LEFT JOIN user ON user.uid = agreement.uid WHERE room.isDelete LIKE 0 GROUP BY rid ) AS T1 LEFT JOIN user ON T1.uid = user.uid)";
     $sqlnumroom = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0";
     $sqlRoomEmpty = "SELECT COUNT(rid) AS Numroom FROM room WHERE isDelete LIKE 0 AND status LIKE 'ว่าง' ";
 
@@ -301,8 +299,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
     <div id="modalDetailRoom" class="modal fade">
         <form class="modal-dialog modal-lg" method="POST" action='manage.php'>
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#eecc0b">
-                    <h4 class="modal-title" style="color:white">รายละเอียดห้องห้อง</h4>
+                <div class="modal-header" style="background-color:#00ace6">
+                    <h4 class="modal-title" style="color:white">รายละเอียดห้อง</h4>
                 </div>
 
                 <div class="modal-body" id="addModalBody">
@@ -318,7 +316,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">ตกลง</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">ปิด</button>
 
                 </div>
             </div>

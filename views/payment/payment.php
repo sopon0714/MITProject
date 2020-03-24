@@ -330,7 +330,7 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                     if (result.type == 0) {
                         swal({
                             title: "คุณไม่สามารถทำรายการได้",
-                            text: "คุณไม่สามารถทำได้เนื่องคุณได้ทำไปแล้ว",
+                            text: "คุณไม่สามารถทำได้เนื่องจากคุณได้ทำรายการของเดือนนี้ไปแล้ว",
                             icon: "error",
                             confirmButtonClass: "btn-danger",
                             dangerMode: true,

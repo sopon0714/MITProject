@@ -30,7 +30,7 @@ function delfunction(title, uid) {
                     location.reload();
                 }, 1500);
             } else {
-                swal("Your imaginary file is safe!");
+                swal(การลบไม่สำเร็จ กรุณาทำรายการใหม่!);
             }
         });
 }
@@ -79,7 +79,7 @@ $(".detailAdmin").click(function () {
 });
 
 function delfunctionAdmin(title, uid) {
-    alert(uid + " dddd")
+    //alert(uid + " dddd")
     swal({
         title: "คุณต้องการลบ",
         text: title + "หรือไม่ ?",
