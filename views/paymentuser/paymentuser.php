@@ -153,11 +153,23 @@ if (!isset($_SESSION['DATAUSER'])) {
                                                         <td><?php echo $tbPayment[$i + 1]['elecUnit'] ?></td>
                                                         <td><?php echo $tbPayment[$i + 1]['waterUnit'] ?></td>
                                                         <td><?php echo $tbPayment[$i + 1]['paymentAll'] ?></td>
-                                                        <?php if (is_null($tbPayment[$i + 1]['timeSlip'])) { ?>
+                                                        <?php if (is_null($tbPayment[$i + 1]['timeSlip']) && is_null($tbPayment[$i + 1]['uid'])) { ?>
                                                         <td style="text-align:center;">
                                                             <a href="#" class="addPay"
-                                                                paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?>>
+                                                                paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?>
+                                                                <?php echo $tbPayment[$i + 1]['pId'] ?>
+                                                                <?php echo $tbPayment[$i + 1]['pId'] ?>>
                                                                 <button type="button" class="btn btn-danger btn-sm"
+                                                                    data-toggle="tooltip" title='รายละเอียด'>
+                                                                    <i class="fas fa-file-alt"></i>
+                                                                </button>
+                                                            </a>
+                                                        </td>
+                                                        <?php } else if (!is_null($tbPayment[$i + 1]['timeSlip']) && is_null($tbPayment[$i + 1]['uid'])) { ?>
+                                                        <td style="text-align:center;">
+                                                            <a href="#">
+                                                                <button type="button" class="btn btn-warning btn-sm"
+                                                                    onclick="detailSlip(<?php echo $tbPayment[$i + 1]['pId'] ?> , '<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>' ,'<?php echo $tbPayment[$i + 1]['year'] ?>')"
                                                                     data-toggle="tooltip" title='รายละเอียด'>
                                                                     <i class="fas fa-file-alt"></i>
                                                                 </button>
@@ -167,7 +179,9 @@ if (!isset($_SESSION['DATAUSER'])) {
                                                         <td style="text-align:center;">
                                                             <a href="#">
                                                                 <button type="button" class="btn btn-info btn-sm"
-                                                                    onclick="detailSlip(<?php echo $tbPayment[$i + 1]['pId'] ?> , '<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>' ,'<?php echo $tbPayment[$i + 1]['year'] ?>')"
+                                                                    onclick="detailSlip(<?php echo $tbPayment[$i + 1]['pId'] ?> , 
+                                                                    '<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>' ,
+                                                                    '<?php echo $tbPayment[$i + 1]['year'] ?>')"
                                                                     data-toggle="tooltip" title='รายละเอียด'>
                                                                     <i class="fas fa-file-alt"></i>
                                                                 </button>

@@ -5,6 +5,8 @@ session_start();
 if (isset($_POST['addPic']) && !empty($_FILES["file"]["name"])) {
     //$pic = $_POST['file'];
     $upload_image = $_FILES['file']["name"];
+    $file = $_FILES['file'];
+    echo $_FILES['file']['size'];
     $fileName = basename($upload_image);
     $pId = $_POST['e_pId'];
     $sql = "SELECT user.uid FROM `payment` 
@@ -13,19 +15,21 @@ if (isset($_POST['addPic']) && !empty($_FILES["file"]["name"])) {
     INNER JOIN date on date.dateId = payment.dateId WHERE payment.pId =$pId ORDER BY `payment`.`dateId`  DESC";
     $data = selectDataOne($sql);
     $id = $data['uid'];
-    echo (" *****" + $pId + " " + $id);
+
     if (!file_exists("../../pic/$id")) {
         mkdir("../../pic/$id");
-        file_put_contents("../../pic/$id/$fileName", "");
+        move_uploaded_file($_FILES["file"]["tmp_name"], "../../pic/$id/" . $_FILES["file"]["name"]);
+        //file_put_contents("../../pic/$id/$fileName", "");
     } else {
-        file_put_contents("../../pic/$id/$fileName", "");
+        move_uploaded_file($_FILES["file"]["tmp_name"], "../../pic/$id/" . $_FILES["file"]["name"]);
+        //file_put_contents("../../pic/$id/$fileName", "");
     }
 
     $time = time();
     $sqlUploadPIC = "UPDATE payment SET `picPath`='pic/$id/$fileName' ,timeSlip ='$time' WHERE pId='$pId' ";
     echo $sqlUploadPIC;
     updateData($sqlUploadPIC);
-    header("location:./paymentuser.php");
+    //header("location:./paymentuser.php");
 }
 if (isset($_POST['action'])) {
 
