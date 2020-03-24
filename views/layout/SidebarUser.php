@@ -24,7 +24,7 @@
         </a>
     </li>
     <li class='nav-item'>
-        <a class='nav-link collapsed' href="../../views/payment/payment.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+        <a class='nav-link collapsed' href="../../views/paymentuser/paymentuser.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
             <i class="fas fa-coins"></i>
             <span>ประวัติการชำระค่าเช่ารายเดือน</span>
         </a>

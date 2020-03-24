@@ -14,10 +14,10 @@ if (isset($_POST['add'])) {
     $phoneNumber = $_POST['phoneNumber'];
     $email = $_POST['email'];
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    //$password = $_POST['password'];
 
     $sqluser = "INSERT INTO user ( uid, `username`, `password` , type , title , firstname , lastname ,formalId ,email , phoneNumber ,status , isDelete) 
-    VALUES ( NULL, '$username', '$password' ,'ผู้เช่า','$title','$firstname','$lastname','$formalId','$email','$phoneNumber','รอยืนยัน', 0 )";
+    VALUES ( NULL, '$username', '$username' ,'ผู้เช่า','$title','$firstname','$lastname','$formalId','$email','$phoneNumber','รอยืนยัน', 0 )";
     echo $sqluser;
     addinsertData($sqluser);
     // $rid = "SELECT rid FROM `room` WHERE room.rnumber = $rnumber";
@@ -76,6 +76,8 @@ if (isset($_POST['add'])) {
                 
                 <div>             
                     <h2>ยืนยันการสมัคร: <strong style='color:#0000ff;'></strong></h2>
+                    <h3>usernameของคุณคือ $username </h3>
+                    <h3>passwordของคุณคือ $username </h3>
                     <a href='http://127.0.0.1/MITProject/views/agreement/acceptEmail.php? &ID=$userID ' target='_blank'>
                             <h1><strong style='color:#3c83f9;'> >> กรุณาคลิ๊กที่นี่ เพื่อยืนยัน<< </strong> </h1>
                         </a>

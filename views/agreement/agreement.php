@@ -293,6 +293,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <input type="text" class="form-control" id="username" name="username" value="" placeholder="กรุณากรอกusername">
                         </div>
                     </div>
+<<<<<<< HEAD
+=======
                     <div class="row mb-4">
                         <div class="col-xl-3 col-12 text-right">
                             <span>password :</span>
@@ -310,6 +312,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                     </div>
 
+>>>>>>> 60baf0250a5096c89a288f6e8639745a8aec6d61
                     <input type="hidden" name="add">
 
                 </div>
