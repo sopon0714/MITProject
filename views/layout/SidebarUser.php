@@ -30,7 +30,7 @@
         </a>
     </li>
     <li class='nav-item'>
-        <a class='nav-link collapsed' href="../../views/inform/showinform.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
+        <a class='nav-link collapsed' href="../../views/inform/informUser.php" data-toggle='' data-target='' aria-expanded='true' aria-controls=''>
             <i class="fas fa-comment-dots"></i>
             <span>แจ้งคำร้อง</span>
         </a>

@@ -25,7 +25,13 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <body>
     <div id="wrapper">
         <!-- Sidebar -->
-        <?php require_once('../../views/layout/SidebarAdmin.php') ?>
+        <?php
+        if ($_SESSION['DATAUSER']['type'] == "ผู้ดูแลระบบ") {
+            require_once('../../views/layout/SidebarAdmin.php');
+        } else {
+            require_once('../../views/layout/SidebarUser.php');
+        }
+        ?>
         <!-- End of Sidebar -->
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -102,7 +108,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                 <div class="col-xl-12 col-12 mb-4">
                     <div class="card">
                         <div class="card-header card-bg  header-text-color" style="background-color:#fff;">
-                            หน้าแจ้งข้อเสนอแนะเพิ่มเติม 
+                            หน้าแจ้งข้อเสนอแนะเพิ่มเติม
                         </div>
                     </div>
                 </div>
@@ -123,9 +129,9 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <button type="submit" id="suggestion_2" style="float:right;" class="btn btn-success" data-toggle="modal" data-target="#modal-1">ส่งข้อเสนอแนะ</button>
                         </div>
                     </div>
-                     
-                    <input type="hidden" id="uid" name="uid"  >
-                
+
+                    <input type="hidden" id="uid" name="uid">
+
                     <input type="hidden" name="add">
                 </form>
             </div>
