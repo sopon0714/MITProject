@@ -107,8 +107,9 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1 ORDER BY request.date DESC"
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr role="row" style="text-align:center;">
-                                                    <th rowspan="1" colspan="1">เวลา</th>
                                                     <th rowspan="1" colspan="1">วันที่</th>
+                                                    <th rowspan="1" colspan="1">เวลา</th>
+
                                                     <th rowspan="1" colspan="1">หมายเลขห้อง</th>
                                                     <th rowspan="1" colspan="1">รายละเอียดปัญหา</th>
                                                     <th rowspan="1" colspan="1">จัดการ</th>
@@ -120,10 +121,11 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1 ORDER BY request.date DESC"
 
                                                 <?php for ($i = 0; $i < $TableRequest[0]['numrow']; $i++) { ?>
                                                     <tr role="row" class="odd" style="text-align:center;">
-                                                        <td class="sorting_1">
-                                                            <?php echo $TableRequest[$i + 1]['TimeRequest'] ?>น.</td>
                                                         <td>
                                                             <?php echo $TableRequest[$i + 1]['DateRequest'] ?></td>
+                                                        <td class="sorting_1">
+                                                            <?php echo $TableRequest[$i + 1]['TimeRequest'] ?>น.</td>
+
                                                         <td>
                                                             <?php echo $TableRequest[$i + 1]['room'] ?></td>
                                                         <td>
