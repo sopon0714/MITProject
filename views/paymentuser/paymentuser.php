@@ -20,7 +20,7 @@ if (!isset($_SESSION['DATAUSER'])) {
     // queryการ์ดแสดงค่าห้องค้างชำระของuser
     $sql_payall = "SELECT SUM(paymentAll) AS payall FROM `payment` INNER JOIN agreement ON agreement.agreeId = payment.agreeId
     INNER JOIN user ON user.uid = agreement.uid WHERE user.uid = $uid AND payment.status = 'ยังไม่ได้จ่าย'
-    GROUP BY payment.pId";
+    GROUP BY user.uid";
     $payall = selectDataOne($sql_payall);
     // queryตารางการจ่ายของuser
     $sql_tbPayment = "SELECT  payment.pId,`timeSlip`,`timeConfirm`, `picPath`,date.year,date.month,payment.waterUnit,payment.elecUnit,payment.paymentAll,payment.uid FROM `payment` 
@@ -100,7 +100,7 @@ if (!isset($_SESSION['DATAUSER'])) {
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
                                                 <?php if (is_null($payall)) { ?>
                                                 0 บาท
-                                                <?php } else {?>
+                                                <?php } else { ?>
                                                 <?php echo $payall['payall'] ?> บาท
                                                 <?php } ?>
                                             </div>
@@ -173,9 +173,9 @@ if (!isset($_SESSION['DATAUSER'])) {
                                                         <?php } else if (!is_null($tbPayment[$i + 1]['timeSlip']) && is_null($tbPayment[$i + 1]['uid'])) { ?>
                                                         <td style="text-align:center;">
                                                             <a href="#" class="editPay"
-                                                                paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?>
-                                                                year=<?php echo $tbPayment[$i + 1]['year'] ?>
-                                                                month=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
+                                                                paymentID2=<?php echo $tbPayment[$i + 1]['pId'] ?>
+                                                                year2=<?php echo $tbPayment[$i + 1]['year'] ?>
+                                                                month2=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
                                                                 <button type="button" class="btn btn-warning btn-sm"
                                                                     data-toggle="tooltip" title='แก้ไขรายละเอียด'>
                                                                     <i class="fas fa-file-alt"></i>
@@ -270,12 +270,13 @@ if (!isset($_SESSION['DATAUSER'])) {
             </div>
         </form>
     </div>
+
     <div id="modalEditPayment" class="modal fade">
         <form class="modal-dialog modal-lg " enctype="multipart/form-data" method="POST" action='manage.php'>
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#eecc0b">
+                <div class="modal-header" style="background-color:#00ace6">
 
-                    <h4 class="modal-title" style="color:white">แก้ไขรายละเอียดของผู้เช่า</h4>
+                    <h4 class="modal-title" style="color:white">เพิ่มรายละเอียดของผู้เช่า</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4" style="margin:20px;">
@@ -283,7 +284,7 @@ if (!isset($_SESSION['DATAUSER'])) {
                             <span>ปีพ.ศ. : </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="text" class="form-control" id="e_year" name="e_year" maxlength="100"
+                            <input type="text" class="form-control" id="e_year2" name="e_year2" maxlength="100"
                                 disabled="">
                         </div>
                     </div>
@@ -292,7 +293,7 @@ if (!isset($_SESSION['DATAUSER'])) {
                             <span>เดือน : </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="text" class="form-control" id="e_month" name="e_month" maxlength="100"
+                            <input type="text" class="form-control" id="e_month2" name="e_month2" maxlength="100"
                                 disabled="">
                         </div>
                     </div>
@@ -304,15 +305,15 @@ if (!isset($_SESSION['DATAUSER'])) {
                             <div class=" upload-content">
                                 <div class="main-section">
                                     <div class="file-loading">
-                                        <input id="file" type="file" name="file" multiple="" class="file"
+                                        <input id="file2" type="file" name="file2" multiple="" class="file"
                                             data-overwrite-initial="false" data-min-file-count="1">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="addPic">
-                    <input type="hidden" name="e_pId" id="e_pId">
+                    <input type="hidden" name="editPic">
+                    <input type="hidden" name="e_pId2" id="e_pId2">
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">บันทึก</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">ยกเลิก</button>
@@ -347,14 +348,14 @@ $(".addPay").click(function() {
     $("#modalAddPayment").modal();
 });
 $(".editPay").click(function() {
-    var pId = $(this).attr('paymentID');
-    var year = $(this).attr('year');
-    var month = $(this).attr('month');
-    //alert(month);
+    var pId2 = $(this).attr('paymentID2');
+    var year2 = $(this).attr('year2');
+    var month2 = $(this).attr('month2');
+    //alert(month2);
 
-    $('#e_pId').val(pId);
-    $('#e_year').val(year);
-    $('#e_month').val(month);
+    $('#e_pId2').val(pId2);
+    $('#e_year2').val(year2);
+    $('#e_month2').val(month2);
     $("#modalEditPayment").modal();
 });
 
