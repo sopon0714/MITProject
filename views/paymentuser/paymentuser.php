@@ -19,7 +19,7 @@ if (!isset($_SESSION['DATAUSER'])) {
     $commonf = selectDataOne($sql_commonf);
     // queryการ์ดแสดงค่าห้องค้างชำระของuser
     $sql_payall = "SELECT SUM(paymentAll) AS payall FROM `payment` INNER JOIN agreement ON agreement.agreeId = payment.agreeId
-    INNER JOIN user ON user.uid = agreement.uid WHERE user.uid = 2 AND payment.status = 'ยังไม่ได้จ่าย'
+    INNER JOIN user ON user.uid = agreement.uid WHERE user.uid = $uid AND payment.status = 'ยังไม่ได้จ่าย'
     GROUP BY payment.pId";
     $payall = selectDataOne($sql_payall);
     // queryตารางการจ่ายของuser
@@ -97,7 +97,11 @@ if (!isset($_SESSION['DATAUSER'])) {
                                         <div class="col mr-2">
                                             <div class="font-weight-bold  text-uppercase mb-1">ยอดค้างชำระ</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php echo $payall['payall'] ?> บาท
+                                                <?php if (is_null($payall)) { ?>
+                                                    0 บาท
+                                                <?php } else {
+                                                    echo ($payall['payall'] + " บาท");
+                                                } ?>
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -145,41 +149,32 @@ if (!isset($_SESSION['DATAUSER'])) {
 
                                                 <tbody style="text-align:center;">
                                                     <?php for ($i = 0; $i < $tbPayment[0]['numrow']; $i++) { ?>
-                                                    <tr>
-                                                        <td><?php echo $tbPayment[$i + 1]['year'] ?></td>
-                                                        <td><?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?></td>
-                                                        <td><?php echo $tbPayment[$i + 1]['elecUnit'] ?></td>
-                                                        <td><?php echo $tbPayment[$i + 1]['waterUnit'] ?></td>
-                                                        <td><?php echo $tbPayment[$i + 1]['paymentAll'] ?></td>
-                                                        <?php if (is_null($tbPayment[$i + 1]['timeSlip']) && is_null($tbPayment[$i + 1]['uid'])) { ?>
-                                                        <td style="text-align:center;">
-                                                            <a href="#" class="addPay"
-                                                                paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?>
-                                                                year=<?php echo $tbPayment[$i + 1]['year'] ?>
-                                                                month=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
-                                                                <button type="button" class="btn btn-success btn-sm"
-                                                                    data-toggle="tooltip" title='เพิ่มรายละเอียด'>
-                                                                    <i class="fas fa-file-alt"></i>
-                                                                </button>
-                                                            </a>
-                                                        </td>
-                                                        <?php } else if (!is_null($tbPayment[$i + 1]['timeSlip']) && is_null($tbPayment[$i + 1]['uid'])) { ?>
-                                                        <td style="text-align:center;">
-                                                            <a href="#" class="editPay"
-                                                                paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?>
-                                                                year=<?php echo $tbPayment[$i + 1]['year'] ?>
-                                                                month=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
-                                                                <button type="button" class="btn btn-warning btn-sm"
-                                                                    data-toggle="tooltip" title='แก้ไขรายละเอียด'>
-                                                                    <i class="fas fa-file-alt"></i>
-                                                                </button>
-                                                            </a>
-                                                        </td>
-                                                        <?php } else { ?>
-                                                        <td style="text-align:center;">
-                                                            <a href="#">
-                                                                <button type="button" class="btn btn-info btn-sm"
-                                                                    onclick="detailSlip(<?php echo $tbPayment[$i + 1]['pId'] ?> , 
+                                                        <tr>
+                                                            <td><?php echo $tbPayment[$i + 1]['year'] ?></td>
+                                                            <td><?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?></td>
+                                                            <td><?php echo $tbPayment[$i + 1]['elecUnit'] ?></td>
+                                                            <td><?php echo $tbPayment[$i + 1]['waterUnit'] ?></td>
+                                                            <td><?php echo $tbPayment[$i + 1]['paymentAll'] ?></td>
+                                                            <?php if (is_null($tbPayment[$i + 1]['timeSlip']) && is_null($tbPayment[$i + 1]['uid'])) { ?>
+                                                                <td style="text-align:center;">
+                                                                    <a href="#" class="addPay" paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?> year=<?php echo $tbPayment[$i + 1]['year'] ?> month=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
+                                                                        <button type="button" class="btn btn-success btn-sm" data-toggle="tooltip" title='เพิ่มรายละเอียด'>
+                                                                            <i class="fas fa-file-alt"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                </td>
+                                                            <?php } else if (!is_null($tbPayment[$i + 1]['timeSlip']) && is_null($tbPayment[$i + 1]['uid'])) { ?>
+                                                                <td style="text-align:center;">
+                                                                    <a href="#" class="editPay" paymentID=<?php echo $tbPayment[$i + 1]['pId'] ?> year=<?php echo $tbPayment[$i + 1]['year'] ?> month=<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>>
+                                                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="tooltip" title='แก้ไขรายละเอียด'>
+                                                                            <i class="fas fa-file-alt"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                </td>
+                                                            <?php } else { ?>
+                                                                <td style="text-align:center;">
+                                                                    <a href="#">
+                                                                        <button type="button" class="btn btn-info btn-sm" onclick="detailSlip(<?php echo $tbPayment[$i + 1]['pId'] ?> , 
                                                                     '<?php echo $arrMonth[$tbPayment[$i + 1]['month']] ?>' ,
                                                                     '<?php echo $tbPayment[$i + 1]['year'] ?>')" data-toggle="tooltip" title='รายละเอียด'>
                                                                             <i class="fas fa-file-alt"></i>
@@ -224,8 +219,7 @@ if (!isset($_SESSION['DATAUSER'])) {
                             <span>ปีพ.ศ. : </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="text" class="form-control" id="e_year" name="e_year" maxlength="100"
-                                disabled="">
+                            <input type="text" class="form-control" id="e_year" name="e_year" maxlength="100" disabled="">
                         </div>
                     </div>
                     <div class="row mb-4" style="margin:20px;">
@@ -233,8 +227,7 @@ if (!isset($_SESSION['DATAUSER'])) {
                             <span>เดือน : </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="text" class="form-control" id="e_month" name="e_month" maxlength="100"
-                                disabled="">
+                            <input type="text" class="form-control" id="e_month" name="e_month" maxlength="100" disabled="">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -245,8 +238,7 @@ if (!isset($_SESSION['DATAUSER'])) {
                             <div class=" upload-content">
                                 <div class="main-section">
                                     <div class="file-loading">
-                                        <input id="file" type="file" name="file" multiple="" class="file"
-                                            data-overwrite-initial="false" data-min-file-count="1">
+                                        <input id="file" type="file" name="file" multiple="" class="file" data-overwrite-initial="false" data-min-file-count="1">
                                     </div>
                                 </div>
                             </div>
@@ -320,57 +312,59 @@ if (!isset($_SESSION['DATAUSER'])) {
 </div>
 <!-- End Modal -->
 <script>
-$(document).ready(function() {
-    console.log("ready!");
-    $('[data-toggle="tooltip"]').tooltip();
-});
-$(".addPay").click(function() {
-    var pId = $(this).attr('paymentID');
-    var year = $(this).attr('year');
-    var month = $(this).attr('month');
-    //alert(month);
-
-    $('#e_pId').val(pId);
-    $('#e_year').val(year);
-    $('#e_month').val(month);
-    $("#modalAddPayment").modal();
-});
-$(".editPay").click(function() {
-    var pId = $(this).attr('paymentID');
-    var year = $(this).attr('year');
-    var month = $(this).attr('month');
-    //alert(month);
-
-    $('#e_pId').val(pId);
-    $('#e_year').val(year);
-    $('#e_month').val(month);
-    $("#modalEditPayment").modal();
-});
-
-function detailSlip(id, month, year) {
-    //alert(id + " " + month + " " + year);
-    $.ajax({
-        type: "POST",
-
-        data: {
-            action: "detailslip",
-            pId: id,
-            monthS: month,
-            yearS: year
-        },
-        url: "../../views/paymentuser/manage.php",
-        async: false,
-        success: function(result) {
-            $("#contentModal").empty();
-            $("#contentModal").append(result);
-            console.log(result);
-            $("#modalDetailSlip").modal('show');
+    $(document).ready(function() {
+        console.log("ready!");
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    $(".addPay").click(function() {
+        var pId = $(this).attr('paymentID');
+        var year = $(this).attr('year');
+        var month = $(this).attr('month');
+        //alert(month);
 
         $('#e_pId').val(pId);
         $('#e_year').val(year);
         $('#e_month').val(month);
         $("#modalAddPayment").modal();
     });
+    $(".editPay").click(function() {
+        var pId = $(this).attr('paymentID');
+        var year = $(this).attr('year');
+        var month = $(this).attr('month');
+        //alert(month);
+
+        $('#e_pId').val(pId);
+        $('#e_year').val(year);
+        $('#e_month').val(month);
+        $("#modalEditPayment").modal();
+    });
+
+    function detailSlip(id, month, year) {
+        //alert(id + " " + month + " " + year);
+        $.ajax({
+            type: "POST",
+
+            data: {
+                action: "detailslip",
+                pId: id,
+                monthS: month,
+                yearS: year
+            },
+            url: "../../views/paymentuser/manage.php",
+            async: false,
+            success: function(result) {
+                $("#contentModal").empty();
+                $("#contentModal").append(result);
+                console.log(result);
+                $("#modalDetailSlip").modal('show');
+
+                $('#e_pId').val(pId);
+                $('#e_year').val(year);
+                $('#e_month').val(month);
+                $("#modalAddPayment").modal();
+            }
+        });
+    }
 
     function detailSlip(id, month, year) {
         //alert(id + " " + month + " " + year);
