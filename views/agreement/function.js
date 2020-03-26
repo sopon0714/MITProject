@@ -65,7 +65,6 @@ $(".detailAdmin").click(function() {
     var phoneNumber = $(this).attr('phoneNumber');
     var email = $(this).attr('email');
     var username = $(this).attr('username');
-    var password = $(this).attr('password');
 
     $('#e_firstname').val(firstname);
     $('#e_lastname').val(lastname);
@@ -73,7 +72,6 @@ $(".detailAdmin").click(function() {
     $('#e_phoneNumber').val(phoneNumber);
     $('#e_email').val(email);
     $('#e_username').val(username);
-    $('#e_password').val(password);
 
     $("#modalDetailAdmin").modal();
 });

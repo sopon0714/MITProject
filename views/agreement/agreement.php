@@ -25,7 +25,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css.map">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css.map">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
@@ -58,7 +59,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <div class="card-header card-bg" style="background-color: #bf4040">
                                     <div class=" row">
                                         <div class="col-12">
-                                            <span class="link-active " style="font-size: 15px; color:white;">การจัดการผู้เช่า</span>
+                                            <span class="link-active "
+                                                style="font-size: 15px; color:white;">การจัดการผู้เช่า</span>
                                             </span>
                                         </div>
                                     </div>
@@ -84,7 +86,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             </div>
                         </div>
                         <div class="col-xl-3 col-12 mb-4">
-                            <div class="card border-left-primary card-color-add shadow h-100 py-2" id="addAgreement" style="cursor:pointer;">
+                            <div class="card border-left-primary card-color-add shadow h-100 py-2" id="addAgreement"
+                                style="cursor:pointer;">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -113,7 +116,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <div class="card shadow mb-4">
                         <div class="card">
                             <div class="card-header card-bg " style="background-color: #bf4040">
-                                <span class="link-active " style="font-size: 15px; color:white;">ผู้เช่าทั้งหมดในระบบ</span>
+                                <span class="link-active "
+                                    style="font-size: 15px; color:white;">ผู้เช่าทั้งหมดในระบบ</span>
                             </div>
                         </div>
                         <div class="card-body">
@@ -128,7 +132,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                     <div class="row center">
 
                                                         <div class="col-sm-12" id="Agreement_table">
-                                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                                            <table class="table table-bordered" id="dataTable"
+                                                                width="100%" cellspacing="0">
                                                                 <thead>
                                                                     <tr role="row" style="text-align:center;">
 
@@ -144,35 +149,58 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                                 </thead>
                                                                 <tbody>
                                                                     <?php for ($i = 0; $i < $TableAgreement[0]['numrow']; $i++) { ?>
-                                                                        <tr role="row" class="odd" style="text-align:center;">
-                                                                            <td class="sorting_1">
-                                                                                <?php echo $TableAgreement[$i + 1]['rnumber'] ?>
-                                                                            </td>
-                                                                            <td><?php echo $TableAgreement[$i + 1]['title'] ?>
-                                                                                <?php echo $TableAgreement[$i + 1]['firstname'] ?>
-                                                                                <?php echo $TableAgreement[$i + 1]['lastname'] ?>
-                                                                            </td>
-                                                                            <td><?php echo $TableAgreement[$i + 1]['startDate'] ?>
-                                                                            </td>
-                                                                            <td><?php echo $TableAgreement[$i + 1]['endDate'] ?>
-                                                                            </td>
-                                                                            <td style="text-align:center;">
-                                                                                <a href="#" class="detailAgreement" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" firstname="<?php echo $TableAgreement[$i + 1]['firstname']; ?>" lastname="<?php echo $TableAgreement[$i + 1]['lastname']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>" phoneNumber="<?php echo $TableAgreement[$i + 1]['phoneNumber']; ?>" email="<?php echo $TableAgreement[$i + 1]['email']; ?>">
-                                                                                    <button type="button" class="btn btn-info btn-sm tt" title='รายละเอียดสัญญา'>
-                                                                                        <i class="fas fa-file-alt"></i>
-                                                                                    </button>
-                                                                                </a>
-                                                                            </td>
-                                                                            <td style="text-align:center;">
-                                                                                <a href="#" class="EditAgreement" idAgree="<?php echo $TableAgreement[$i + 1]['agreeId']; ?>" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>" rid="<?php echo $TableAgreement[$i + 1]['rid']; ?>">
-                                                                                    <button type="button" class="btn btn-warning  btn-sm tt" title="แก้ไขข้อมูล">
-                                                                                        <i class="fas fa-edit"></i>
-                                                                                    </button>
-                                                                                </a>
+                                                                    <tr role="row" class="odd"
+                                                                        style="text-align:center;">
+                                                                        <td class="sorting_1">
+                                                                            <?php echo $TableAgreement[$i + 1]['rnumber'] ?>
+                                                                        </td>
+                                                                        <td><?php echo $TableAgreement[$i + 1]['title'] ?>
+                                                                            <?php echo $TableAgreement[$i + 1]['firstname'] ?>
+                                                                            <?php echo $TableAgreement[$i + 1]['lastname'] ?>
+                                                                        </td>
+                                                                        <td><?php echo $TableAgreement[$i + 1]['startDate'] ?>
+                                                                        </td>
+                                                                        <td><?php echo $TableAgreement[$i + 1]['endDate'] ?>
+                                                                        </td>
+                                                                        <td style="text-align:center;">
+                                                                            <a href="#" class="detailAgreement"
+                                                                                rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>"
+                                                                                firstname="<?php echo $TableAgreement[$i + 1]['firstname']; ?>"
+                                                                                lastname="<?php echo $TableAgreement[$i + 1]['lastname']; ?>"
+                                                                                startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>"
+                                                                                endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>"
+                                                                                phoneNumber="<?php echo $TableAgreement[$i + 1]['phoneNumber']; ?>"
+                                                                                email="<?php echo $TableAgreement[$i + 1]['email']; ?>">
+                                                                                <button type="button"
+                                                                                    class="btn btn-info btn-sm tt"
+                                                                                    title='รายละเอียดสัญญา'>
+                                                                                    <i class="fas fa-file-alt"></i>
+                                                                                </button>
+                                                                            </a>
+                                                                        </td>
+                                                                        <td style="text-align:center;">
+                                                                            <a href="#" class="EditAgreement"
+                                                                                idAgree="<?php echo $TableAgreement[$i + 1]['agreeId']; ?>"
+                                                                                rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>"
+                                                                                startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>"
+                                                                                endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>"
+                                                                                rid="<?php echo $TableAgreement[$i + 1]['rid']; ?>">
+                                                                                <button type="button"
+                                                                                    class="btn btn-warning  btn-sm tt"
+                                                                                    title="แก้ไขข้อมูล">
+                                                                                    <i class="fas fa-edit"></i>
+                                                                                </button>
+                                                                            </a>
 
-                                                                                <button onclick="delfunction('ผู้เช่าห้อง<?php echo $TableAgreement[$i + 1]['rnumber'] ?>','<?php echo $TableAgreement[$i + 1]['uid'] ?>')" type='button' id='btn_delete' class="btn btn-danger btn-sm" data-toggle="tooltip" title="" data-original-title="ลบผู้เช่า"><i class="far fa-trash-alt"></i></button>
-                                                                            </td>
-                                                                        </tr>
+                                                                            <button
+                                                                                onclick="delfunction('ผู้เช่าห้อง<?php echo $TableAgreement[$i + 1]['rnumber'] ?>','<?php echo $TableAgreement[$i + 1]['uid'] ?>')"
+                                                                                type='button' id='btn_delete'
+                                                                                class="btn btn-danger btn-sm"
+                                                                                data-toggle="tooltip" title=""
+                                                                                data-original-title="ลบผู้เช่า"><i
+                                                                                    class="far fa-trash-alt"></i></button>
+                                                                        </td>
+                                                                    </tr>
                                                                     <?php } ?>
                                                                 </tbody>
                                                             </table>
@@ -212,8 +240,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <select class="custom-select  mb-3" id="rnumber" name="rnumber">
                                 <?php for ($i = 0; $i < $room[0]['numrow']; $i++) {
                                 ?>
-                                    <option value="<?= $room[$i + 1]['rid'] ?>">ห้อง <?php echo $room[$i + 1]['rnumber'] ?>
-                                    </option>
+                                <option value="<?= $room[$i + 1]['rid'] ?>">ห้อง <?php echo $room[$i + 1]['rnumber'] ?>
+                                </option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -223,7 +251,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่เข้า : </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="startDate" name="startDate" value="" maxlength="100">
+                            <input type="date" class="form-control" id="startDate" name="startDate" value=""
+                                maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4" style="margin:10px;">
@@ -231,7 +260,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่ออก : </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="endDate" name="endDate" value="" maxlength="100">
+                            <input type="date" class="form-control" id="endDate" name="endDate" value=""
+                                maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -250,7 +280,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ชื่อผู้เข้าพักอาศัย :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="firstname" name="firstname" value="" placeholder="กรุณากรอกชื่อ" maxlength="100">
+                            <input type="text" class="form-control" id="firstname" name="firstname" value=""
+                                placeholder="กรุณากรอกชื่อ" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -258,7 +289,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>นามสกุล:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="lastname" name="lastname" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100">
+                            <input type="text" class="form-control" id="lastname" name="lastname" value=""
+                                placeholder="กรุณากรอกนามสกุล" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -266,7 +298,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>รหัสประจำตัวประชาชน:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="formalId" name="formalId" value="" placeholder="กรุณากรอกรหัสประจำตัวประชาชนร">
+                            <input type="text" class="form-control" id="formalId" name="formalId" value=""
+                                placeholder="กรุณากรอกรหัสประจำตัวประชาชนร">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -274,7 +307,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>เบอร์โทรติดต่อ:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="" placeholder="กรุณากรอกเบอร์โทร">
+                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value=""
+                                placeholder="กรุณากรอกเบอร์โทร">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -282,7 +316,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>อีเมล์ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="email" name="email" value="" placeholder="กรุณากรอกอีเมล์">
+                            <input type="text" class="form-control" id="email" name="email" value=""
+                                placeholder="กรุณากรอกอีเมล์">
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -290,23 +325,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>username :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="username" name="username" value="" placeholder="กรุณากรอกusername">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>password :</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="password" class="form-control" id="password" name="password" value="" placeholder="กรุณากรอกpassword">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>ยืนยัน password :</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="password" class="form-control" id="password2" name="password2" value="" placeholder="กรุณากรอกยืนยัน password">
+                            <input type="text" class="form-control" id="username" name="username" value=""
+                                placeholder="กรุณากรอกusername">
                         </div>
                     </div>
 
@@ -338,8 +358,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                 <option id="sel" value="0" selected>ห้อง xxxx </option>
                                 <?php for ($i = 0; $i < $room[0]['numrow']; $i++) {
                                 ?>
-                                    <option value="<?= $room[$i + 1]['rid'] ?>">ห้อง <?php echo $room[$i + 1]['rnumber'] ?>
-                                    </option>
+                                <option value="<?= $room[$i + 1]['rid'] ?>">ห้อง <?php echo $room[$i + 1]['rnumber'] ?>
+                                </option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -349,7 +369,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่เข้า: </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="e_startDate" name="e_startDate" value="2020-03-07" maxlength="100">
+                            <input type="date" class="form-control" id="e_startDate" name="e_startDate"
+                                value="2020-03-07" maxlength="100">
                         </div>
                     </div>
                     <div class="row mb-4" style="margin:10px;">
@@ -357,7 +378,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่ออก: </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="e_endDate" name="e_endDate" value="2020-03-07" maxlength="100">
+                            <input type="date" class="form-control" id="e_endDate" name="e_endDate" value="2020-03-07"
+                                maxlength="100">
                         </div>
                     </div>
                     <input type="hidden" id="e_idAgree" name="e_idAgree">
@@ -386,7 +408,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>เลขห้อง :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_rnumber2" name="e_rnumber2" value="" maxlength="100" disabled>
+                            <input type="text" class="form-control" id="e_rnumber2" name="e_rnumber2" value=""
+                                maxlength="100" disabled>
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -394,7 +417,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>ชื่อผู้เข้าพักอาศัย :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_firstname" name="e_firstname" value="" maxlength="100" disabled>
+                            <input type="text" class="form-control" id="e_firstname" name="e_firstname" value=""
+                                maxlength="100" disabled>
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -402,7 +426,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>นามสกุล:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_lastname" name="e_lastname" value="" placeholder="กรุณากรอกนามสกุล" maxlength="100" disabled>
+                            <input type="text" class="form-control" id="e_lastname" name="e_lastname" value=""
+                                placeholder="กรุณากรอกนามสกุล" maxlength="100" disabled>
                         </div>
                     </div>
                     <div class="row mb-4" style="margin:10px;">
@@ -410,7 +435,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่เข้า: </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="e_startDate2" name="e_startDate" value="2020-03-07" maxlength="100" disabled>
+                            <input type="date" class="form-control" id="e_startDate2" name="e_startDate"
+                                value="2020-03-07" maxlength="100" disabled>
                         </div>
                     </div>
                     <div class="row mb-4" style="margin:10px;">
@@ -418,7 +444,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>วันที่ออก: </span>
                         </div>
                         <div class="col-xl-5 col-12">
-                            <input type="date" class="form-control" id="e_endDate2" name="e_endDate" value="2020-03-07" maxlength="100" disabled>
+                            <input type="date" class="form-control" id="e_endDate2" name="e_endDate" value="2020-03-07"
+                                maxlength="100" disabled>
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -426,7 +453,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>เบอร์โทรติดต่อ:</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_phoneNumber" name="e_phoneNumber" value="" placeholder="กรุณากรอกเบอร์โทร" disabled>
+                            <input type="text" class="form-control" id="e_phoneNumber" name="e_phoneNumber" value=""
+                                placeholder="กรุณากรอกเบอร์โทร" disabled>
                         </div>
                     </div>
                     <div class="row mb-4">
@@ -434,7 +462,8 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                             <span>อีเมล์ :</span>
                         </div>
                         <div class="col-xl-8 col-12">
-                            <input type="text" class="form-control" id="e_email" name="e_email" value="" placeholder="กรุณากรอกอีเมล์" disabled>
+                            <input type="text" class="form-control" id="e_email" name="e_email" value=""
+                                placeholder="กรุณากรอกอีเมล์" disabled>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -448,90 +477,90 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
 <!-- End Modal -->
 <script src="function.js"></script>
 <script>
-    $(document).ready(function() {
-        console.log("ready!");
-        $('[data-toggle="tooltip"]').tooltip();
+$(document).ready(function() {
+    console.log("ready!");
+    $('[data-toggle="tooltip"]').tooltip();
 
-        $('.tt').tooltip({
-            trigger: "hover"
+    $('.tt').tooltip({
+        trigger: "hover"
+    });
+});
+$(".detailAgreement").click(function() {
+    var rnumber = $(this).attr('rnumber');
+    var firstname = $(this).attr('firstname');
+    var lastname = $(this).attr('lastname');
+    var startDate = $(this).attr('startDate');
+    var endDate = $(this).attr('endDate');
+    var phoneNumber = $(this).attr('phoneNumber');
+    var email = $(this).attr('email');
+
+    //alert(rnumber);
+    $('#e_rnumber2').val(rnumber);
+    $('#e_firstname').val(firstname);
+    $('#e_lastname').val(lastname);
+    $('#e_startDate2').val(startDate);
+    $('#e_endDate2').val(endDate);
+    $('#e_phoneNumber').val(phoneNumber);
+    $('#e_email').val(email);
+
+    $("#modalDetailAgreement").modal();
+});
+$(".EditAgreement").click(function() {
+    var idAgree = $(this).attr('idAgree');
+    var rnumber = $(this).attr('rnumber');
+    var startDate = $(this).attr('startDate');
+    var endDate = $(this).attr('endDate');
+    var rid = $(this).attr('rid');
+    // alert(idAgree);
+    // alert(rnumber);
+    // alert(startDate);
+    // alert(endDate);
+    $('#sel').val(rid);
+    $('#sel').text("ห้อง " + rnumber);
+    $('#e_idAgree').val(idAgree);
+    $('#e_startDate').val(startDate);
+    $('#e_endDate').val(endDate);
+    $('#e_rid').val(rid);
+    //$('#sel01').html("<option value=\"" + rid + "\" selected>ห้อง " + rnumber + " </option>");
+    $("#modalEdit").modal();
+
+});
+
+function delfunction(title, uid) {
+    //alert(uid + " dddd")
+    swal({
+            title: "คุณต้องการลบ",
+            text: title + "หรือไม่ ?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                swal("ลบรายการสำเร็จเรียบร้อยแล้ว", {
+                    icon: "success",
+                    buttons: false
+                });
+                delete_1(uid);
+                setTimeout(function() {
+                    location.reload();
+                }, 1500);
+            } else {
+                swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
+            }
         });
+}
+
+function delete_1(uid1) {
+    $.ajax({
+        type: "POST",
+        data: {
+            uid: uid1,
+            delete: "delete"
+        },
+        url: "./manage.php",
+        async: false,
+        success: function(result) {}
     });
-    $(".detailAgreement").click(function() {
-        var rnumber = $(this).attr('rnumber');
-        var firstname = $(this).attr('firstname');
-        var lastname = $(this).attr('lastname');
-        var startDate = $(this).attr('startDate');
-        var endDate = $(this).attr('endDate');
-        var phoneNumber = $(this).attr('phoneNumber');
-        var email = $(this).attr('email');
-
-        //alert(rnumber);
-        $('#e_rnumber2').val(rnumber);
-        $('#e_firstname').val(firstname);
-        $('#e_lastname').val(lastname);
-        $('#e_startDate2').val(startDate);
-        $('#e_endDate2').val(endDate);
-        $('#e_phoneNumber').val(phoneNumber);
-        $('#e_email').val(email);
-
-        $("#modalDetailAgreement").modal();
-    });
-    $(".EditAgreement").click(function() {
-        var idAgree = $(this).attr('idAgree');
-        var rnumber = $(this).attr('rnumber');
-        var startDate = $(this).attr('startDate');
-        var endDate = $(this).attr('endDate');
-        var rid = $(this).attr('rid');
-        // alert(idAgree);
-        // alert(rnumber);
-        // alert(startDate);
-        // alert(endDate);
-        $('#sel').val(rid);
-        $('#sel').text("ห้อง " + rnumber);
-        $('#e_idAgree').val(idAgree);
-        $('#e_startDate').val(startDate);
-        $('#e_endDate').val(endDate);
-        $('#e_rid').val(rid);
-        //$('#sel01').html("<option value=\"" + rid + "\" selected>ห้อง " + rnumber + " </option>");
-        $("#modalEdit").modal();
-
-    });
-
-    function delfunction(title, uid) {
-        //alert(uid + " dddd")
-        swal({
-                title: "คุณต้องการลบ",
-                text: title + "หรือไม่ ?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    swal("ลบรายการสำเร็จเรียบร้อยแล้ว", {
-                        icon: "success",
-                        buttons: false
-                    });
-                    delete_1(uid);
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1500);
-                } else {
-                    swal("การลบไม่สำเร็จ กรุณาทำรายการใหม่!");
-                }
-            });
-    }
-
-    function delete_1(uid1) {
-        $.ajax({
-            type: "POST",
-            data: {
-                uid: uid1,
-                delete: "delete"
-            },
-            url: "./manage.php",
-            async: false,
-            success: function(result) {}
-        });
-    }
+}
 </script>
