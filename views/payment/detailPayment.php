@@ -88,7 +88,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $INFOPAYMENT['roomNotpay'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-file-invoice-dollar"></i>
+                                            <i class="fas fa-file-invoice-dollar fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@ $arrMonth = array("-", "มกราคม", "กุมภาพันธ์", "
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $INFOPAYMENT['roomCommit'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-vote-yea"></i>
+                                            <i class="fas fa-vote-yea fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>

@@ -471,5 +471,5 @@ if ($action == "detailslip") {
             //echo "ระบบได้ส่งข้อความไปเรียบร้อย";
         }
     }
-    header("location:javascript://history.go(-1)");
+    header("location:./detailPayment.php?dateID={$DATA['dateId']}");
 }
