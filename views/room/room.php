@@ -67,7 +67,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numroom[1]['Numroom'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">home</i>
+                                            <i class="fas fa-home fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $RoomEmpty[1]['Numroom'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">home</i>
+                                            <i class="fas fa-home fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -103,8 +103,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">+1 ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">add_circle</i>
-                                        </div>
+                                            <i class="fas fa-plus-circle fa-2x"></i> </div>
                                     </div>
                                 </div>
                             </div>

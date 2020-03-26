@@ -85,7 +85,7 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                         </div>
                                         <div class="col-auto">
 
-                                            <i class="fas fa-file-invoice-dollar"></i>
+                                            <i class="fas fa-file-invoice-dollar fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $numberWait ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-vote-yea"></i>
+                                            <i class="fas fa-vote-yea fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -116,55 +116,57 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">+1 การชำระ</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">add_circle</i>
+                                            <i class="fas fa-plus-circle fa-2x"></i>
                                         </div>
-
                                     </div>
+
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
-                    <!-- ######################## start filter ######################## -->
-                    <div class="row center">
-                        <div class="col-xl-12 col-12 mb-4 ">
-                            <!-- <div class="card-header header-background-color-filter" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style=" color:white;">
+                </div>
+                <!-- ######################## start filter ######################## -->
+                <div class="container">
+                <div class="row center">
+                    <div class="col-xl-12 col-12 mb-4 ">
+                        <!-- <div class="card-header header-background-color-filter" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style=" color:white;">
                                             การค้นหาขั้นสูง  สัญญาการเช่าทั้งหมด
                                         </div> -->
+                    </div>
+                </div>
+                <!-- ######################## end filter ######################## -->
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card">
+                        <div class="card-header card-bg " style="background-color: #bf4040">
+                            <span class="link-active " style="font-size: 15px; color:white;">สัญญาการเช่าทั้งหมด</span>
+
                         </div>
                     </div>
-                    <!-- ######################## end filter ######################## -->
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card">
-                            <div class="card-header card-bg " style="background-color: #bf4040">
-                                <span class="link-active " style="font-size: 15px; color:white;">สัญญาการเช่าทั้งหมด</span>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row center">
+                                    <div class="col-sm-12">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr role="row" style="text-align:center;">
+                                                    <th rowspan="1" colspan="1">ปีพ.ศ</th>
+                                                    <th rowspan="1" colspan="1">เดือน</th>
+                                                    <th rowspan="1" colspan="1">ห้องที่ต้องชำระ</th>
+                                                    <th rowspan="1" colspan="1">ห้องที่ยังไม่ชำระ</th>
+                                                    <th rowspan="1" colspan="1">ห้องที่รอยืนยัน</th>
+                                                    <th rowspan="1" colspan="1">ห้องที่ชำระเสร็จสมบูรณ์</th>
+                                                    <th rowspan="1" colspan="1">รายละเอียด</th>
 
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                    <div class="row center">
-                                        <div class="col-sm-12">
-                                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                                <thead>
-                                                    <tr role="row" style="text-align:center;">
-                                                        <th rowspan="1" colspan="1">ปีพ.ศ</th>
-                                                        <th rowspan="1" colspan="1">เดือน</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ต้องชำระ</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ยังไม่ชำระ</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่รอยืนยัน</th>
-                                                        <th rowspan="1" colspan="1">ห้องที่ชำระเสร็จสมบูรณ์</th>
-                                                        <th rowspan="1" colspan="1">รายละเอียด</th>
+                                                </tr>
+                                            </thead>
 
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody style="text-align:center;">
-                                                    <?php
-                                                    for ($i = 1; $i <= $INFOPAYMENT[0]['numrow']; $i++) {
-                                                        echo "<tr>
+                                            <tbody style="text-align:center;">
+                                                <?php
+                                                for ($i = 1; $i <= $INFOPAYMENT[0]['numrow']; $i++) {
+                                                    echo "<tr>
                                                         <td>{$INFOPAYMENT[$i]['year']}</td>
                                                         <td>{$arrMonth[$INFOPAYMENT[$i]['month']]}</td>
                                                         <td>{$INFOPAYMENT[$i]['roomAll']}</td>
@@ -180,22 +182,23 @@ $INFOPAYROOM = selectData($sqlpayRoom);
                                                         </td>
 
                                                     </tr>";
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
 
 
 
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            
             </div>
         </div>
+    </div>
     </div>
 </body>
 

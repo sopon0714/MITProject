@@ -73,7 +73,7 @@ INNER JOIN room ON room.rid = agreement.rid  WHERE 1 ORDER BY request.date DESC"
                                     </div>
                                     <div class="col-auto">
 
-                                        <i class="fas fa-home"></i>
+                                        <i class="fas fa-home fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
