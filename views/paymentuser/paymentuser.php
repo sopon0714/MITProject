@@ -274,9 +274,9 @@ if (!isset($_SESSION['DATAUSER'])) {
     <div id="modalEditPayment" class="modal fade">
         <form class="modal-dialog modal-lg " enctype="multipart/form-data" method="POST" action='manage.php'>
             <div class="modal-content">
-                <div class="modal-header" style="background-color:#00ace6">
+                <div class="modal-header" style="background-color:#f6c23e">
 
-                    <h4 class="modal-title" style="color:white">เพิ่มรายละเอียดของผู้เช่า</h4>
+                    <h4 class="modal-title" style="color:white">แก้ไขรายละเอียดของผู้เช่า</h4>
                 </div>
                 <div class="modal-body" id="addModalBody">
                     <div class="row mb-4" style="margin:20px;">
