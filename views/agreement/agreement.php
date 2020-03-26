@@ -158,7 +158,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                                             </td>
                                                                             <td style="text-align:center;">
                                                                                 <a href="#" class="detailAgreement" rnumber="<?php echo $TableAgreement[$i + 1]['rnumber']; ?>" firstname="<?php echo $TableAgreement[$i + 1]['firstname']; ?>" lastname="<?php echo $TableAgreement[$i + 1]['lastname']; ?>" startDate="<?php echo $TableAgreement[$i + 1]['startDate']; ?>" endDate="<?php echo $TableAgreement[$i + 1]['endDate']; ?>" phoneNumber="<?php echo $TableAgreement[$i + 1]['phoneNumber']; ?>" email="<?php echo $TableAgreement[$i + 1]['email']; ?>">
-                                                                                    <button type="button" class="btn btn-info btn-sm tt" title='รายละเอียดสัญญา'>
+                                                                                    <button type="button" class="btn btn-info btn-sm tt" title='รายละเอียดผู้เช่า'>
                                                                                         <i class="fas fa-file-alt"></i>
                                                                                     </button>
                                                                                 </a>
@@ -291,22 +291,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                         </div>
                         <div class="col-xl-8 col-12">
                             <input type="text" class="form-control" id="username" name="username" value="" placeholder="กรุณากรอกusername">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>password :</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="password" class="form-control" id="password" name="password" value="" placeholder="กรุณากรอกpassword">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-xl-3 col-12 text-right">
-                            <span>ยืนยัน password :</span>
-                        </div>
-                        <div class="col-xl-8 col-12">
-                            <input type="password" class="form-control" id="password2" name="password2" value="" placeholder="กรุณากรอกยืนยัน password">
                         </div>
                     </div>
 
