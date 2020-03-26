@@ -61,7 +61,6 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                     <div class="card">
                         <div class="card-header card-bg " style="background-color: #bf4040">
                             <span class="link-active " style="font-size: 15px; color:white;">แจ้งคำร้อง</span>
-
                         </div>
                     </div>
                     <form class="card " method="POST" action="manageUser.php">

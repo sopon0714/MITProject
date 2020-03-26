@@ -77,7 +77,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                                 <?php echo $NumAgreement[1]['numAgreement'] ?> ห้อง</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">home</i>
+                                            <i class="fas fa-home fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@ $DATAUSER = $_SESSION['DATAUSER'] ?? NULL;
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">+1 คน</div>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="material-icons icon-big">add_circle</i>
+                                            <i class="fas fa-plus-circle fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>
